@@ -21,9 +21,8 @@ new #[Layout('layouts.guest')] class extends Component
     public function register(): void
     {
 
-        $user = User::create([...]);
-    $user->assignRole('editor'); // Assign default role
-        $validated = $this->validate([
+
+       $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
@@ -31,7 +30,11 @@ new #[Layout('layouts.guest')] class extends Component
 
         $validated['password'] = Hash::make($validated['password']);
 
-        event(new Registered($user = User::create($validated)));
+        $user = User::create($validated);
+
+        $user->assignRole('user'); // Assign default role
+
+        event(new Registered($user));
 
         Auth::login($user);
 

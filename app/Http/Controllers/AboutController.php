@@ -16,7 +16,9 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //
+      $about = About::latest()->get();
+        return view('components.partials.about', ['abouts' => $about]);
+
     }
 
     /**
@@ -34,7 +36,7 @@ class AboutController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required',
+            'description' => 'required',
             'image' => 'image|sometimes|nullable|max:10240',
             'photo' =>'image|sometimes|nullable|max:10240'
 
@@ -92,7 +94,7 @@ class AboutController extends Controller
             abort(403, 'Unauthorized Action');
         }
         $validated = $request->validate([
-            'name' => 'required',
+            'description' => 'required',
             'image' => 'image|sometimes|nullable|max:10240',
               'photo' =>'image|sometimes|nullable|max:10240'
         ]);

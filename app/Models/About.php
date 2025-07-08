@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class About extends Model
 {
     protected $fillable = [
-        'name',
+        'description',
         'image',
         'photo',
         'user_id',
