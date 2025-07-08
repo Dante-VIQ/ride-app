@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#img {
+  background-image: url('/images/RIDE TOP.png'); /* Adjust the path as necessary */
+  background-size: cover; /* or 'contain' depending on your preference */
+  background-repeat: no-repeat;
+  background-position: top left; /* Adjust position as needed */
+}
