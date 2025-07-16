@@ -1,51 +1,79 @@
-<div class="row flex-grow">
+@props(['abouts' => []])
+<div>
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-rounded">
             <div class="card-body">
                 <div class="d-sm-flex justify-content-between align-items-start">
                     <div>
-                        <h4 class="card-title card-title-dash">Market
-                            Overview</h4>
-                        <p class="card-subtitle card-subtitle-dash">
-                            Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit</p>
+                        <h4 class="card-title card-title-dash">About us</h4>
+                        <p class="card-subtitle card-subtitle-dash">You can manage your About Us content here</p>
                     </div>
-                    <div>
-                        <div class="dropdown">
-                            <button
-                                class="btn btn-light dropdown-toggle toggle-dark btn-lg mb-0 me-0"
-                                type="button" id="dropdownMenuButton2"
-                                data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"> This month
-                            </button>
-                            <div class="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton2">
-                                <h6 class="dropdown-header">Settings
-                                </h6>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else
-                                    here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                    <div class="p-5 mx-auto" x-data="{ show: false }" x-cloak>
+                        <button x-on:click.prevent="show = true" class="px-4 py-2 text-light rounded bg-primary">
+                            <i class="fa fa-add text-primary"></i>
+                            Create About Us content
+                        </button>
+
+                        <!-- Modal -->
+                        <div x-show="show" x-transition
+                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                            x-on:click.self="show = false">
+                            <div class="relative">
+                                @include('about.create')
+                                <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
+                                    x-on:click="show = false">&#10005;</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-sm-flex align-items-center mt-1 justify-content-between">
-                    <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                        <h2 class="me-2 fw-bold">$36,2531.00</h2>
-                        <h4 class="me-2">USD</h4>
-                        <h4 class="text-success">(+1.37%)</h4>
-                    </div>
-                    <div class="me-3">
-                        <div id="marketingOverview-legend"></div>
-                    </div>
-                </div>
-                <div class="chartjs-bar-wrapper mt-3">
-                    <canvas id="marketingOverview"></canvas>
+                <div class="table-responsive  mt-1">
+                    <table class="table select-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="form-check form-check-flat mt-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" aria-checked="false"
+                                                id="check-all"><i class="input-helper"></i></label>
+                                    </div>
+                                </th>
+                                <th>Destination</th>
+                                <th>Created by</th>
+                                <th>Manage</th>
+                                <th>Clicks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @unless (empty($abouts) || count($abouts) == 0)
+                                @foreach ($abouts as $about)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check form-check-flat mt-0">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" aria-checked="false"><i
+                                                        class="input-helper"></i></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex ">
+                                                <img src="{{ asset('storage/' . $about->image) }}" alt="">
+                                                <div>
+                                                    <h6>{{ $about->description }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6">Go to Dashboard to view About us page</td>
+                                </tr>
+                            @endunless
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

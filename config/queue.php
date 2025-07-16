@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Queue Connection Name
@@ -29,7 +28,6 @@ return [
     */
 
     'connections' => [
-
         'sync' => [
             'driver' => 'sync',
         ],
@@ -39,7 +37,8 @@ return [
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
-            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 300), // Increased to 300 seconds
+            'timeout' => (int) env('DB_QUEUE_TIMEOUT', 60), // Add this line
             'after_commit' => false,
         ],
 
@@ -71,7 +70,6 @@ return [
             'block_for' => null,
             'after_commit' => false,
         ],
-
     ],
 
     /*
@@ -108,5 +106,4 @@ return [
         'database' => env('DB_CONNECTION', 'sqlite'),
         'table' => 'failed_jobs',
     ],
-
 ];

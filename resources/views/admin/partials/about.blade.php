@@ -4,16 +4,18 @@
             <div class="card-body">
                 <div class="d-sm-flex justify-content-between align-items-start">
                     <div>
-                        <h4 class="card-title card-title-dash">Destinations</h4>
-                        <p class="card-subtitle card-subtitle-dash">You can manage your destinations here</p>
+                        <h4 class="card-title card-title-dash">About us</h4>
+                        <p class="card-subtitle card-subtitle-dash">You can manage your About Us content here</p>
                     </div>
-                    <div x-data="{ show: false }" x-cloak>
-                        <button x-on:click.prevent="show = true" class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i
-                                class="mdi mdi-account-plus"></i>Add
-                            new destination</button>
-                    </div>
-                    <div class="mx-auto z-9 top-1/3 left-1/3" x-show="show" x-on:click.outside.prevent="show = false">
-                        {{-- @include('livewire.includes.doctor-create') --}}
+                    <div class="relative p-5 mx-auto" x-data="{ show: false }" x-cloak>
+                        <x-button x-on:click.prevent="show = true" class="px-4 py-2 text-light rounded bg-primary"><i
+                                class="fa fa-add text-primary"></i>
+                            Create About Us content</x-button>
+
+                        <div class="mx-auto z-9 top-1/3 left-1/3" x-show="show"
+                            x-on:click.outside.prevent="show = false">
+                            @include('about.create')
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive  mt-1">
@@ -33,55 +35,30 @@
                                 <th>Clicks</th>
                             </tr>
                         </thead>
-                        @unless (count($doctors) == 0)
-                            @foreach ($this->doctors as $doctor)
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-flat mt-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" aria-checked="false"><i
-                                                        class="input-helper"></i></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <img src="{{ asset('storage/' . $doctor->image) }}" alt="">
-                                                <div>
-                                                    <h6>{{ $doctor->name }}</h6>
-                                                    <p>{{ $doctor->category }}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h6>{{ $doctor->user->name }}</h6>
-                                            <p>{{ $doctor->user->id }}</p>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div
-                                                    class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                                    <p class="text-success">79%
-                                                    </p>
-                                                    <p>85/162</p>
-                                                </div>
-                                                <div class="progress progress-md">
-                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                        style="width: 85%" aria-valuenow="25" aria-valuemin="0"
-                                                        aria-valuemax="100">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-opacity-warning">
-                                                In progress</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @foreach ($user->roles as $role)
+                                            <span class="badge bg-primary">{{ $role->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('admin.users.assign-role', $user) }}" method="POST">
+                                            @csrf
+                                            <select name="role" class="form-select">
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
-
-                        @endunless
+                        </tbody>
                     </table>
                 </div>
             </div>

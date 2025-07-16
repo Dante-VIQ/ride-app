@@ -16,8 +16,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-      $about = About::latest()->get();
-        return view('components.partials.about', ['abouts' => $about]);
+        $abouts = About::latest()->get();
+        return view('admin.market', ['abouts' => $abouts]);
 
     }
 
@@ -26,7 +26,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        $this->authorize('create_abouts');
+
         return view('about.create');
     }
 
@@ -35,6 +35,7 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'description' => 'required',
             'image' => 'image|sometimes|nullable|max:10240',
@@ -58,7 +59,7 @@ class AboutController extends Controller
 
         About::create($validated);
 
-        return redirect('/dashboard')->with('message', 'About created successfully!');
+        return redirect('/admin/home')->with('message', 'About created successfully!');
     }
 
     /**
@@ -66,7 +67,8 @@ class AboutController extends Controller
      */
     public function show(About $about)
     {
-        return view('about.show', ['about' => $about]);
+        $abouts = About::latest()->get();
+        return view('about.main', ['abouts' => $abouts]);
     }
 
     /**
@@ -108,7 +110,7 @@ class AboutController extends Controller
         }
         $about->update($validated);
 
-        return redirect('/dashboard')->with('message', 'About updated successfully!');
+        return redirect('/admin/home')->with('message', 'About updated successfully!');
     }
 
     /**

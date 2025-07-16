@@ -16,7 +16,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::paginate(6);
+        return view('services.index', compact('services'));
     }
 
     /**
@@ -47,21 +48,31 @@ class ServiceController extends Controller
             $validated['image'] = $request->file('image')->store('images', 'public');
         }
 
-       
+
 
         $validated['user_id'] = Auth::id();
 
         Service::create($validated);
 
-        return redirect('/dashboard')->with('message', 'Service created successfully!');
+        return redirect('/admin/home')->with('message', 'Service created successfully!');
     }
 
+        /**
+     * Display all services for the main services page.
+     */
+    public function all()
+    {
+        $services = Service::all();
+        return view('services.main', compact('services'));
+    }
+    
     /**
      * Display the specified resource.
      */
     public function show(Service $service)
     {
-        return view('services.show', ['service' => $service]);
+        $services = Service::latest()->get();
+        return view('services.main');
     }
 
     /**
@@ -94,7 +105,7 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'image' =>'image|sometimes|nullable|max:10240',
-          
+
 
         ]);
 
@@ -102,10 +113,10 @@ class ServiceController extends Controller
             $validated['image'] = $request->file('image')->store('images', 'public');
         }
 
-        
+
            $service->update($validated);
 
-        return redirect('/dashboard')->with('message', 'Service updated successfully!');
+        return redirect('/admin/home')->with('message', 'Service updated successfully!');
     }
 
     /**

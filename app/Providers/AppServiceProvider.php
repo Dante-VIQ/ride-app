@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,8 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-         Gate::define('access-admin', function ($user) {
-        return $user->hasRole('admin');
-    });
+        Blade::if('role', function ($role) {
+            return Auth::check() && Auth::user()->hasRole($role);
+        });
+      
+        Blade::if('admin', function () {
+            return Auth::check() && Auth::user()->hasRole('admin');
+        });
+      
+        Blade::component('button', \App\View\Components\Button::class);
     }
 }

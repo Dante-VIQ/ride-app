@@ -17,7 +17,7 @@ class Dashboard extends Component
     #[Computed()]
     public function mount()
     {
-        $this->services = Service::all();
+        $this->services = Service::latest()->get();
         $this->abouts = About::latest()->get();
     }
     public function render()

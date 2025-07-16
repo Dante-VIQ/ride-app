@@ -1,10 +1,10 @@
-<x-card class="p-10 max-w-lg" style="top: 10%; left: 30%;">
+<x-card class="p-10">
     <header class="text-center text-black">
         <h2 class="text-2xl font-bold uppercase mb-1 text-slate-700">Add a Service</h2>
         {{-- <p class="mb-4 font-semibold">Post a gig</p> --}}
     </header>
 
-    <form action="/services" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-6 text-black font-semibold">
             <label for="title" class="inline-block text-lg mb-2">Title</label>

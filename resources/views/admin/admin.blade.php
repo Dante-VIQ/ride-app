@@ -8,15 +8,23 @@
 
                     <div class="row">
                         <div class="col-lg-8 d-flex flex-column">
-
+                            @include('admin.market')
+                  
                             <div class="row flex-grow">
-                              @include('admin.requests')
+                             @include('admin.requests', ['requests' => $requests])
                             </div>
-                            <div class="row flex-grow">
+                            {{-- <div class="row flex-grow">
                                 @include('admin.events')
+                            </div> --}}
+                        </div>
+                        <div class="col-lg-4 d-flex flex-column">
+                        
+                            <div class="row flex-grow">
+                                <div class="col-12 grid-margin stretch-card">
+                                   @include('admin.perfomers')
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

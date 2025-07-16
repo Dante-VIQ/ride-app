@@ -1,4 +1,4 @@
-@props(['service'])
+@props(['services'])
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
@@ -8,7 +8,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
 
-            @unless (count($services) == 0)
+            @unless ($services->isEmpty())
                 @foreach ($services as $service)
                     <div class="testimonial-item text-center items-center wow fadeInUp" data-wow-delay="0.1s">
                         <img class="img-fluid bg-green-300 rounded-circle p-2 mx-auto mb-4"
@@ -19,7 +19,10 @@
                         </div>
                     </div>
                 @endforeach
-
+ @else
+                <div class="col-12">
+                    <p class="text-center">No services content available yet.</p>
+                </div>
             @endunless
         </div>
     </div>

@@ -1,9 +1,11 @@
 <?php
 
+use App\Livewire\Dashboard;
 use App\Livewire\AnalyticsView;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 
 Route::view('/', 'welcome');
@@ -16,34 +18,25 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::view('about', 'about')
-    ->name('about');
+// Public routes for services
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/services/all', [ServiceController::class, 'all'])->name('all-services');
 
-    Route::view('services', 'services')
-    ->name('services');
 
-    // Single middleware
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->middleware(['auth', 'role:admin']);
+Route::get('/about', [AboutController::class, 'show'])->name('about.main');
+Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('show');
 
-// Group middleware
-Route::middleware(['auth', 'permission:edit_abouts'])->group(function () {
-    Route::get('/abouts/{id}/edit', [AboutController::class, 'edit']);
-});
-
-Route::prefix('admin')->middleware(['auth', 'can:access-admin'])->group(function () {
-
-    Route::get('/', AnalyticsView::class)->name('analytics');
-    Route::resource('abouts', AboutController::class)
-        ->names('abouts');
-        Route::resource('services', App\Http\Controllers\ServiceController::class)
-        ->names('services');
-    // Route::get('/users', function () {
-    //     return view('admin.users');
-    // })->name('admin.users');
+// Admin routes
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/home', [AdminController::class, 'index'])->name('home');
+    Route::resource('abouts', AboutController::class);
+    Route::resource('services', ServiceController::class)->names('admin.services');
+    
+    // Appointment requests admin view
+    Route::get('/requests', [RequestController::class, 'index'])->name('admin.requests');
 });
 
 Route::post('/users/{user}/make-admin', [AdminController::class, 'makeAdmin'])
     ->middleware(['auth', 'can:manage-users']); // Protect this route
+
 require __DIR__.'/auth.php';

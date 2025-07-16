@@ -1,3 +1,3 @@
-<x-layouts.livewire-layout>
+<div>
     @include('admin.admin')
-</x-layouts.livewire-layout>
+</div>

@@ -38,15 +38,19 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div class="min-h-screen bg-gray-100">
 
         <livewire:welcome.navigation />
 
 
             <main>
-                {{ $slot }}
+                        {{ $slot }}
             </main>
         </div>
+
+        
+            
+    
           <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
@@ -58,6 +62,7 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <script src="js/main.js"></script>
+
     @livewireScripts
 
     </body>
