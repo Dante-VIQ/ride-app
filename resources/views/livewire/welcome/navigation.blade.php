@@ -9,11 +9,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @if(Route::has('services'))
-                    <x-nav-link :href="route('services')" :active="request()->routeIs('services')" wire:navigate>
+                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')" wire:navigate>
                         {{ __('Services') }}
                     </x-nav-link>
-                    @endif
+
                     <x-nav-link :href="route('about.main')" :active="request()->routeIs('about.main')" wire:navigate>
                         {{ __('About') }}
                     </x-nav-link>

@@ -4,7 +4,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 col-md-12">
                     <h1 class="text-light mb-4  text-4xl justify-center">Ride-Aide LLC</h1>
-                  
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Location
@@ -12,7 +12,7 @@
                         <span>StatesVille 102, Burkingstreet, WA 12345</span>
                     </h5>
                     </h5>
-                    
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Contact</h5>
