@@ -22,12 +22,12 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <div class="flex space-x-4">
                     <a href="{{ route('login') }}"
-                        class="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        class="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] ">
                         {{ __('Log in') }}
                     </a>
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            class="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                             {{ __('Register') }}
                         </a>
                     @endif
@@ -57,7 +57,7 @@
                 {{ __('About') }}
             </x-responsive-nav-link>
         </div>
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-4 pb-1 border-t border-gray-200 text-gray-700">
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('login')" wire:navigate>
                     {{ __('Log in') }}

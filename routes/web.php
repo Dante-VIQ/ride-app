@@ -9,6 +9,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 
 Route::view('/', 'welcome');
+Route::middleware(['role:user'])->group(function () {
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -26,12 +27,13 @@ Route::get('/services/all', [ServiceController::class, 'all'])->name('all-servic
 Route::get('/about', [AboutController::class, 'show'])->name('about.main');
 Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('show');
 
+}):
 // Admin routes
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('home');
     Route::resource('abouts', AboutController::class);
     Route::resource('services', ServiceController::class)->names('admin.services');
-    
+
     // Appointment requests admin view
     Route::get('/requests', [RequestController::class, 'index'])->name('admin.requests');
 });

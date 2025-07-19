@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Role;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,10 +16,9 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+ use HasRoles;
 
-     const ROLE_ADMIN = 'admin';
-     const ROLE_EDITOR = 'editor';
-     const ROLE_USER = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -54,18 +54,18 @@ class User extends Authenticatable
     }
 
 
-public function role()
-{
-    return $this->belongsTo(Role::class);
-}
+// public function role()
+// {
+//     return $this->belongsTo(Role::class);
+// }
 
-public function hasPermission($permissionName)
-{
-    return $this->role->permissions()->where('name', $permissionName)->exists();
+// public function hasPermission($permissionName)
+// {
+//     return $this->role->permissions()->where('name', $permissionName)->exists();
 
-        return Cache::remember("user_{$this->id}_permissions", now()->addHours(1), function () {
-        return $this->role->permissions->pluck('name');
-    })->contains($permissionName);
-}
+//         return Cache::remember("user_{$this->id}_permissions", now()->addHours(1), function () {
+//         return $this->role->permissions->pluck('name');
+//     })->contains($permissionName);
+// }
 
 }

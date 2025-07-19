@@ -41,11 +41,11 @@ new class extends Component {
                         {{ __('About') }}
                     </x-nav-link>
 
-                    @if (auth()->check() && auth()->user()->role->name === 'admin')
+                   @role('admin')
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                             {{ __('Analytics') }}
                         </x-nav-link>
-                    @endif
+                    @endrole
 
                 </div>
             </div>

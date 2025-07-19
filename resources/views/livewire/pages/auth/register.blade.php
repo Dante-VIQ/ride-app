@@ -32,7 +32,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         $user = User::create($validated);
 
-        // $user->assignRole('user');
+        $user->assignRole('user');
 
         event(new Registered($user));
 

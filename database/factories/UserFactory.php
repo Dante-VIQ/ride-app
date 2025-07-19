@@ -25,14 +25,14 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $role = Role::firstOrCreate(['name' => 'user'], ['description' => 'Regular User']);
-        
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => (static::$password ??= Hash::make('password')),
             'remember_token' => Str::random(10),
-             'role_id' => Role::inRandomOrder()->first()?->id ?? Role::create(['name' => 'user'])->id,
+             
         ];
     }
 

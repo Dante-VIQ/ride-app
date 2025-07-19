@@ -10,17 +10,14 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-        // Use withoutEvents to prevent unnecessary model events
-        Role::withoutEvents(function () {
-            Role::updateOrCreate(
-                ['name' => 'admin'],
-                ['description' => 'Administrator with full access']
-            );
-            
-            Role::updateOrCreate(
-                ['name' => 'user'],
-                ['description' => 'Regular user']
-            );
-        });
+        Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        Role::firstOrCreate([
+            'name' => 'admin',
+            'guard_name' => 'web',
+        ]);
     }
 }

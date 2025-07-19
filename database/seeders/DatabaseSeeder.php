@@ -24,17 +24,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        
+
         $this->call([
             RoleSeeder::class,
-            RolesAndPermissionsSeeder::class,
+            // RolesAndPermissionsSeeder::class,
         ]);
-    // Create roles first
-//     $adminRole = Role::create(['name' => 'admin']);
-//     $userRole = Role::create(['name' => 'user']);
-//    \App\Models\User::factory(10)->create();
-        // Service::factory()->create();
-
-        //  About::factory()->create();
+  
     }
 }
