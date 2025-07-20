@@ -1,10 +1,9 @@
-@props(['abouts'])  <!-- Changed from $about to $abouts since you're looping -->
+@props(['about'])  <!-- Changed from $about to $abouts since you're looping -->
 
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-5">
-            @unless ($abouts->isEmpty())  <!-- Changed to use Collection's isEmpty() method -->
-                @foreach ($abouts as $about)
+ <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                @if ($about)
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="d-flex flex-column">
                             <img class="img-fluid rounded w-75 align-self-end"
@@ -17,15 +16,12 @@
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <p class="d-inline-block text-lg border rounded-pill py-1 px-4">More About Us</p>
-                        <p class="text-gray-700 h-40 max-h-full">{{ $about->description }}</p>
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="/about">Read More</a>
+                       <div class="space-x-3">
+                        <p class="text-gray-700  overflow-ellipsis p-4">{{ $about->description }}</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
                     </div>
-                @endforeach
-            @else
-                <div class="col-12">
-                    <p class="text-center">No about content available yet.</p>
-                </div>
-            @endunless
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
-</div>

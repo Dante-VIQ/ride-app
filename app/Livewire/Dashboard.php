@@ -12,13 +12,13 @@ class Dashboard extends Component
 
     public $services;
 
-    public $abouts;
+    public $abouts, $about;
     
     #[Computed()]
     public function mount()
     {
         $this->services = Service::latest()->get();
-        $this->abouts = About::latest()->get();
+        $this->about = About::first();
     }
     public function render()
     {
