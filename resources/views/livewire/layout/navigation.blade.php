@@ -114,6 +114,9 @@ new class extends Component {
                <x-responsive-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
                 {{ __('About') }}
             </x-responsive-nav-link>
+              <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('Analytics') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -3,7 +3,7 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 col-md-12">
-                    <h1 class="text-light mb-4  text-4xl justify-center">Ride-Aide LLC</h1>
+                    <h1 class="text-light mb-4 text-4xl justify-center items-center">Ride-Aide LLC</h1>
 
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Contact</h5>
-                    <p class="btn btn-link">admin@ride-aidellc.com</p>
+                    <p class="btn btn-link">admin@rideaidellc.com</p>
                     <p class="btn btn-link">+1 123457890087</p>
 
                 </div>
