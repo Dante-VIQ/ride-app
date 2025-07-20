@@ -74,7 +74,7 @@
     </style>
 
 
-    {{-- <script>
+    <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -133,7 +133,7 @@
                 }
             }
         }
-    </script> --}}
+    </script>
 
     <!-- Scripts -->
     @livewireStyles
