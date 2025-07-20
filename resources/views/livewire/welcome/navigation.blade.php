@@ -1,19 +1,25 @@
-<nav class="bg-white border-b border-gray-100">
+<nav class="bg-white border-b border-gray-100 items-center justify-center">
     <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+
+                 <div class="flex items-center sm:-my-px sm:ms-10">
+                    <a href="{{ route('dashboard') }}" wire:navigate>
+                        <x-application-logo class="block text-xl" />
+                    </a>
+                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')" wire:navigate>
+                    <x-nav-link href="/all-services" :active="request()->routeIs('/all-services')" wire:navigate>
                         {{ __('Services') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('about.main')" :active="request()->routeIs('about.main')" wire:navigate>
+                    <x-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
                         {{ __('About') }}
                     </x-nav-link>
                 </div>
@@ -50,10 +56,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')" wire:navigate>
+            <x-responsive-nav-link href="/all-services" :active="request()->routeIs('/all-services')" wire:navigate>
                 {{ __('Services') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('about.main')" :active="request()->routeIs('about.main')" wire:navigate>
+            <x-responsive-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
                 {{ __('About') }}
             </x-responsive-nav-link>
         </div>

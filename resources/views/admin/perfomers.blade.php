@@ -1,3 +1,4 @@
+@props(['services'])
 <div>
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-rounded">
@@ -44,7 +45,7 @@
                         </thead>
                         <tbody>
                             @unless (empty($services) || count($services) == 0)
-                                @foreach ($services as $service)
+                                @foreach ($this->services as $service)
                             <tbody>
                                 <tr>
                                     <td>

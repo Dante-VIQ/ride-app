@@ -9,14 +9,14 @@
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Location
                     <h5 class="text-light mb-4">Washington State,
-                        <span>StatesVille 102, Burkingstreet, WA 12345</span>
+                        <span>USA</span>
                     </h5>
                     </h5>
 
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Contact</h5>
-                    <p class="btn btn-link">hr@ride-aidellc.com</p>
+                    <p class="btn btn-link">admin@ride-aidellc.com</p>
                     <p class="btn btn-link">+1 123457890087</p>
 
                 </div>

@@ -1,4 +1,4 @@
-<x-app-layout>
+    <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                    
                     <main>
-                      <livewire:dashboard />
+                      @include('livewire.about-card')
                     </main>
 
                       @include('components.partials.footer')
@@ -19,4 +19,5 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+    </div>
+

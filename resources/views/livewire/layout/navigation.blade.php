@@ -21,9 +21,9 @@ new class extends Component {
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="flex items-center sm:-my-px sm:ms-10">
                     <a href="{{ route('dashboard') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block text-xl" />
                     </a>
                 </div>
 
@@ -33,11 +33,11 @@ new class extends Component {
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')" wire:navigate>
+                    <x-nav-link href="/services" :active="request()->routeIs('/services')" wire:navigate>
                         {{ __('Services') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('about.main')" :active="request()->routeIs('about.main')" wire:navigate>
+                    <x-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
                         {{ __('About') }}
                     </x-nav-link>
 
@@ -106,6 +106,13 @@ new class extends Component {
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+               <x-responsive-nav-link href="/all-services" :active="request()->routeIs('/all-services')" wire:navigate>
+                {{ __('Services') }}
+            </x-responsive-nav-link>
+               <x-responsive-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
+                {{ __('About') }}
             </x-responsive-nav-link>
         </div>
 

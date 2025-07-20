@@ -6,7 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'RIDE AIDE LLC') }}</title>
+    <title>{{ config('app.name', 'RIDE AIDE LLC | Non-Emergency Medical Transportation Services') }}</title>
+
+    <!-- Primary Meta Tags -->
+    {{-- <title>Ride_Aide LLC </title> --}}
+    <meta name="title" content="Ride_Aide LLC | Non-Emergency Medical Transportation Services">
+    <meta name="description"
+        content="Ride_Aide LLC provides safe, reliable, and compassionate non-emergency medical transportation across Washington and internationally. We specialize in assisting seniors, individuals with disabilities, and those with limited mobility.">
+
+    <!-- Author & Publisher -->
+    <meta name="author" content="Daniel Mwangi (Site Designer)">
+    <meta name="publisher" content="Ride_Aide LLC">
+    <meta name="contact" content="damalide20@gmail.com"> <!-- Site designer contact, not customer service -->
+    <meta name="copyright" content="© 2025 Ride_Aide LLC. All rights reserved.">
+
+    <!-- Keywords -->
+    <meta name="keywords"
+        content="non-emergency medical transportation, international NEMT, wheelchair transport, Ride_Aide LLC, senior medical rides, therapy transportation, safe patient travel, mobility transportation services, Seattle, Washington">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.rideaidellc.com/">
+    <meta property="og:title" content="Ride_Aide LLC | Non-Emergency Medical Transportation Services">
+    <meta property="og:description"
+        content="We provide wheelchair-accessible, safe, and dependable transport services to medical appointments, therapy, and more. Available across Washington and globally.">
+    <meta property="og:image" content="https://www.rideaidellc.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Ride_Aide LLC">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.rideaidellc.com/">
+    <meta property="twitter:title" content="Ride_Aide LLC | Non-Emergency Medical Transportation Services">
+    <meta property="twitter:description" content="Trusted global NEMT services for individuals with mobility needs.">
+    <meta property="twitter:image" content="https://www.rideaidellc.com/images/og-image.jpg">
+    <meta property="twitter:creator" content="@rideaidellc">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -34,9 +72,9 @@
             /* fill viewport height */
         }
     </style>
-     
 
-    <script>
+
+    {{-- <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -95,8 +133,8 @@
                 }
             }
         }
-    </script>
-       
+    </script> --}}
+
     <!-- Scripts -->
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -111,7 +149,7 @@
             {{ $slot }}
         </main>
     </div>
-@livewireScripts
+    @livewireScripts
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -126,7 +164,7 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
-    
+
 </body>
 
 </html>
