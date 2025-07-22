@@ -2,7 +2,7 @@
 
  <div class="container-xxl py-5">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-4">
                 @if ($about)
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="d-flex flex-column">
@@ -17,7 +17,7 @@
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <p class="d-inline-block text-lg border rounded-pill py-1 px-4">More About Us</p>
                        <div class="space-x-3">
-                        <p class="text-gray-700  overflow-ellipsis p-4">{{ $about->description }}</p>
+                        <p class="text-gray-700  overflow-ellipsis p-2">{{ $about->description }}</p>
                         <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
                     </div>
                     </div>

@@ -1,10 +1,14 @@
- <section class="relative image-stack flex">
-     <!-- Logo as faded background -->
-     <img src="{{ asset('images/ride-aide.png') }}" alt="Ride Aide LLC"
-         class="top-0 left-0 lg:h-1/2 sm:h-1/3  max-h-1/2 object-contain pointer-events-none select-none" style="height:50vh; max-height:50%;" />
+<section class="relative image-stack bg-cover bg-center">
+    <!-- Foreground image: top-right, half width & height on large screens, full width on mobile -->
+    <img src="{{ asset('images/ride-aide.png') }}" alt="Ride Aide LLC"
+     class="absolute top-0 left-0 w-1/2 object-contain z-10
+            sm:w-1/2" />
 
-     <p class="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 px-4 py-2 text-gray-800 text-lg italic font-bold bg-gray-200 bg-opacity-90 rounded shadow-lg border border-gray-400"
-        style="min-width:60%;">
+    <!-- Text overlay: bottom center, responsive width -->
+    <p class="absolute bottom-4 left-1/2 transform -translate-x-1/2
+              px-4 py-2 bg-gray-200 bg-opacity-90 text-gray-800 text-sm sm:text-base md:text-lg italic font-bold
+              rounded shadow border border-gray-400 text-center z-20
+              w-[90%] sm:w-[80%] md:w-[60%]">
         Compassionate, reliable and safe transportation every mile of the way
-     </p>
- </section>
+    </p>
+</section>
