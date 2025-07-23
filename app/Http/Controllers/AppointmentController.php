@@ -6,35 +6,43 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentRequestMail;
 
-class AppointmentController extends Controller
+class RequestController extends Controller
 {
 
+    public function index()
+{
+    $requests = Appointment::latest()->paginate(10);
 
-    public function sendMessage(Request $request)
+    return view('admin.partials.requests', compact('requests'));
+}
+    public function store(Request $request)
     {
+        // ✅ 1. Validate form input
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string|max:2000',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email|max:255',
+            'message'    => 'required|string|max:2000',
         ]);
 
-        // Save to database
-        Appointment::create($validated);
-
-        // Send email to admin
         try {
-            Mail::raw($validated['message'], function ($mail) use ($validated) {
-                $mail->to(config('mail.admin_address', 'damalide20@gmail.com'))
-                    ->subject('New Appointment Message from ' . $validated['first_name'] . ' ' . $validated['last_name'])
-                    ->replyTo($validated['email']);
-            });
-        } catch (\Exception $e) {
-            Log::error('Appointment message failed: ' . $e->getMessage());
-            return back()->with('error', 'Failed to send message. Please try again later.');
-        }
+            // ✅ 2. Save to database
+            $request = Appointment::create($validated);
 
-        return back()->with('success', 'Your message has been sent successfully!');
+            // ✅ 3. Queue email to admins
+            $adminRecipients = [
+                config('mail.admin_address_1', 'admin1@example.com'),
+                config('mail.admin_address_2', 'admin2@example.com'),
+            ];
+
+            Mail::to($adminRecipients)->queue(new AppointmentRequestMail($validated));
+
+            return back()->with('success', 'Your appointment request has been submitted successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to process appointment request: ' . $e->getMessage());
+            return back()->with('error', 'Something went wrong. Please try again later.');
+        }
     }
 }
