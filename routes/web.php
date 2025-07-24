@@ -21,7 +21,7 @@ Route::view('/', 'welcome');
         ->name('profile');
     Route::get('/all-services', ServiceCard::class);
     Route::get('/all-about', AboutCard::class);
- 
+ Route::post('/appointments', [RequestController::class, 'store'])->name('appointments.store');
 // });
 
 // Admin routes

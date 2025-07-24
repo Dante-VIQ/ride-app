@@ -13,7 +13,7 @@
 
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="bg-light rounded h-100 d-flex align-items-center p-5">
-                    <form>
+                    <form  action="{{ route('appointments.store') }}" method="POST">
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control border-0" placeholder="First Name"

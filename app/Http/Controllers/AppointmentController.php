@@ -13,7 +13,7 @@ class RequestController extends Controller
 
     public function index()
 {
-    $requests = Appointment::latest()->paginate(10);
+    $appointments = Appointment::latest()->paginate(10);
 
     return view('admin.partials.requests', compact('requests'));
 }
@@ -29,7 +29,7 @@ class RequestController extends Controller
 
         try {
             // ✅ 2. Save to database
-            $request = Appointment::create($validated);
+            $appointment = Appointment::create($validated);
 
             // ✅ 3. Queue email to admins
             $adminRecipients = [
