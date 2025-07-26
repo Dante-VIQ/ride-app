@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentRequestMail;
 
-class RequestController extends Controller
+class AppointmentController extends Controller
 {
 
     public function index()

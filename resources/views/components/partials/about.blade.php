@@ -7,10 +7,10 @@
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="d-flex flex-column">
                             <img class="img-fluid rounded w-75 align-self-end"
-                                src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/default-image.jpg') }}"
+                                src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.webp') }}"
                                 alt="">
                             <img class="img-fluid rounded w-50 bg-white pt-3 pe-3"
-                                src="{{ $about->photo ? asset('storage/' . $about->photo) : asset('images/default-photo.jpg') }}"
+                                src="{{ $about->photo ? asset('storage/' . $about->photo) : asset('images/medical-van.webp') }}"
                                 alt="" style="margin-top: -25%;">
                         </div>
                     </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AppointmentController;
 
 Route::view('/', 'welcome');
 // Route::middleware(['role:user'])->group(function () {
@@ -21,7 +22,7 @@ Route::view('/', 'welcome');
         ->name('profile');
     Route::get('/all-services', ServiceCard::class);
     Route::get('/all-about', AboutCard::class);
- Route::post('/appointments', [RequestController::class, 'store'])->name('appointments.store');
+ Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 // });
 
 // Admin routes
