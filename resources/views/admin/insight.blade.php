@@ -1,21 +1,14 @@
-<div class="row">
-    <div class="col-sm-12">
-        <div
-            class="statistics-details d-flex align-items-center justify-content-between px-5">
-            <div>
-                <p class="statistics-title">Users</p>
-              
-                <h3 class="rate-percentage text-success text-center"><span>{{ $this->userCount }}</span></h3>
-            </div>
-            <div class="d-none d-md-block">
-                <p class="statistics-title">Services</p>
-
-                <h3 class="rate-percentage text-success text-center">{{ $this->serviceCount }}</h3>
-            </div>
-            {{-- <div class="d-none d-md-block">
-                <p class="statistics-title">Appointments</p>
-                <h3 class="rate-percentage text-success text-center">{{ $this->appointmentCount }}</h3>
-            </div> --}}
+  <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold">Total Users</h3>
+            <p class="text-2xl">{{ $this->userCount }}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold">Total Services</h3>
+            <p class="text-2xl">{{ $this->serviceCount }}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold">Total Appointments</h3>
+            <p class="text-2xl">{{ $this->appointmentCount }}</p>
         </div>
     </div>
-</div>

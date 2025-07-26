@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @unless (empty($appontments) || count($appontments) == 0)
+                        {{-- @unless (count($appontments) == 0) --}}
 
                             @foreach ($appointments as $appointment)
                                 <tr>
@@ -65,12 +65,12 @@
                                         <div class="badge badge-opacity-warning">New</div>
                                     </td>
                                 </tr>
-                                @empty
+                                @endforeach
+                                {{-- @else
                                     <tr>
                                         <td colspan="5">No requests found.</td>
-                                    </tr>
-                                @endforeach
-                            @endunless
+                                    </tr> --}}
+                            {{-- @endunless --}}
                         </tbody>
                     </table>
                 </div>

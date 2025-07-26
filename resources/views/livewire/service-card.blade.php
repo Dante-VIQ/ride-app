@@ -22,11 +22,11 @@
 
                     @unless ($services->isEmpty())
                         @foreach ($services as $service)
-                            <div class="testimonial-item text-center items-center wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="text-center items-center wow fadeInUp" data-wow-delay="0.1s">
                                 <img class="img-fluid bg-green-300 rounded-circle p-2 mx-auto mb-4"
                                     src="{{ $service->image ? asset('storage/' . $service->image) : asset('/images') }}"
                                     style="width: 200px; height: 200px;">
-                                <div class="testimonial-text rounded text-center p-2">
+                                <div class="rounded text-center p-2">
                                     <span class="fst-italic text-gray-800 text-lg">{{ $service->title }}</span>
                                 </div>
                             </div>
@@ -44,6 +44,6 @@
         <!-- Appointment Start -->
         @include('components.partials.appointment')
         <!-- Appointment End -->
-    
+
 
     </div>

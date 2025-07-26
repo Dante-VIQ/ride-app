@@ -108,29 +108,27 @@
         <!-- partial:../../partials/_navbar.html -->
         <livewire:layout.navigation />
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_sidebar.html -->
-            {{-- @include('admin.sidebar') --}}
-            <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    <livewire:analytics-view />
+            <div class="py-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-4 text-gray-900">
 
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
-                <footer class="footer">
+                    <main>
+                                          <livewire:analytics-view />
+
+                    </main>
+
+                       <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Vumbi
-                            Ventures</span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Ride Aide LLC</span>
                         <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2025. All
                             rights reserved.</span>
                     </div>
                 </footer>
-                <!-- partial -->
+                </div>
             </div>
-            <!-- main-panel ends -->
         </div>
+    </div>
         <!-- page-body-wrapper ends -->
     </div>
 

@@ -9,6 +9,7 @@ export default {
         './resources/views/**/*.blade.php',
         './app/Livewire/**/*.php', // Livewire components
         './resources/js/**/*.js',  // Alpine.js components or custom scripts
+        './resources/**/*.vue',
     ],
 
     theme: {
@@ -19,5 +20,9 @@ export default {
         },
     },
 
-    plugins: [forms],
+   plugins: [
+  require('@tailwindcss/forms'),
+  require('@tailwindcss/line-clamp'),
+],
+
 };

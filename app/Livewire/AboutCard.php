@@ -12,11 +12,11 @@ class AboutCard extends Component
 
     public function mount()
     {
-        
-        $this->about = About::first(); 
+
+        $this->about = About::first();
     }
 
-    #[Layout('layouts.guest')]
+    #[Layout('layouts.analytic-layout')]
     public function render()
     {
         return view('all-about');
