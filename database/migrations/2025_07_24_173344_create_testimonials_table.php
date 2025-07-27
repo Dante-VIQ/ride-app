@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('email');
             $table->text('content');
             $table->string('photo')->nullable();
+            $table->unsignedTinyInteger('rating'); // 1 to 5 stars
             $table->timestamps();
         });
     }

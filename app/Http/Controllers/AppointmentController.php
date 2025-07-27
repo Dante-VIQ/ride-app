@@ -17,6 +17,11 @@ class AppointmentController extends Controller
 
     return view('admin.partials.requests', compact('requests'));
 }
+ public function create()
+    {
+
+        return view('components.partials.appointment');
+    }
     public function store(Request $request)
     {
         // ✅ 1. Validate form input
@@ -29,11 +34,11 @@ class AppointmentController extends Controller
 
         try {
             // ✅ 2. Save to database
-            $appointment = Appointment::create($validated);
+            dd($appointment = Appointment::create($validated));
 
             // ✅ 3. Queue email to admins
             $adminRecipients = [
-                config('mail.admin_address_1', 'admin1@example.com'),
+                config('mail.admin_address_1', 'damalide20@gmail.com'),
                 config('mail.admin_address_2', 'admin2@example.com'),
             ];
 

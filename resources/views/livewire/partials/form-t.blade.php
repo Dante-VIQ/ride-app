@@ -1,21 +1,4 @@
-<div x-data="{ showForm: false }" class="testimonials-container">
-    <!-- Toggle Button -->
-    <div class="text-center my-6">
-        <button @click="showForm = !showForm"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-            <span x-text="showForm ? 'Close Form' : 'Leave a Testimonial'"></span>
-        </button>
-    </div>
 
-    <!-- Success Message (Livewire-controlled) -->
-    @if($successMessage)
-        <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center">
-            {{ $successMessage }}
-        </div>
-    @endif
-
-    <!-- Form Section -->
-    <div x-show="showForm" x-cloak x-transition class="mb-10">
         <form wire:submit.prevent="create" class="space-y-4 bg-white p-6 rounded shadow-md max-w-2xl mx-auto">
             <!-- Name -->
             <div>
@@ -106,5 +89,4 @@
                 </button>
             </div>
         </form>
-    </div>
-</div>
+

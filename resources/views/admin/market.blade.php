@@ -58,22 +58,22 @@
                                         <div class="d-flex items-start">
                                             <img src="{{ asset('storage/' . $about->image) }}" alt="Image"
                                                 class="w-12 h-12 object-cover rounded me-3">
-                                            
+
                                         </div>
                                     </td>
 
-                                    <td class="py-3 px-4">
+                                    <td class="py-3 px-4 h-1/3">
                                         <div class="d-flex">
                                             <div class="max-w-xs">
-                                                <h6 class="line-clamp-2 text-sm text-gray-800">
+                                                <p class="line-clamp-2 text-sm text-gray-800">
                                                     {{ $about->description }}
-                                                </h6>
+                                                </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-4 text-right">
-                                        <div class="flex justify-end space-x-2">
-                                            <button wire:click="edit({{ $about->id }})"
+                                    <td class="py-3 px-4">
+                                        <div x-data="{ show: false }"   class="d-sm-flex justify-content-between align-items-start" x-cloak>
+                                            <button x-on:click.prevent="show = true"
                                                 class="btn-edit flex items-center text-blue-600 hover:text-blue-800">
                                                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -85,6 +85,16 @@
                                                 Edit
                                             </button>
 
+                                            <div x-show="show" x-transition
+                                                class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                                                x-on:click.self="show = false">
+                                                <div class="relative">
+                                                    @include('about.edit')
+                                                    <button
+                                                        class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
+                                                        x-on:click="show = false">&#10005;</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
 

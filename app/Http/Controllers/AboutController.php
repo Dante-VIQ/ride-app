@@ -76,9 +76,9 @@ class AboutController extends Controller
      */
     public function edit(About $about)
     {
-          if (! Gate::allows('update-about', $about)) {
-            abort(403);
-        }
+        //   if (! Gate::allows('update-about', $about)) {
+        //     abort(403);
+        // }
         return view('about.edit', ['about' => $about]);
     }
 
@@ -88,9 +88,9 @@ class AboutController extends Controller
     public function update(Request $request, About $about)
     {
 
-          if (! Gate::allows('update-about', $about)) {
-            abort(403);
-        }
+        //   if (! Gate::allows('update-about', $about)) {
+        //     abort(403);
+        // }
         // Make sure logged in user is owner
         if ($about->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
@@ -130,7 +130,12 @@ class AboutController extends Controller
         if ($about->image && Storage::disk('public')->exists($about->image)) {
             Storage::disk('public')->delete($about->image);
         }
+        if ($about->photo && Storage::disk('public')->exists($about->photo)) {
+            Storage::disk('public')->delete($about->photo);
+        }
+
+         // Delete the about record
         $about->delete();
-        return redirect('/dashboard')->with('message', 'About deleted successfully');
+        return redirect('admin/home')->with('message', 'About deleted successfully');
     }
 }

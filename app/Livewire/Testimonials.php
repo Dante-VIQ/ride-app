@@ -50,6 +50,7 @@ class Testimonials extends Component
             'email' => 'required|email',
             'content' => 'required|min:10',
             'photo' => 'nullable|image|max:1024',
+             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         // Handle file upload
@@ -62,7 +63,7 @@ class Testimonials extends Component
         // Create testimonial
         Testimonial::create($validated);
 
-        $this->reset(['name', 'email', 'content', 'photo']);
+        $this->reset(['name', 'email', 'content', 'photo', 'rating']);
 
         // Dispatch event to Alpine
         $this->dispatch('testimonial-created', [
