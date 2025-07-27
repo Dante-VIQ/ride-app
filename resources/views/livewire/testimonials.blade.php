@@ -34,33 +34,29 @@
         @endunless
     </div>
 
-    <div x-data="{ show: false }" class="testimonials-container" x-cloak>
-        <!-- Toggle Button -->
-        <div class="text-center my-6">
-            <button x-on:click.prevent="show = true"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                <span x-text="show ? 'Close Form' : 'Leave a Testimonial'"></span>
-            </button>
+    <div x-data="{ show: false }" class="testimonials-container">
+    <!-- Toggle Button -->
+    <div class="text-center my-6">
+        <button x-on:click.prevent="show = true"
+            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+            <span x-text="show ? 'Close Form' : 'Leave a Testimonial'"></span>
+        </button>
+    </div>
+
+    <!-- Form Section -->
+    <div x-show="show"
+        x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        x-on:click.self="show = false">
+        <div class="relative">
+            @include('livewire.partials.form-t')
+
+            <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
+                x-on:click="show = false">&#10005;</button>
         </div>
+    </div>
+</div>
 
-        <!-- Success Message (Livewire-controlled) -->
-        @if ($successMessage)
-            <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center">
-                {{ $successMessage }}
-            </div>
-        @endif
-
-        <!-- Form Section -->
-        <div x-show="show" x-transition
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-            x-on:click.self="show = false">
-            <div class="relative">
-                @include('livewire.partials.form-t')
-
-                <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
-                    x-on:click="show = false">&#10005;</button>
-            </div>
-        </div>
     </div>
 
 </div>
