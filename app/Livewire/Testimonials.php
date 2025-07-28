@@ -17,6 +17,7 @@ class Testimonials extends Component
      public $rating = null;
     public $testimonials = [];
         public $successMessage = null;
+        
 
     protected $rules = [
         'name' => 'required|min:2',
@@ -69,7 +70,7 @@ class Testimonials extends Component
         $this->dispatch('testimonial-created', [
             'message' => 'Thank you for your testimonial!'
         ]);
-
+      
         // Reload testimonials
         $this->testimonials = Testimonial::latest()->take(5)->get();
     }

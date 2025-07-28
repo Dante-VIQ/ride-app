@@ -27,6 +27,16 @@
                                 </svg>
                             @endfor
                         </div>
+
+                        <div class="text-yellow-400 flex justify-center mb-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $testimonial->rating)
+                                    ★
+                                @else
+                                    ☆
+                                @endif
+                            @endfor
+                        </div>
                         <h5 class="mb-0 text-gray-500">— {{ $t->name }}</h5>
                     </div>
                 </div>
@@ -34,29 +44,27 @@
         @endunless
     </div>
 
-    <div x-data="{ show: false }" class="testimonials-container">
-    <!-- Toggle Button -->
-    <div class="text-center my-6">
-        <button x-on:click.prevent="show = true"
-            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-            <span x-text="show ? 'Close Form' : 'Leave a Testimonial'"></span>
-        </button>
-    </div>
+    <div x-data="{ show: false }" class="testimonials-container" x-cloak>
+        <!-- Toggle Button -->
+        <div class="text-center my-6">
+            <button x-on:click.prevent="show = true"
+                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                <span x-text="show ? 'Close Form' : 'Leave a Testimonial'"></span>
+            </button>
+        </div>
 
-    <!-- Form Section -->
-    <div x-show="show"
-        x-cloak
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-        x-on:click.self="show = false">
-        <div class="relative">
-            @include('livewire.partials.form-t')
+        <!-- Form Section -->
+        <div x-show="show" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="relative">
+                @include('livewire.partials.form-t')
 
-            <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
-                x-on:click="show = false">&#10005;</button>
+                <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-4 py-2"
+                    x-on:click="show = false">&#10005;</button>
+            </div>
         </div>
     </div>
-</div>
 
-    </div>
+
+</div>
 
 </div>
