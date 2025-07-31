@@ -56,16 +56,19 @@
     <link href="css/style.css" rel="stylesheet">
     <style>
         .image-stack {
-            background-image: url('images/DODGE CARAVAN.jpg');
-            background-size: 100% 100%;
-            /* Show the whole image */
+            background-image: url('/images/DODGE CARAVAN.jpg');
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             height: 70vh;
-            /* fill viewport height */
             min-height: 400px;
-            /* fallback for small screens */
-            /* fill viewport height */
+        }
+
+        @media (max-width: 768px) {
+            .image-stack {
+                background-size: cover;
+                height: 60vh;
+            }
         }
     </style>
 
@@ -84,7 +87,7 @@
             {{ $slot }}
         </main>
     </div>
-   <!-- JavaScript Libraries -->
+    <!-- JavaScript Libraries -->
     <!-- jQuery FIRST (no defer) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
