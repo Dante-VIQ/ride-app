@@ -24,6 +24,9 @@
                     <p class="text-gray-600 text-lg leading-relaxed">
                         {{ Str::limit(strip_tags($about->description), 500, '...') }}
                     </p>
+
+                    <a class="btn btn-info py-3 px-5 mt-3" href="/all-about">
+                        Read More </a>
                 </div>
             </div>
         @endif

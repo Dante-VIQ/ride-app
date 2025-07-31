@@ -142,39 +142,140 @@
             }
         }
         
+    /* Animation for foreground image */
+        @keyframes float {
+            0% {
+                transform: translateX(-10px) translateY(-10px);
+            }
+            50% {
+                transform: translateX(10px) translateY(10px);
+            }
+            100% {
+                transform: translateX(-10px) translateY(-10px);
+            }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .foreground-image {
-                width: 60%;
+                width: 55%;
             }
             
             .quote-box {
-                font-size: 1.2rem;
-                padding: 15px 20px;
+                font-size: 1.4rem;
+                padding: 20px 25px;
+            }
+            
+            .logo h1 {
+                font-size: 32px;
             }
         }
         
         @media (max-width: 768px) {
             .foreground-image {
-                width: 80%;
+                width: 70%;
+                max-width: 100%;
+            }
+            
+            .image-stack {
+                min-height: 60vh;
             }
             
             .quote-box {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                padding: 18px 22px;
             }
             
+            .logo h1 {
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 16px;
+            }
         }
         
         @media (max-width: 576px) {
             .foreground-image {
-                width: 100%;
+                width: 85%;
+                padding: 20px;
+            }
+            
+            .image-stack {
+                min-height: 50vh;
+            }
+            
+            .quote-box {
+                font-size: 1.1rem;
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .tagline {
+                font-size: 14px;
+            }
+            
+            .features {
+                padding: 25px 20px;
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .foreground-image {
+                width: 95%;
+                padding: 15px;
             }
             
             .quote-box {
                 font-size: 1rem;
             }
             
-           
+            .feature-card {
+                padding: 20px 15px;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Ensure entire car is visible on all devices */
+        @media (max-height: 600px) {
+            .image-stack {
+                min-height: 80vh;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .image-stack {
+                min-height: 50vh;
+            }
         }
     </style>
 

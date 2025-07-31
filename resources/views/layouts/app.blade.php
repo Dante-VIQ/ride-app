@@ -215,6 +215,19 @@
     <!-- Your Template Script (depends on jQuery) -->
     <script src="js/main.js" defer></script>
 
+    <script> 
+    //  Simple animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteBox = document.querySelector('.quote-box');
+            
+            // Pulsing animation for the quote box
+            setInterval(() => {
+                quoteBox.style.transform = 'scale(1.03)';
+                setTimeout(() => {
+                    quoteBox.style.transform = 'scale(1)';
+                }, 300);
+            }, 5000);
+        </script>
     @livewireScripts
 
 
