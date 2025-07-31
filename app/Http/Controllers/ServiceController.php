@@ -124,9 +124,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-         if (! Gate::allows('destroy-service', $service)) {
-            abort(403);
-        }
+        //  if (! Gate::allows('destroy-service', $service)) {
+        //     abort(403);
+        // }
+         return view('sevice.delete', ['service' => $service]);
         // Make sure logged in user is owner
     if ($service->user_id != Auth::guard()->id()) {
         abort(403, 'Unauthorized Action');

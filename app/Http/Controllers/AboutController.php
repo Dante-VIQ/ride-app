@@ -122,6 +122,7 @@ class AboutController extends Controller
         //   if (! Gate::allows('destroy-about', $about)) {
         //     abort(403);
         // }
+        return view('about.delete', ['about' => $about]);
         // Make sure logged in user is owner
         if ($about->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
