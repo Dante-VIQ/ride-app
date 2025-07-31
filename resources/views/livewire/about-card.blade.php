@@ -24,7 +24,7 @@
                         <!-- Images -->
                         <div class="flex flex-col items-end space-y-4">
                             <img class="rounded-lg w-3/4 shadow-md"
-                                src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.jpg') }}"
+                                src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.webp') }}"
                                 alt="Senior Transport">
 
                             <img class="rounded-lg w-1/2 shadow-md -mt-12 bg-white p-2"
@@ -35,7 +35,7 @@
                         <!-- Structured Sections Below -->
                         <div class="mt-12 bg-white/80 backdrop-blur-md rounded-xl p-8 shadow-md">
                             <div class="text-gray-700 leading-relaxed space-y-6">
-                                {!! nl2br(e($about->description)) !!}
+                                {{ $about->description }}
                             </div>
                         </div>
                     </div>
