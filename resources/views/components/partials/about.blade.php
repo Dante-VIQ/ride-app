@@ -22,7 +22,7 @@
                         More About Us
                     </p>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        {{ Str::limit(strip_tags($about->description), 200, '...') }}
+                        {{ Str::limit(strip_tags($about->description), 500, '...') }}
                     </p>
                 </div>
             </div>

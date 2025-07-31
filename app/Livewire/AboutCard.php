@@ -11,7 +11,7 @@ class AboutCard extends Component
     public $about;
     public $sections = [];
 
-    public function mount()
+    public function about()
     {
         $this->about = About::first();
 
