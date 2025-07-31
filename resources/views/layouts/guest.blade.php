@@ -84,23 +84,27 @@
             {{ $slot }}
         </main>
     </div>
+   <!-- JavaScript Libraries -->
+    <!-- jQuery FIRST (no defer) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap Bundle (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- jQuery Plugins -->
+    <script src="lib/wow/wow.min.js" defer></script>
+    <script src="lib/easing/easing.min.js" defer></script>
+    <script src="lib/waypoints/waypoints.min.js" defer></script>
+    <script src="lib/counterup/counterup.min.js" defer></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js" defer></script>
+    <script src="lib/tempusdominus/js/moment.min.js" defer></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js" defer></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+    <!-- Your Template Script (depends on jQuery) -->
+    <script src="js/main.js" defer></script>
+
     @livewireScripts
-
- <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <script src="js/main.js"></script>
-
-
 
 </body>
 
