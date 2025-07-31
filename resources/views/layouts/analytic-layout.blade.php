@@ -54,7 +54,7 @@
     <link href="css/style.css" rel="stylesheet">
     <style>
         .image-stack {
-            background-image: url('images/wheelvan9.jpg');
+            background-image: url('images/DODGE CARAVAN.png');
             background-size: 100% 100%;
             /* Show the whole image */
             background-position: center;

@@ -8,7 +8,7 @@
     <div class="py-4">
         <div class="max-w-7xl mx-auto">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-4 text-gray-900">
+                <div class="px-2 text-gray-900">
 
                     <main>
                       <livewire:dashboard />

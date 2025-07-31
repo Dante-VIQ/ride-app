@@ -1,27 +1,36 @@
 @props(['about']) <!-- Changed from $about to $abouts since you're looping -->
 
 <div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-4">
-            @if ($about)
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-flex flex-column">
-                        <img class="img-fluid rounded w-75 align-self-end"
-                            src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.webp') }}"
-                            alt="">
-                        <img class="img-fluid rounded w-50 bg-white pt-3 pe-3"
-                            src="{{ $about->photo ? asset('storage/' . $about->photo) : asset('images/medical van.webp') }}"
-                            alt="" style="margin-top: -25%;">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <p class="d-inline-block text-lg border rounded-pill py-1 px-4">More About Us</p>
-                    <div class="space-x-3">
-                        <p class="text-gray-700  overflow-ellipsis p-2">{{ $about->description }}</p>
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
-                    </div>
-                </div>
-            @endif
+    <div class="container mx-auto py-16">
+
+    @if ($about)
+        <!-- Top Row: Images + Short Intro -->
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
+            <!-- Images -->
+            <div class="flex flex-col items-end space-y-4">
+                <img class="rounded-lg w-3/4 shadow-md"
+                     src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.jpg') }}"
+                     alt="Senior Transport">
+
+                <img class="rounded-lg w-1/2 shadow-md -mt-12 bg-white p-2"
+                     src="{{ $about->photo ? asset('storage/' . $about->photo) : asset('images/medical van.webp') }}"
+                     alt="Medical Van">
+            </div>
+
+            <!-- Short Intro -->
+            <div>
+                <p class="inline-block text-lg border border-green-600 text-green-800 rounded-full py-2 px-5 mb-3">
+                    More About Us
+                </p>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    {{ Str::limit(strip_tags($about->description), 200, '...') }}
+                </p>
+            </div>
         </div>
-    </div>
+
+       
+    @endif
+
+</div>
+
 </div>

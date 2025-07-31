@@ -17,7 +17,7 @@
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Contact</h5>
                     <p class="btn btn-link">admin@rideaidellc.com</p>
-                    <p class="btn btn-link">+1 123457890087</p>
+                    <p class="btn btn-link">+1 (405)6005593</p>
 
                 </div>
 

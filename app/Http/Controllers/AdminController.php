@@ -9,11 +9,11 @@ use Illuminate\Routing\Controller;
 
 class AdminController extends Controller
 {
-     public function __invoke()
-     {
-         $this->middleware('auth');
-        $this->middleware('role:admin');
-     }
+    //  public function __invoke()
+    //  {
+    //      $this->middleware('auth');
+    //     $this->middleware('role:admin');
+    //  }
     public function index()
     {
         $users = User::all();

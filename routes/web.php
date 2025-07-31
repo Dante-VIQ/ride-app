@@ -25,14 +25,14 @@ Route::view('/', 'welcome');
  Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 // });
 
+Route::get('/home', [AdminController::class, 'index'])->name('home');
 // Admin routes
-Route::prefix('admin')->middleware(['role:admin', 'verified'])->group(function () {
-    Route::get('/home', [AdminController::class, 'index'])->name('home');
+// Route::prefix('admin')->middleware(['role:admin'])->group(function () {
     Route::resource('abouts', AboutController::class);
     Route::resource('services', ServiceController::class);
 
     // Appointment requests admin view
     Route::get('/requests', [RequestController::class, 'index'])->name('admin.requests');
-});
+// });
 
 require __DIR__ . '/auth.php';

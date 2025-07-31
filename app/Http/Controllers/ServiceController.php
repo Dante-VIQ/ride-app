@@ -54,7 +54,7 @@ class ServiceController extends Controller
 
         Service::create($validated);
 
-        return redirect('/admin/home')->with('message', 'Service created successfully!');
+        return redirect('/home')->with('message', 'Service created successfully!');
     }
 
         /**
@@ -65,7 +65,7 @@ class ServiceController extends Controller
         $services = Service::all();
         return view('services.main', compact('services'));
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -116,7 +116,7 @@ class ServiceController extends Controller
 
            $service->update($validated);
 
-        return redirect('/admin/home')->with('message', 'Service updated successfully!');
+        return redirect('/home')->with('message', 'Service updated successfully!');
     }
 
     /**

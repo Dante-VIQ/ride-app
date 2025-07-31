@@ -56,7 +56,7 @@
     <link href="css/style.css" rel="stylesheet">
     <style>
         .image-stack {
-            background-image: url('images/wheelvan9.jpg');
+            background-image: url('images/DODGE CARAVAN.jpg');
             background-size: 100% 100%;
             /* Show the whole image */
             background-position: center;
@@ -90,7 +90,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
     </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>

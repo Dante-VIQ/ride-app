@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\Role;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -12,29 +11,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable;
 
-
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Get the attributes that should be cast.
@@ -49,19 +41,17 @@ class User extends Authenticatable
         ];
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 
-// public function role()
-// {
-//     return $this->belongsTo(Role::class);
-// }
+    public function hasPermission($permissionName)
+    {
+        return $this->role->permissions()->where('name', $permissionName)->exists();
 
-// public function hasPermission($permissionName)
-// {
-//     return $this->role->permissions()->where('name', $permissionName)->exists();
-
-//         return Cache::remember("user_{$this->id}_permissions", now()->addHours(1), function () {
-//         return $this->role->permissions->pluck('name');
-//     })->contains($permissionName);
-// }
-
+        return Cache::remember("user_{$this->id}_permissions", now()->addHours(1), function () {
+            return $this->role->permissions->pluck('name');
+        })->contains($permissionName);
+    }
 }

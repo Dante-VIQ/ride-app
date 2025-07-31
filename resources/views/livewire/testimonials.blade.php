@@ -28,15 +28,18 @@
                             @endfor
                         </div>
 
-                        <div class="text-yellow-400 flex justify-center mb-2">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $testimonial->rating)
-                                    ★
-                                @else
-                                    ☆
-                                @endif
-                            @endfor
-                        </div>
+                        <!-- Star Rating Display -->
+                      <div class="rating-display mt-2">
+                    <div class="stars flex">
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="star text-xl {{
+                                $i <= $testimonial->rating ? 'text-green-500' : 'text-gray-300'
+                            }}">
+                                ★
+                            </span>
+                        @endfor
+                    </div>
+                </div>
                         <h5 class="mb-0 text-gray-500">— {{ $t->name }}</h5>
                     </div>
                 </div>

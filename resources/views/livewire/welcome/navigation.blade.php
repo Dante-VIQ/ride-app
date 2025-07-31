@@ -6,7 +6,7 @@
 
                  <div class="flex items-center sm:-my-px sm:ms-10">
                     <a href="{{ route('dashboard') }}" wire:navigate>
-                        <x-application-logo class="block text-xl" />
+                        <x-application-logo class="block text-2xl" />
                     </a>
                 </div>
 
@@ -65,11 +65,11 @@
         </div>
         <div class="pt-4 pb-1 border-t border-gray-200 text-gray-700">
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('login')" wire:navigate>
+                <x-responsive-nav-link :href="route('login')">
                     {{ __('Log in') }}
                 </x-responsive-nav-link>
                 @if (Route::has('register'))
-                    <x-responsive-nav-link :href="route('register')" wire:navigate>
+                    <x-responsive-nav-link :href="route('register')">
                         {{ __('Register') }}
                     </x-responsive-nav-link>
                 @endif

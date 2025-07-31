@@ -26,3 +26,10 @@
 .duration-150 {
     transition-duration: 150ms;
 }
+
+ .star {
+        transition: color 0.2s;
+    }
+    .rating-input .star:hover {
+        color: #4ade80; /* Light green on hover */
+    }

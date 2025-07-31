@@ -59,7 +59,7 @@ class AboutController extends Controller
 
         About::create($validated);
 
-        return redirect('/admin/home')->with('message', 'About created successfully!');
+        return redirect('/home')->with('message', 'About created successfully!');
     }
 
     /**
@@ -110,7 +110,7 @@ class AboutController extends Controller
         }
         $about->update($validated);
 
-        return redirect('/admin/home')->with('message', 'About updated successfully!');
+        return redirect('/home')->with('message', 'About updated successfully!');
     }
 
     /**
@@ -119,9 +119,9 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
 
-          if (! Gate::allows('destroy-about', $about)) {
-            abort(403);
-        }
+        //   if (! Gate::allows('destroy-about', $about)) {
+        //     abort(403);
+        // }
         // Make sure logged in user is owner
         if ($about->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
@@ -136,6 +136,6 @@ class AboutController extends Controller
 
          // Delete the about record
         $about->delete();
-        return redirect('admin/home')->with('message', 'About deleted successfully');
+        return redirect('/home')->with('message', 'About deleted successfully');
     }
 }

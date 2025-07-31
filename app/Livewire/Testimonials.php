@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Testimonial;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class Testimonials extends Component
 {
@@ -14,10 +15,9 @@ class Testimonials extends Component
     public $email;
     public $content;
     public $photo;
-     public $rating = null;
+    public $rating = 0; // Changed from null to 0
     public $testimonials = [];
-        public $successMessage = null;
-        
+    public $successMessage = null;
 
     protected $rules = [
         'name' => 'required|min:2',
@@ -37,48 +37,31 @@ class Testimonials extends Component
         $this->testimonials = Testimonial::latest()->take(5)->get();
     }
 
-    // Changed from submit() to create()
-//    public function mount()
-//     {
-//         $this->testimonials = Testimonial::latest()->take(5)->get();
-//     }
+    // New method to handle star selection
+    public function setRating($value)
+    {
+        $this->rating = $value;
+    }
 
     public function create()
     {
-        // Validate with proper rules
-        $validated = $this->validate([
-            'name' => 'required|min:2',
-            'email' => 'required|email',
-            'content' => 'required|min:10',
-            'photo' => 'nullable|image|max:1024',
-             'rating' => 'required|integer|min:1|max:5',
-        ]);
+        $validated = $this->validate();
 
-        // Handle file upload
         if ($this->photo) {
-            $validated['photo'] = $this->photo->store('testimonials', 'public');
-        } else {
-            $validated['photo'] = null;
+            $extension = $this->photo->getClientOriginalExtension();
+            $filename = Str::slug($this->name) . '-' . time() . '.' . $extension;
+            $validated['photo'] = $this->photo->storeAs('testimonials', $filename, 'public');
         }
 
-        // Create testimonial
         Testimonial::create($validated);
 
+        $this->successMessage = 'Thank you for your testimonial!';
         $this->reset(['name', 'email', 'content', 'photo', 'rating']);
-
-        // Dispatch event to Alpine
-        $this->dispatch('testimonial-created', [
-            'message' => 'Thank you for your testimonial!'
-        ]);
-      
-        // Reload testimonials
-        $this->testimonials = Testimonial::latest()->take(5)->get();
+        $this->loadTestimonials();
     }
-
 
     public function render()
     {
-         $this->testimonials = Testimonial::latest()->take(5)->get();
         return view('livewire.testimonials');
     }
 }

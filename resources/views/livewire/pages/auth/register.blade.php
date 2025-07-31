@@ -30,13 +30,13 @@ new #[Layout('layouts.guest')] class extends Component {
         $user = User::create($validated);
 
         // $user->assignRole('user');
+$adminEmails = array_map('trim', explode(',', env('ADMIN_EMAILS', '')));
 
-          $adminEmails = explode(',', env('ADMIN_EMAILS'));
-
+    // 3. Assign admin or user role automatically
     if (in_array($user->email, $adminEmails)) {
-        $user->assignRole('admin');
+        $user->assignRole('admin'); // Admin if email matches
     } else {
-        $user->assignRole('user');
+        $user->assignRole('user');  // Default user role
     }
 
         event(new Registered($user));

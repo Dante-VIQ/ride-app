@@ -17,7 +17,7 @@ class ServiceCard extends Component
        
     }
 
-    #[Layout('layouts.guest')]
+    #[Layout('layouts.analytic-layout')]
     public function render()
     {
 

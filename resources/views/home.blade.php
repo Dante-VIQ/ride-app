@@ -9,7 +9,7 @@
         content="Africa travel, African culture, African destinations, Explore Africa, travel blog, African art, African history, African cuisine.">
     <meta name="description"
         content="Discover the rich tapestry of Africa's diverse cultures, breathtaking landscapes, and umique experiences. Explore top travel destinations, art, history, and cuisine on AfrikaVibe.">
-    <title>{{ config('app.name', 'Tembia') }}</title>
+    <title>{{ config('app.name', 'RIDE AIDE') }}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -35,7 +35,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
+    {{-- <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -94,10 +94,10 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 
     <!-- Scripts -->
-    @vite(['resources/js/app.js'])
+       @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
@@ -108,27 +108,29 @@
         <!-- partial:../../partials/_navbar.html -->
         <livewire:layout.navigation />
         <!-- partial -->
-            <div class="py-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-4 text-gray-900">
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-4 text-gray-900">
 
-                    <main>
-                                          <livewire:analytics-view />
+                        <main>
+                            <livewire:analytics-view />
 
-                    </main>
+                        </main>
 
-                       <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Ride Aide LLC</span>
-                        <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2025. All
-                            rights reserved.</span>
+                        <footer class="footer">
+                            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Ride Aide
+                                    LLC</span>
+                                <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2025.
+                                    All
+                                    rights reserved.</span>
+                            </div>
+                        </footer>
                     </div>
-                </footer>
                 </div>
             </div>
         </div>
-    </div>
         <!-- page-body-wrapper ends -->
     </div>
 
