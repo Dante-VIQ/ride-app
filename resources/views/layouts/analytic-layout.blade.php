@@ -87,13 +87,9 @@
     @livewireScripts
 
     <!-- JavaScript Libraries -->
-       <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-3fp9o8l6EybC3xMFXLJH0iIEexzA62Q9r0iKh8wFv6A=" crossorigin="anonymous" defer></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
-    {{-- Bootstrap 5 Bundle (with Popper) --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoYpVwT0nU6xI1p5Kh5W/S2nUd1p4n5fYh+7mIVo5NhcQ8+" crossorigin="anonymous" defer>
-    </script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
