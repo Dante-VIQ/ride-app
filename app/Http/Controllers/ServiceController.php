@@ -80,9 +80,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        if (! Gate::allows('update-service', $service)) {
-            abort(403);
-        }
+        // if (! Gate::allows('update-service', $service)) {
+        //     abort(403);
+        // }
         // Make sure logged in user is owner
         if ($service->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
@@ -95,9 +95,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-          if (! Gate::allows('update-service', $service)) {
-            abort(403);
-        }
+        //   if (! Gate::allows('update-service', $service)) {
+        //     abort(403);
+        // }
         // Make sure logged in user is owner
         if ($service->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
