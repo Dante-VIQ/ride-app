@@ -16,8 +16,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $abouts = About::latest()->get();
-        return view('admin.market', ['abouts' => $abouts]);
+        $abouts = About::latest()->paginate();
+        return view('admin.abouts', ['abouts' => $abouts]);
 
     }
 

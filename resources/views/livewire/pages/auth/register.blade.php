@@ -21,7 +21,7 @@ new #[Layout('layouts.guest')] class extends Component {
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -29,26 +29,17 @@ new #[Layout('layouts.guest')] class extends Component {
 
         $user = User::create($validated);
 
-        // $user->assignRole('user');
-$adminEmails = array_map('trim', explode(',', env('ADMIN_EMAILS', '')));
-
-    // 3. Assign admin or user role automatically
-    if (in_array($user->email, $adminEmails)) {
-        $user->assignRole('admin'); // Admin if email matches
-    } else {
-        $user->assignRole('user');  // Default user role
-    }
-
         event(new Registered($user));
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        redirect()->route('dashboard');
     }
-}; ?>
+};
+?>
 
-<div  class="items-center justify-center flex flex-col w-full max-w-md mx-auto p-4 mt-10 bg-white rounded-lg">
-    <form wire:submit="register">
+<div class="items-center justify-center flex flex-col w-full max-w-md mx-auto p-4 mt-10 bg-white rounded-lg">
+    <form wire:submit.prevent="register">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />

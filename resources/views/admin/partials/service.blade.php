@@ -1,80 +1,119 @@
-@props(['culture'])
+@props(['services'])
 <div>
-    {{-- @if (auth()->check() && auth()->user()->isMaster())
-        <div class="relative p-5 mx-auto" x-data="{ show: false }" x-cloak>
-            <x-button x-on:click.prevent="show = true" class="px-4 py-2 text-light rounded bg-primary"><i
-                    class="fa fa-add text-primary"></i>
-                Add Destination</x-button>
-
-            <div class="mx-auto z-9 top-1/3 left-1/3" x-show="show" x-on:click.outside.prevent="show = false">
-                @include('livewire.includes.doctor-create')
-            </div>
-        </div>
-    @endif --}}
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-12 grid-margin stretch-card w-full">
         <div class="card card-rounded">
             <div class="card-body">
                 <div class="d-sm-flex justify-content-between align-items-start">
                     <div>
-                        <h4 class="card-title card-title-dash">Services</h4>
-                        <p class="card-subtitle card-subtitle-dash">You can manage your Services here</p>
+                        <h4 class="card-title card-title-dash">Our Services</h4>
+                        <p class="card-subtitle card-subtitle-dash">You can manage your services here</p>
                     </div>
-                    <div x-data="{ show: false }" x-cloak>
-                        <button x-on:click.prevent="show = true" class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i
-                                class="mdi mdi-account-plus"></i>Add
-                            New Service</button>
-                    </div>
-                    <div class="mx-auto z-9 top-1/3 left-1/3" x-show="show" x-on:click.outside.prevent="show = service
-                        @include('service.create')
+                    <div class="relative p-5 mx-auto" x-data="{ show: false }" x-cloak>
+                        <button x-on:click.prevent="show = true" class="px-4 py-2 text-light rounded bg-primary">
+                            <i class="fa fa-add text-primary text-lg"></i>
+                            Create service
+                        </button>
+
+                        <!-- Modal -->
+                        <div x-show="show" x-transition
+                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                            x-on:click.self="show = false">
+                            <div class="relative">
+                                @include('services.create')
+                                <button class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
+                                    x-on:click="show = false">&#10005;</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive  mt-1">
                     <table class="table select-table">
                         <thead>
                             <tr>
-                                <th>
+                                {{-- <th>
                                     <div class="form-check form-check-flat mt-0">
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input" aria-checked="false"
                                                 id="check-all"><i class="input-helper"></i></label>
                                     </div>
-                                </th>
-                                <th>Destination</th>
-                                <th>Created by</th>
-                                <th>Manage</th>
-                                <th>Clicks</th>
+                                </th> --}}
+                                <th class="p-3">Photo</th>
+                                <th class="p-3">Service Name</th>
+                                <th class="p-3">Edit</th>
+                                <th class="p-3">Delete</th>
                             </tr>
                         </thead>
-                        @unless (count($services) == 0)
+                        <tbody>
+                            {{-- @unless (count($services) == 0) --}}
                             @foreach ($services as $service)
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-flat mt-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" aria-checked="false"><i
-                                                        class="input-helper"></i></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <img src="{{ asset('storage/' . $service->image) }}" alt="">
-                                                <div>
-                                                    <h6>{{ $service->name }}</h6>
-                                                
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h6>{{ $culture->user->name }}</h6>
-                                            <p>{{ $culture->user->id }}</p>
-                                        </td>
-                                      
-                                    </tr>
-                                </tbody>
-                            @endforeach
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-check form-check-flat mt-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i
+                                                class="input-helper"></i></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <img class="img-fluid rounded-circle p-2 mx-auto mb-4"
+                                            src="{{ $service->image ? asset('storage/' . $service->image) : asset('/images') }}"
+                                            style="width: 80px; height: 80px;">
 
-                        @endunless
+                                    </div>
+                                </td>
+
+
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="max-w-xs">
+                                            <h6 class="line-clamp-2 text-sm text-gray-800">
+                                                {{ $service->title }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="py-3 px-4">
+                                    <div x-data="{ show: false }" x-cloak class="flex justify-start space-x-2">
+                                        <button x-on:click.prevent="show = true"
+                                            class="btn-edit flex items-center text-blue-600 hover:text-blue-800">
+                                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                </path>
+                                            </svg>
+                                            Edit
+                                        </button>
+
+                                        <div x-show="show" x-transition
+                                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                                            x-on:click.self="show = false">
+                                            <div class="relative">
+                                                @include('services.edit')
+                                                <button
+                                                    class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1"
+                                                    x-on:click="show = false">&#10005;</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                {{-- <td>
+                                  @include('services.delete', ['service' => $service])
+                                </td> --}}
+                            </tr>
+                        </tbody>
+                        @endforeach
+                        {{-- @else
+                            <tr>
+                                <td colspan="6">Got to Dashboard to view Services</td>
+                            </tr> --}}
+                        {{-- @endunless --}}
+                        </tbody>
                     </table>
                 </div>
             </div>

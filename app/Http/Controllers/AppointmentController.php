@@ -34,7 +34,7 @@ class AppointmentController extends Controller
 
         try {
             // ✅ 2. Save to database
-            dd($appointment = Appointment::create($validated));
+            $appointment = Appointment::create($validated);
 
             // ✅ 3. Queue email to admins
             $adminRecipients = [

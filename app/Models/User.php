@@ -12,8 +12,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
     use HasRoles;
+
+    protected $guard_name = 'web';
     /**
      * The attributes that are mass assignable.
      *
@@ -28,30 +29,14 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
+     /**
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string,string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function hasPermission($permissionName)
-    {
-        return $this->role->permissions()->where('name', $permissionName)->exists();
-
-        return Cache::remember("user_{$this->id}_permissions", now()->addHours(1), function () {
-            return $this->role->permissions->pluck('name');
-        })->contains($permissionName);
-    }
 }

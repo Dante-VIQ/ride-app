@@ -17,21 +17,21 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" placeholder="First Name"
+                                <input type="text" class="form-control border-0" name="First Name" placeholder="First Name"
                                     style="height: 55px;">
                             </div>
 
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" placeholder="Last Name"
+                                <input type="text" class="form-control border-0" name="Last Name" placeholder="Last Name"
                                     style="height: 55px;">
                             </div>
                             <div class="col-12">
-                                <input type="email" class="form-control border-0" placeholder="Your Email"
+                                <input type="email" class="form-control border-0" name="email" placeholder="Your Email"
                                     style="height: 55px;">
                             </div>
 
                             <div class="col-12">
-                                <textarea class="form-control border-0" rows="5" placeholder="Describe your problem"></textarea>
+                                <textarea class="form-control border-0" rows="5" name="message" placeholder="Describe your problem"></textarea>
                             </div>
 
                             <button class="btn btn-info py-2 px-4" type="submit">Send</button>

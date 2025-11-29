@@ -9,7 +9,6 @@ use Livewire\Attributes\Layout;
 class AboutCard extends Component
 {
     public $about;
-    public $sections = [];
 
     public function mount()
     {

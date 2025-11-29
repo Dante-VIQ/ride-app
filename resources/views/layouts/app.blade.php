@@ -43,12 +43,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        rel="stylesheet" />
-
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,12 +50,11 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <style>
-
         /* Image Stack Section */
         .image-stack {
             position: relative;
             min-height: 70vh;
-            background-image:  url('/images/DODGE CARAVAN.jpg');
+            background-image: url('/images/DODGE CARAVAN.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -70,7 +63,7 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         /* Foreground image positioned at top 0 left 0 */
         .foreground-image {
             position: absolute;
@@ -83,7 +76,7 @@
             /* transform: translateX(-10px) translateY(-10px);
             animation: float 8s ease-in-out infinite; */
         }
-        
+
         /* Text overlay at bottom center */
         .text-overlay {
             position: absolute;
@@ -94,7 +87,7 @@
             width: 90%;
             max-width: 700px;
         }
-        
+
         .quote-box {
             background-color: rgba(255, 255, 255, 0.92);
             color: #1a365d;
@@ -109,8 +102,9 @@
             position: relative;
             overflow: hidden;
         }
-        
-        .quote-box::before, .quote-box::after {
+
+        .quote-box::before,
+        .quote-box::after {
             content: '"';
             position: absolute;
             font-size: 5rem;
@@ -118,65 +112,89 @@
             opacity: 0.2;
             font-family: Georgia, serif;
         }
-        
+
         .quote-box::before {
             top: -20px;
             left: 20px;
         }
-        
+
         .quote-box::after {
             bottom: -50px;
             right: 20px;
         }
- 
 
- 
+
+
         /* Animation for foreground image */
         @keyframes float {
             0% {
                 transform: translateX(-10px) translateY(-10px);
             }
+
             50% {
                 transform: translateX(10px) translateY(10px);
             }
+
             100% {
                 transform: translateX(-10px) translateY(-10px);
             }
         }
-        
+
         /* Responsive adjustments */
         @media (max-width: 992px) {
+            .image-stack {
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                min-height: 70vh;
+            }
+
             .foreground-image {
                 width: 60%;
             }
-            
+
             .quote-box {
                 font-size: 1.2rem;
                 padding: 15px 20px;
             }
         }
-        
+
         @media (max-width: 768px) {
+            .image-stack {
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                min-height: 70vh;
+            }
+
             .foreground-image {
                 width: 80%;
             }
-            
+
             .quote-box {
                 font-size: 1.1rem;
             }
-            
+
         }
-        
+
         @media (max-width: 576px) {
+
+            .image-stack {
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                min-height: 70vh;
+            }
+
             .foreground-image {
                 width: 100%;
             }
-            
+
             .quote-box {
                 font-size: 1rem;
             }
-            
-           
+
+
         }
     </style>
 
@@ -202,32 +220,22 @@
     <!-- Bootstrap Bundle (with Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 
-    <!-- jQuery Plugins -->
-    <script src="lib/wow/wow.min.js" defer></script>
-    <script src="lib/easing/easing.min.js" defer></script>
-    <script src="lib/waypoints/waypoints.min.js" defer></script>
-    <script src="lib/counterup/counterup.min.js" defer></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js" defer></script>
-    <script src="lib/tempusdominus/js/moment.min.js" defer></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js" defer></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
-
     <!-- Your Template Script (depends on jQuery) -->
     <script src="js/main.js" defer></script>
 
-    <script> 
-    //  Simple animations
+    <script>
+        //  Simple animations
         document.addEventListener('DOMContentLoaded', function() {
-            const quoteBox = document.querySelector('.quote-box');
-            
-            // Pulsing animation for the quote box
-            setInterval(() => {
-                quoteBox.style.transform = 'scale(1.03)';
-                setTimeout(() => {
-                    quoteBox.style.transform = 'scale(1)';
-                }, 300);
-            }, 5000);
-        </script>
+                    const quoteBox = document.querySelector('.quote-box');
+
+                    // Pulsing animation for the quote box
+                    setInterval(() => {
+                        quoteBox.style.transform = 'scale(1.03)';
+                        setTimeout(() => {
+                            quoteBox.style.transform = 'scale(1)';
+                        }, 300);
+                    }, 5000);
+    </script>
     @livewireScripts
 
 

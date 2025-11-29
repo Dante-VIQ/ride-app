@@ -10,7 +10,7 @@ use App\Models\Appointment;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 
-#[Layout('layouts.analytic-layout')]
+#[Layout('layouts.admin')]
 class AnalyticsView extends Component
 {
     // Remove conflicting public properties

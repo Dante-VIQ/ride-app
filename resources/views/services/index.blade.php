@@ -14,7 +14,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -30,15 +32,15 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-     @livewireStyles
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
-   
+
 
     <!-- Navbar Start -->
- <livewire:layout.navigation />
+    <livewire:layout.navigation />
     <!-- Navbar End -->
 
 
@@ -58,30 +60,30 @@
     <!-- Page Header End -->
 
     <!-- Service Start -->
-<div class="container-xxl py-5">
-    <div class="container">
+    <div class="container-xxl py-5">
+        <div class="container">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
 
-            @unless ($services->isEmpty())
-                @foreach ($services as $service)
-                    <div class="testimonial-item text-center items-center wow fadeInUp" data-wow-delay="0.1s">
-                        <img class="img-fluid bg-green-300 rounded-circle p-2 mx-auto mb-4"
-                            src="{{ $service->image ? asset('storage/' . $service->image) : asset('/images') }}"
-                            style="width: 200px; height: 200px;">
-                        <div class="testimonial-text rounded text-center p-2">
-                            <span class="fst-italic text-gray-800">{{ $service->title }}</span>
+                @unless ($services->isEmpty())
+                    @foreach ($services as $service)
+                        <div class="testimonial-item text-center items-center wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="img-fluid bg-green-300 rounded-circle p-2 mx-auto mb-4"
+                                src="{{ $service->image ? asset('storage/' . $service->image) : asset('/images') }}"
+                                style="width: 200px; height: 200px;">
+                            <div class="testimonial-text rounded text-center p-2">
+                                <span class="fst-italic text-gray-800">{{ $service->title }}</span>
+                            </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col-12">
+                        <p class="text-center">No services content available yet.</p>
                     </div>
-                @endforeach
- @else
-                <div class="col-12">
-                    <p class="text-center">No services content available yet.</p>
-                </div>
-            @endunless
+                @endunless
+            </div>
         </div>
     </div>
-</div>
     <!-- Service End -->
 
     <!-- Appointment Start -->
@@ -89,12 +91,13 @@
     <!-- Appointment End -->
 
     <!-- Footer Start -->
- @include('components.partials.footer')
+    @include('components.partials.footer')
     <!-- Footer End -->
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+            class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript Libraries -->
