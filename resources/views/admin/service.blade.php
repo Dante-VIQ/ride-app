@@ -17,8 +17,5 @@
             <livewire:admin-view />
         </table>
 
-        <div class="mt-4">
-            {{ $services->links() }}
-        </div>
     </div>
 </x-admin-layout>

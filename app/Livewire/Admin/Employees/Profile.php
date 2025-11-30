@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Employee;
 use App\Models\EmployeeDocument;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Profile extends Component
 {
@@ -18,25 +19,40 @@ class Profile extends Component
     public $address;
     public $drivers_license_number;
     public $editingField = null;
-
+    public $documents;
     public $newProfileImage;
     public $newDocuments = [];
     public $uploadingDocuments = false;
-
-    public function mount(Employee $employee)
+    public $profile_image;
+    public function mount($employeeId)
     {
-        // Load the employee with documents relationship
-        // $this->employee = $employee->load('documents');
-        
-        // Set the form fields
-        $this->employee_name = $employee->employee_name;
-        $this->employee_id = $employee->employee_id;
-        $this->phone_number = $employee->phone_number;
-        $this->address = $employee->address;
-        $this->drivers_license_number = $employee->drivers_license_number;
-        $this->employeeId = $employee->id;
-        $this->employee = Employee::with('documents')->find($this->employeeId);
-        $this->loadEmployee();
+        $this->employeeId = $employeeId;
+        $this->loadEmployeeData();
+    }
+
+    /**
+     * Load all employee data including documents
+     */
+    public function loadEmployeeData()
+    {
+        // Load employee with documents relationship
+        $this->employee = Employee::with('documents')->findOrFail($this->employeeId);
+
+        // Load documents separately
+        $this->documents = EmployeeDocument::where('employee_id', $this->employeeId)->get();
+
+        // Populate the form fields with employee data
+        $this->employee_name = $this->employee->employee_name;
+        $this->employee_id = $this->employee->employee_id;
+        $this->phone_number = $this->employee->phone_number;
+        $this->address = $this->employee->address;
+        $this->drivers_license_number = $this->employee->drivers_license_number;
+        $this->profile_image = $this->employee->profile_image;
+    }
+
+    public function getDocumentsProperty()
+    {
+        return $this->employee->documents ?? collect();
     }
 
     public function enableEdit($field)
@@ -58,7 +74,7 @@ class Profile extends Component
         ]);
 
         $this->editingField = null;
-
+        $this->loadEmployeeData();
         session()->flash('success', 'Updated successfully.');
     }
 
@@ -68,14 +84,21 @@ class Profile extends Component
             'newProfileImage' => 'required|image|max:2048',
         ]);
 
-        $path = $this->newProfileImage->store('employee_profiles', 'public');
+        // Delete old profile image if exists
+        if ($this->employee->profile_image && file_exists(public_path($this->employee->profile_image))) {
+            unlink(public_path($this->employee->profile_image));
+        }
+
+        // Store new image in public folder
+        $path = $this->newProfileImage->store('employee_profiles', 'public_direct');
+        $imagePath = 'uploads/' . $path;
 
         $this->employee->update([
-            'profile_image' => $path,
+            'profile_image' => $imagePath,
         ]);
 
         $this->newProfileImage = null;
-
+        $this->loadEmployeeData();
         session()->flash('success', 'Profile image updated.');
     }
 
@@ -86,50 +109,61 @@ class Profile extends Component
         ]);
 
         foreach ($this->newDocuments as $document) {
-            $path = $document->store('employee_documents', 'public');
+            $path = $document->store('employee_documents', 'public_direct');
+            $filePath = 'uploads/' . $path;
 
             $this->employee->documents()->create([
-                'file_path' => $path,
+                'file_path' => $filePath,
                 'original_name' => $document->getClientOriginalName(),
                 'file_size' => $document->getSize(),
             ]);
         }
 
-        // IMPORTANT: Refresh the employee with documents
-        $this->employee->refresh();
-        $this->employee->load('documents');
-
+        // Refresh the employee with documents
+        $this->loadEmployeeData();
         $this->newDocuments = [];
-        $this->uploadingDocuments = false;
 
         session()->flash('success', 'Documents uploaded successfully.');
     }
 
-    public function deleteDocument($id)
+    public function deleteDocument($documentId)
     {
-        $doc = $this->employee->documents()->findOrFail($id);
+        $document = EmployeeDocument::findOrFail($documentId);
 
-        // Optional: Delete the physical file from storage
-        // Storage::disk('public')->delete($doc->file_path);
+        // Delete physical file
+        if ($document->file_path && file_exists(public_path($document->file_path))) {
+            unlink(public_path($document->file_path));
+        }
 
-        $doc->delete();
+        $document->delete();
 
-        // Reload the relationship
-        $this->employee->load('documents');
+        // Refresh the documents
+        $this->loadEmployeeData();
 
         session()->flash('success', 'Document deleted successfully.');
     }
-
-    public function loadEmployee()
+    public function deleteEmployee()
     {
-        $this->employee = Employee::with('documents')->find($this->employeeId);
+        $employee = Employee::with('documents')->findOrFail($this->employeeId);
 
-        // If employee not found, you might want to handle this case
-        if (!$this->employee) {
-            abort(404, 'Employee not found');
+        // Delete profile image
+        if ($employee->profile_image && file_exists(public_path($employee->profile_image))) {
+            unlink(public_path($employee->profile_image));
         }
-    }
 
+        // Delete all documents
+        foreach ($employee->documents as $document) {
+            if ($document->file_path && file_exists(public_path($document->file_path))) {
+                unlink(public_path($document->file_path));
+            }
+            $document->delete();
+        }
+
+        $employee->delete();
+
+        session()->flash('success', 'Employee deleted successfully.');
+        return redirect()->route('employees.index');
+    }
     public function render()
     {
         return view('livewire.admin.employees.profile');

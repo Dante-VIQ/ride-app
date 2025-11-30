@@ -32,7 +32,7 @@ class Create extends Component
         ];
     }
 
-    public function save()
+ public function save()
     {
         $this->validate([
             'employee_name' => 'required|string|max:255',
@@ -52,26 +52,30 @@ class Create extends Component
         $employee->address = $this->address;
 
         if ($this->profile_image) {
-            $employee->profile_image = $this->profile_image->store('employee_profiles', 'public');
+            // Store in public folder using public_direct disk
+            $path = $this->profile_image->store('employee_profiles', 'public_direct');
+            $employee->profile_image = 'uploads/' . $path;
         }
 
         $employee->save();
 
         if (!empty($this->documents)) {
             foreach ($this->documents as $doc) {
+                // Store documents in public folder too
+                $docPath = $doc->store('employee_documents', 'public_direct');
                 $employee->documents()->create([
-                    'file_path' => $doc->store('employee_documents', 'public'),
+                    'file_path' => 'uploads/' . $docPath,
                 ]);
             }
         }
 
-        //  $this->employee->load('documents');
         session()->flash('success', 'Employee created successfully.');
 
         $this->reset(['employee_name', 'employee_id', 'phone_number', 'drivers_license_number', 'address', 'profile_image', 'documents']);
 
         $this->dispatch('employee-created');
     }
+
 
     public function render()
     {

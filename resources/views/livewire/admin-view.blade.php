@@ -1,5 +1,5 @@
 <tbody>
-    @forelse ($services as $service)
+    @forelse ($services ?? [] as $service)
         <tr class="border-b">
             <td class="p-2">
                 <img src="{{ asset('storage/' . $service->image) }}"
@@ -19,4 +19,4 @@
     @endforelse
 </tbody>
 
-{{ $services->links() }}
+
