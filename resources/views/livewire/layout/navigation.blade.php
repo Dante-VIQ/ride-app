@@ -115,11 +115,11 @@ new class extends Component {
                 {{ __('About') }}
             </x-responsive-nav-link>
 
-             @role('admin')
+             {{-- @role('master|engineer') --}}
               <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                 {{ __('Analytics') }}
             </x-responsive-nav-link>
-            @endrole
+            {{-- @endrole --}}
         </div>
 
         <!-- Responsive Settings Options -->
