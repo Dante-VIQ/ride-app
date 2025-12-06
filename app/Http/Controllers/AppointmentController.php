@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentRequestMail;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
 {
@@ -43,7 +44,7 @@ class AppointmentController extends Controller
                 $masterRecipients = [config('mail.admin_address_1', 'damalide20@gmail.com')];
             }
 
-            Mail::to($masterRecipients)->queue(new AppointmentRequestMail($validated));
+            Mail::to($masterRecipients)->queue(new AppointmentRequestMail($appointment));
 
             return back()->with('success', 'Your appointment request has been submitted successfully!');
         } catch (\Exception $e) {

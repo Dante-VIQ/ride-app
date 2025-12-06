@@ -12,38 +12,40 @@
             </div>
 
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="bg-light rounded h-100 d-flex align-items-center p-5">
-                    @if(session('success'))
+                <div class="w-100">
+                    @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    @if(session('error'))
+                    @if (session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-                    @if($errors->any())
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">
-                                @foreach($errors->all() as $error)
+                                @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
+                </div>
+                <div class="bg-light rounded h-100 d-flex align-items-center p-5">
 
-                    <form  action="{{ route('appointments.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('appointments.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" name="first_name" placeholder="First Name"
-                                    style="height: 55px;">
+                                <input type="text" class="form-control border-0" name="first_name"
+                                    placeholder="First Name" style="height: 55px;">
                             </div>
 
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" name="last_name" placeholder="Last Name"
-                                    style="height: 55px;">
+                                <input type="text" class="form-control border-0" name="last_name"
+                                    placeholder="Last Name" style="height: 55px;">
                             </div>
                             <div class="col-12">
-                                <input type="email" class="form-control border-0" name="email" placeholder="Your Email"
-                                    style="height: 55px;">
+                                <input type="email" class="form-control border-0" name="email"
+                                    placeholder="Your Email" style="height: 55px;">
                             </div>
 
                             <div class="col-12">

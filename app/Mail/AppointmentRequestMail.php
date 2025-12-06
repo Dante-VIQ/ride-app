@@ -7,20 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Appointment;
 
 class AppointmentRequestMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public array $data;
+    public Appointment $appointment;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(array $data)
+    public function __construct(Appointment $appointment)
     {
-        $this->data = $data;
+        $this->appointment = $appointment;
     }
 
     /**
@@ -29,9 +31,9 @@ class AppointmentRequestMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Appointment Request from ' . $this->data['first_name'] . ' ' . $this->data['last_name'],
+            subject: 'New Appointment Request from ' . $this->appointment->first_name . ' ' . $this->appointment->last_name,
             replyTo: [
-                $this->data['email'] => $this->data['first_name'] . ' ' . $this->data['last_name'],
+                new Address($this->appointment->email, $this->appointment->first_name . ' ' . $this->appointment->last_name),
             ],
         );
     }
@@ -42,8 +44,8 @@ class AppointmentRequestMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'emails.requests', // <- Change to your Blade view
-            with: ['data' => $this->data],
+            view: 'emails.requests',
+            with: ['appointment' => $this->appointment],
         );
     }
 
