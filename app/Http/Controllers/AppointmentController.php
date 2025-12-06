@@ -10,16 +10,14 @@ use App\Mail\AppointmentRequestMail;
 
 class AppointmentController extends Controller
 {
-
     public function index()
-{
-    $appointments = Appointment::latest()->paginate(10);
-
-    return view('admin.partials.requests', compact('requests'));
-}
- public function create()
     {
+        $appointments = Appointment::latest()->paginate(10);
 
+        return view('admin.partials.requests', compact('appointments'));
+    }
+    public function create()
+    {
         return view('components.partials.appointment');
     }
     public function store(Request $request)
@@ -27,22 +25,25 @@ class AppointmentController extends Controller
         // ✅ 1. Validate form input
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'required|email|max:255',
-            'message'    => 'required|string|max:2000',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:2000',
         ]);
 
         try {
             // ✅ 2. Save to database
             $appointment = Appointment::create($validated);
 
-            // ✅ 3. Queue email to admins
-            $adminRecipients = [
-                config('mail.admin_address_1', 'damalide20@gmail.com'),
-                config('mail.admin_address_2', 'admin2@example.com'),
-            ];
+            // ✅ 3. Queue email to MASTER_EMAILS from .env (comma-separated)
+            $masterEmails = env('MASTER_EMAILS', '');
+            $masterRecipients = array_filter(array_map('trim', explode(',', $masterEmails)));
 
-            Mail::to($adminRecipients)->queue(new AppointmentRequestMail($validated));
+            // Fallback to a sensible default if MASTER_EMAILS not set
+            if (empty($masterRecipients)) {
+                $masterRecipients = [config('mail.admin_address_1', 'damalide20@gmail.com')];
+            }
+
+            Mail::to($masterRecipients)->queue(new AppointmentRequestMail($validated));
 
             return back()->with('success', 'Your appointment request has been submitted successfully!');
         } catch (\Exception $e) {

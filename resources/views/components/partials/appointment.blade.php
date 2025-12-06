@@ -13,16 +13,32 @@
 
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="bg-light rounded h-100 d-flex align-items-center p-5">
-                    <form  action="{{ route('appointments.store') }}" method="POST">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form  action="{{ route('appointments.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" name="First Name" placeholder="First Name"
+                                <input type="text" class="form-control border-0" name="first_name" placeholder="First Name"
                                     style="height: 55px;">
                             </div>
 
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" name="Last Name" placeholder="Last Name"
+                                <input type="text" class="form-control border-0" name="last_name" placeholder="Last Name"
                                     style="height: 55px;">
                             </div>
                             <div class="col-12">
