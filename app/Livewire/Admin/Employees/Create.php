@@ -28,7 +28,7 @@ class Create extends Component
             'drivers_license_number' => 'nullable|string|max:100',
             'address' => 'nullable|string|max:255',
             'profile_image' => 'nullable|sometimes|image|max:20480',
-            'documents.*' => 'nullable|mimes:pdf,doc,docx|max:10240',
+            'documents.*' => 'nullable|mimes:pdf,doc,docx,jpg,png,jpeg|max:10240',
         ];
     }
 
@@ -41,7 +41,7 @@ class Create extends Component
             'address' => 'nullable|string|max:255',
             'drivers_license_number' => 'nullable|string|max:255',
             'profile_image' => 'nullable|image|max:20480',
-            'documents.*' => 'nullable|file|max:10240|mimes:pdf,doc,docx',
+            'documents.*' => 'nullable|file|max:10240|mimes:pdf,doc,docx,jpg,png,jpeg',
         ]);
 
         $employee = new Employee();
