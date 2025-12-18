@@ -88,15 +88,15 @@
             @foreach($documents as $document)
                 <div class="flex justify-between items-center border border-gray-200 rounded p-3">
                     <div>
-                        <span class="font-medium text-gray-700">{{ $document->original_name }}</span>
-                        <span class="text-sm text-gray-500 ml-2">
+                        <span class="font-medium  text-sm">{{ $document->original_name }}</span>
+                        <span class="text-sm ml-2">
                             ({{ number_format($document->file_size / 1024, 1) }} KB)
                         </span>
                     </div>
                     <div class="space-x-2">
                         <a href="{{ asset($document->file_path) }}"
                            target="_blank"
-                           class="bg-green-500 text-gray-700 py-1 px-3 rounded text-sm">
+                           class="py-1 px-3 rounded text-sm" id="view">
                             View
                         </a>
                         <button wire:click="deleteDocument({{ $document->id }})"
