@@ -96,7 +96,7 @@
                     <div class="space-x-2">
                         <a href="{{ asset($document->file_path) }}"
                            target="_blank"
-                           class="bg-green-500 text-white py-1 px-3 rounded text-sm">
+                           class="bg-green-500 text-gray-700 py-1 px-3 rounded text-sm">
                             View
                         </a>
                         <button wire:click="deleteDocument({{ $document->id }})"
