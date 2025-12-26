@@ -59,7 +59,7 @@ class ServiceController extends Controller
         ]);
 
 
-        return redirect('admin.service')->with('message', 'Service created successfully!');
+        return redirect('/admin/service')->with('message', 'Service created successfully!');
     }
 
         /**
