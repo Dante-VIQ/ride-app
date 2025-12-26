@@ -33,7 +33,7 @@ new class extends Component {
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link href="/services" :active="request()->routeIs('/services')" wire:navigate>
+                    <x-nav-link href="/all-services" :active="request()->routeIs('/services')" wire:navigate>
                         {{ __('Services') }}
                     </x-nav-link>
 
