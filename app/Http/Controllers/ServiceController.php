@@ -89,9 +89,9 @@ class ServiceController extends Controller
         //     abort(403);
         // }
         // Make sure logged in user is owner
-        if ($service->user_id != Auth::guard()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        // if ($service->user_id != Auth::guard()->id()) {
+        //     abort(403, 'Unauthorized Action');
+        // }
        return view('services.edit', ['service' => $service]);
     }
 
