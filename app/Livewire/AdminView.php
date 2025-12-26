@@ -5,20 +5,26 @@ namespace App\Livewire;
 use App\Models\About;
 use App\Models\Service;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
+#[Layout('layouts.admin')]
 class AdminView extends Component
 {
-    public $services, $abouts;
+    use WithPagination;
 
-    
+    public $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $services = Service::latest()->paginate(10);
-        $abouts = About::latest()->paginate(10);
-        
+        // Make sure to return the paginated data
         return view('livewire.admin-view', [
-            'services' => $services,
-            'abouts' => $abouts,
+            'services' => Service::paginate(10),
         ]);
     }
 }

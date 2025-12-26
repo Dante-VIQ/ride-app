@@ -17,7 +17,7 @@ class AboutController extends Controller
     public function index()
     {
         $abouts = About::latest()->paginate();
-        return view('admin.abouts', ['abouts' => $abouts]);
+        return view('admin.about', ['abouts' => $abouts]);
 
     }
 
@@ -36,7 +36,7 @@ class AboutController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request->validate([
+       $request->validate([
             'description' => 'required',
             'image' => 'image|sometimes|nullable|max:10240',
             'photo' =>'image|sometimes|nullable|max:10240'
@@ -44,22 +44,32 @@ class AboutController extends Controller
         ]);
 
         if (!Auth::check()) {
-            abort(403, 'You must be logged in to create a service.');
+            abort(403, 'You must be logged in to create an about.');
         }
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('images', 'public');
-        }
+        // if ($request->hasFile('image')) {
+        //     $validated['image'] = $request->file('image')->store('images', 'public');
+        // }
 
-         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('photos', 'public');
-        }
+        //  if ($request->hasFile('photo')) {
+        //     $validated['photo'] = $request->file('photo')->store('photos', 'public');
+        // }
+
+           // Store image using public_direct disk
+        $path = $request->file('image')->store('abouts', 'public_direct');
+        $path = $request->file('photo')->store('photos', 'public_direct');
+        $imagePath = 'uploads/' . $path;
 
         $validated['user_id'] = Auth::id();
 
-        About::create($validated);
+        About::create([
+            'description' => $request->input('description'),
+            'image' => $imagePath,
+            'photo' => $imagePath,
+            'user_id' => $validated['user_id'],
+        ]);
 
-        return redirect('/home')->with('message', 'About created successfully!');
+        return redirect('/admin/about')->with('message', 'About created successfully!');
     }
 
     /**
@@ -110,7 +120,7 @@ class AboutController extends Controller
         }
         $about->update($validated);
 
-        return redirect('/home')->with('message', 'About updated successfully!');
+        return redirect('/admin/about')->with('message', 'About updated successfully!');
     }
 
     /**
@@ -122,7 +132,7 @@ class AboutController extends Controller
         //   if (! Gate::allows('destroy-about', $about)) {
         //     abort(403);
         // }
-        return view('about.delete', ['about' => $about]);
+        // return view('about.delete', ['about' => $about]);
         // Make sure logged in user is owner
         if ($about->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
@@ -137,6 +147,6 @@ class AboutController extends Controller
 
          // Delete the about record
         $about->delete();
-        return redirect('/home')->with('message', 'About deleted successfully');
+        return redirect('/admin/about')->with('message', 'About deleted successfully');
     }
 }

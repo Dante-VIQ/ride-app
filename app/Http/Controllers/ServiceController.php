@@ -33,7 +33,7 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'title' => 'required',
             'image' =>'image|sometimes|nullable|max:10240'
 
@@ -44,17 +44,22 @@ class ServiceController extends Controller
             abort(403, 'You must be logged in to create a service.');
         }
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('images', 'public');
-        }
+
+        // Store image using public_direct disk
+        $path = $request->file('image')->store('services', 'public_direct');
+        $imagePath = 'uploads/' . $path;
 
 
+        // $validated['user_id'] = Auth::id();
 
-        $validated['user_id'] = Auth::id();
+        Service::create([
+            'title' => $request->title,
+            'image' => $imagePath,
+            'user_id' => Auth::id(),
+        ]);
 
-        Service::create($validated);
 
-        return redirect('/home')->with('message', 'Service created successfully!');
+        return redirect('admin.service')->with('message', 'Service created successfully!');
     }
 
         /**
@@ -102,21 +107,31 @@ class ServiceController extends Controller
         if ($service->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
         }
-        $validated = $request->validate([
+        $request->validate([
             'title' => 'required',
             'image' =>'image|sometimes|nullable|max:10240',
 
 
         ]);
-
+        // If new image is uploaded
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('images', 'public');
+            // Delete old image from public folder
+            if ($service->image && file_exists(public_path($service->image))) {
+                unlink(public_path($service->image));
+            }
+
+            // Save new image using public_direct
+            $path = $request->file('image')->store('services', 'public_direct');
+            $data['image'] = 'uploads/' . $path;
         }
 
 
-           $service->update($validated);
+           $service->update([
+            'title' => $request->title,
+            'image' => $data['image'] ?? $service->image,
+        ]);
 
-        return redirect('/home')->with('message', 'Service updated successfully!');
+        return redirect('/admin/service')->with('message', 'Service updated successfully!');
     }
 
     /**
@@ -127,7 +142,7 @@ class ServiceController extends Controller
         //  if (! Gate::allows('destroy-service', $service)) {
         //     abort(403);
         // }
-         return view('sevice.delete', ['service' => $service]);
+        //  return view('sevice.delete', ['service' => $service]);
         // Make sure logged in user is owner
     if ($service->user_id != Auth::guard()->id()) {
         abort(403, 'Unauthorized Action');
@@ -137,6 +152,6 @@ class ServiceController extends Controller
         Storage::disk('public')->delete($service->image);
     }
     $service->delete();
-    return redirect('/dashboard')->with('message', 'Service deleted successfully');
+    return redirect('/admin/service')->with('message', 'Service deleted successfully');
     }
 }

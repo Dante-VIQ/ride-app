@@ -1,4 +1,3 @@
-<x-admin-layout>
     <div class="max-w-4xl w-full flex flex-col p-6">
 
         <h1 class="text-2xl font-bold mb-4">About Posts</h1>
@@ -18,7 +17,7 @@
                 @foreach ($abouts as $about)
                     <tr class="border-b">
                         <td class="p-2">
-                            <img src="{{ asset('storage/' . $about->image) }}" class="h-16 w-16 object-cover rounded">
+                            <img src="{{ $about->image ? asset($about->image) : asset('images/default.png') }}" class="h-16 w-16 object-cover rounded">
                         </td>
                         <td class="p-2">{{ $about->description }}</td>
                         <td class="p-2">
@@ -33,8 +32,5 @@
             </tbody>
         </table>
 
-        <div class="mt-4">
-            {{ $abouts->links() }}
-        </div>
+
     </div>
-</x-admin-layout>

@@ -24,11 +24,11 @@
                         <!-- Images -->
                         <div class="flex flex-col items-end space-y-4">
                             <img class="rounded-lg w-3/4 shadow-md"
-                                src="{{ $about->image ? asset('storage/' . $about->image) : asset('images/senior transport.webp') }}"
+                                src="{{ $about->image ? asset($about->image) : asset('images/senior transport.webp') }}"
                                 alt="Senior Transport">
 
                             <img class="rounded-lg w-1/2 shadow-md -mt-12 bg-white p-2"
-                                src="{{ $about->photo ? asset('storage/' . $about->photo) : asset('images/medical van.webp') }}"
+                                src="{{ $about->photo ? asset($about->photo) : asset('images/medical van.webp') }}"
                                 alt="Medical Van">
                         </div>
 

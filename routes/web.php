@@ -55,6 +55,9 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
         return view('admin.employees');
     })->name('admin.employees');
 
+    Route::get('admin/about', function () {
+        return view('admin.about');
+    })->name('admin.about');
     Route::get('admin/service', function () {
         return view('admin.service');
     })->name('admin.service');
@@ -67,11 +70,11 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     //     return view('admin.user_profile');
     // })->name('admin.user_profile');
 
-Route::get('admin/user_profile/{id}', [ShowController::class, 'show'])->name('admin.user_profile');
+    Route::get('admin/user_profile/{id}', [ShowController::class, 'show'])->name('admin.user_profile');
 
-Route::get('/admin/user_profile/{employee}', function (Employee $employee) {
-    return view('admin.user_profile', compact('employee'));
-});
+    Route::get('/admin/user_profile/{employee}', function (Employee $employee) {
+        return view('admin.user_profile', compact('employee'));
+    });
     // web.php
     // Route::get('/admin/employees/{employeeId}', function ($employeeId) {
     //     return view('admin.employees/profile', compact('employeeId'));
