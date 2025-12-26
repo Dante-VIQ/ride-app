@@ -104,9 +104,9 @@ class ServiceController extends Controller
         //     abort(403);
         // }
         // Make sure logged in user is owner
-        if ($service->user_id != Auth::guard()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        // if ($service->user_id != Auth::guard()->id()) {
+        //     abort(403, 'Unauthorized Action');
+        // }
         $request->validate([
             'title' => 'required',
             'image' =>'image|sometimes|nullable|max:10240',

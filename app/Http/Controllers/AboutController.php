@@ -105,20 +105,21 @@ class AboutController extends Controller
         if ($about->user_id != Auth::guard()->id()) {
             abort(403, 'Unauthorized Action');
         }
-        $validated = $request->validate([
+         $request->validate([
             'description' => 'required',
             'image' => 'image|sometimes|nullable|max:10240',
               'photo' =>'image|sometimes|nullable|max:10240'
         ]);
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('images', 'public');
-        }
+        $path = $request->file('image')->store('abouts', 'public_direct');
+        $path = $request->file('photo')->store('photos', 'public_direct');
+        $imagePath = 'uploads/' . $path;
 
-           if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('photos', 'public');
-        }
-        $about->update($validated);
+        $about->update([
+            'description' => $request->input('description'),
+            'image' => $imagePath,
+            'photo' => $imagePath,
+        ]);
 
         return redirect('/admin/about')->with('message', 'About updated successfully!');
     }
