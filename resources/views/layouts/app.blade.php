@@ -30,16 +30,18 @@
     <meta property="og:title" content="Ride_Aide LLC – Safe & Compassionate Medical Transportation">
     <meta property="og:description"
         content="Non-emergency medical transportation services across Washington. Reliable, accessible, and senior-friendly.">
-    <meta property="og:image" content="https://www.rideaidellc.com/images/og-image.jpg">
+    <meta property="og:image" content="http://127.0.0.1:8000/images/ride-logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ride_Aide LLC – Medical Transport You Can Trust">
     <meta name="twitter:description"
         content="Transportation services for medical appointments, dialysis, therapy, and more across Washington.">
-    <meta name="twitter:image" content="https://www.rideaidellc.com/images/og-image.jpg">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/images/ride-logo.png">
 
-
+   <link rel="icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -54,7 +56,7 @@
         .image-stack {
             position: relative;
             min-height: 70vh;
-            background-image: url('/images/DODGE CARAVAN.jpg');
+            /* background-image: url('/images/DODGE CARAVAN.jpg'); */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

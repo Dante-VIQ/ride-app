@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Image;
 use App\Models\Employee;
 use App\Livewire\AboutCard;
 use App\Livewire\Dashboard;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ShowController;
 use App\Livewire\Admin\Employees\Create;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ImageController;
 use App\Livewire\Admin\Employees\Profile;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
@@ -38,7 +40,13 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     // Route::prefix('admin')->middleware(['role:admin'])->group(function () {
     Route::resource('admin/abouts', AboutController::class);
     Route::resource('admin/services', ServiceController::class);
+    Route::resource('admin/images', ImageController::class);
+  Route::get('/admin/head', [ImageController::class, 'index']);
 
+
+    //     Route::get('admin/head', function () {
+    //     return view('admin.head');
+    // })->name('admin.head');
     // Appointment requests admin view
     Route::get('/requests', [RequestController::class, 'index'])->name('admin.requests');
 

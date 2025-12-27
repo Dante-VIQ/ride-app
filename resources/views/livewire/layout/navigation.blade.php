@@ -22,6 +22,7 @@ new class extends Component {
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center sm:-my-px sm:ms-10">
+                    <img src="{{ asset('images/ride-logo.png') }}" alt="Logo" class="block h-12 w-auto" />
                     <a href="{{ route('dashboard') }}" wire:navigate>
                         <x-application-logo class="block text-xl" />
                     </a>
@@ -41,10 +42,10 @@ new class extends Component {
                         {{ __('About') }}
                     </x-nav-link>
 
-                   {{-- @role('admin') --}}
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
-                            {{ __('Analytics') }}
-                        </x-nav-link>
+                    {{-- @role('admin') --}}
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                        {{ __('Analytics') }}
+                    </x-nav-link>
                     {{-- @endrole --}}
 
                 </div>
@@ -108,17 +109,17 @@ new class extends Component {
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-               <x-responsive-nav-link href="/all-services" :active="request()->routeIs('/all-services')" wire:navigate>
+            <x-responsive-nav-link href="/all-services" :active="request()->routeIs('/all-services')" wire:navigate>
                 {{ __('Services') }}
             </x-responsive-nav-link>
-               <x-responsive-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
+            <x-responsive-nav-link href="/all-about" :active="request()->routeIs('/all-about')" wire:navigate>
                 {{ __('About') }}
             </x-responsive-nav-link>
 
-             @role('master|engineer')
-              <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
-                {{ __('Analytics') }}
-            </x-responsive-nav-link>
+            @role('master|engineer')
+                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                    {{ __('Analytics') }}
+                </x-responsive-nav-link>
             @endrole
         </div>
 
