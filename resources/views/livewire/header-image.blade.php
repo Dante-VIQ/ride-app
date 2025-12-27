@@ -1,5 +1,10 @@
-  <section class="image-stack bg-cover bg-center relative"
-      style="background-image: url({{ $images->first()->image ? asset($images->first()->image) : asset('images/DODGE CARAVAN.jpg') }});">
+<section
+    class="image-stack bg-cover bg-center relative"
+    style="background-image: url('{{ $images->first()?->image
+        ? asset($images->first()->image)
+        : asset('images/DODGE CARAVAN.jpg') }}');"
+>
+
       <!-- Foreground image positioned at top 0 left 0 -->
       <img src="/images/ride-aide.png" alt="Ride Aide LLC vehicle" class="foreground-image">
 
