@@ -1,6 +1,6 @@
  <!-- Footer Start -->
-    <div class="container-fluid bg-primary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
+    <div class="container-fluid bg-primary text-light footer mt-5 pt-4 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 col-md-12">
                     <h1 class="text-light mb-4 text-4xl justify-center items-center">Ride-Aide LLC</h1>

@@ -32,7 +32,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'nullable',
             'image' => 'image|sometimes|nullable|max:10240',
             'photos' => 'image|sometimes|nullable|max:10240',
             'picture' => 'image|sometimes|nullable|max:10240',
@@ -65,7 +65,7 @@ class ImageController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('/admin/head')->with('message', 'Image created successfully!');
+        return redirect('/admin/head')->with('message', 'Image created successfully!');
     }
 
     /**
@@ -91,7 +91,7 @@ class ImageController extends Controller
     public function update(Request $request, Image $image)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'nullable',
             'image' => 'image|sometimes|nullable|max:10240',
             'photos' => 'image|sometimes|nullable|max:10240',
             'picture' => 'image|sometimes|nullable|max:10240',
@@ -129,7 +129,7 @@ class ImageController extends Controller
             'picture' => $imagePath ?? null,
         ]);
 
-        return redirect()->route('/admin/head')->with('message', 'Image updated successfully!');
+        return redirect('/admin/head')->with('message', 'Image created successfully!');
     }
 
     /**
@@ -140,6 +140,6 @@ class ImageController extends Controller
         // $image = Image::findOrFail($id);
         $image->delete();
 
-        return redirect()->route('/admin/head')->with('message', 'Image deleted successfully!');
+        return redirect('/admin/head')->with('message', 'Image created successfully!');
     }
 }
