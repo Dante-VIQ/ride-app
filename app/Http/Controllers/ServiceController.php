@@ -144,9 +144,9 @@ class ServiceController extends Controller
         // }
         //  return view('sevice.delete', ['service' => $service]);
         // Make sure logged in user is owner
-    if ($service->user_id != Auth::guard()->id()) {
-        abort(403, 'Unauthorized Action');
-    }
+    // if ($service->user_id != Auth::guard()->id()) {
+    //     abort(403, 'Unauthorized Action');
+    // }
 
     if ($service->image && Storage::disk('public')->exists($service->image)) {
         Storage::disk('public')->delete($service->image);
