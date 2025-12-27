@@ -11,9 +11,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
-    <link rel="shortcut icon" href="{{ asset('images/ride-logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
 
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');

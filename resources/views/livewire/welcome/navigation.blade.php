@@ -5,7 +5,7 @@
                 <!-- Logo -->
 
                  <div class="flex items-center sm:-my-px sm:ms-10 gap-3">
-                    <img src="{{ asset('images/ride-logo.png') }}" alt="Logo" class="block h-12 w-auto" />
+                    <img src="{{ asset('images/ride-logo.PNG') }}" alt="Logo" class="block h-12 w-auto" />
                     <a href="{{ route('dashboard') }}" wire:navigate>
                         <x-application-logo class="block text-2xl" />
                     </a>
