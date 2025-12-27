@@ -39,9 +39,9 @@
         content="Transportation services for medical appointments, dialysis, therapy, and more across Washington.">
     <meta name="twitter:image" content="http://127.0.0.1:8000/images/ride-logo.png">
 
-   <link rel="icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
-    <link rel="shortcut icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ride-logo.PNG') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

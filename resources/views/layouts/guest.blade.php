@@ -40,9 +40,10 @@
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow">
     <meta name="language" content="en">
-    <link rel="icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
-    <link rel="shortcut icon" href="{{ asset('images/ride-logo.PNG') }}" type="image/png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ride-logo.PNG') }}">
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
