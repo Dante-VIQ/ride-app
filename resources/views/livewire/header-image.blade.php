@@ -1,3 +1,4 @@
+<div>
 <section
     class="relative image-stack"
     style="background-image: url('{{ $images->first()?->image
@@ -14,3 +15,4 @@
           </div>
       </div>
   </section>
+</div>

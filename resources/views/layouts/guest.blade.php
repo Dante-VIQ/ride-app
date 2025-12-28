@@ -59,7 +59,7 @@
         /* Image Stack Section */
 .image-stack {
     width: 100%;
-    min-height: 100vh;
+    min-height: 70vh;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -72,9 +72,9 @@
 /* Mobile */
 @media (max-width: 768px) {
     .image-stack {
-        background-size: contain;
-        background-position: center;
-        background-color: #000;
+        min-height: 75vh;
+        background-position: center 25%;
+    
     }
 }
 

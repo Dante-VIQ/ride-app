@@ -1,5 +1,5 @@
  <!-- Footer Start -->
-    <div class="container-fluid bg-primary text-light footer mt-5 pt-4 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-blue-500 h-[30vh] text-light footer mt-5 pt-4 h- wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 col-md-12">
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="copyright">
                 <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                         &copy; <a class="border-bottom" href="#">Ride Aide LLC</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
