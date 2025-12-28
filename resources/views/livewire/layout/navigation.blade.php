@@ -21,7 +21,7 @@ new class extends Component {
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex items-center sm:-my-px sm:ms-10">
+                <div class="flex items-center sm:-my-px sm:ms-10 gap-3">
                     <img src="{{ asset('images/ride-logo.PNG') }}" alt="Logo" class="block h-12 w-auto" />
                     <a href="{{ route('dashboard') }}" wire:navigate>
                         <x-application-logo class="block text-xl" />

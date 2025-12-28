@@ -57,18 +57,26 @@
     <style>
 
         /* Image Stack Section */
-        .image-stack {
-            position: relative;
-            min-height: 70vh;
-            /* background-image:  url('/images/DODGE CARAVAN.jpg'); */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+.image-stack {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .image-stack {
+        background-size: contain;
+        background-position: center;
+        background-color: #000;
+    }
+}
 
         /* Foreground image positioned at top 0 left 0 */
         .foreground-image {
@@ -177,6 +185,8 @@
 
 
         }
+
+
     </style>
 
     @livewireStyles
