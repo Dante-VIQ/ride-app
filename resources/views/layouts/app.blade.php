@@ -54,150 +54,157 @@
     <style>
         /* Image Stack Section */
         .image-stack {
-            position: relative;
+            width: 100%;
             min-height: 70vh;
-            /* background-image: url('/images/DODGE CARAVAN.jpg'); */
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
+
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            overflow: hidden;
         }
 
-        /* Foreground image positioned at top 0 left 0 */
-        .foreground-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            max-width: 400px;
-            z-index: 50;
-            /* padding: 30px; */
-            /* transform: translateX(-10px) translateY(-10px);
-            animation: float 8s ease-in-out infinite; */
-        }
-
-        /* Text overlay at bottom center */
-        .text-overlay {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            width: 90%;
-            max-width: 700px;
-        }
-
-        .quote-box {
-            background-color: rgba(255, 255, 255, 0.92);
-            color: #1a365d;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 700;
-            font-style: italic;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 2px solid #ecc94b;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quote-box::before,
-        .quote-box::after {
-            content: '"';
-            position: absolute;
-            font-size: 5rem;
-            color: #ecc94b;
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .quote-box::before {
-            top: -20px;
-            left: 20px;
-        }
-
-        .quote-box::after {
-            bottom: -50px;
-            right: 20px;
-        }
-
-
-
-        /* Animation for foreground image */
-        @keyframes float {
-            0% {
-                transform: translateX(-10px) translateY(-10px);
-            }
-
-            50% {
-                transform: translateX(10px) translateY(10px);
-            }
-
-            100% {
-                transform: translateX(-10px) translateY(-10px);
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .image-stack {
-                background-size: cover;
-                background-position: center;
-                position: relative;
-                min-height: 70vh;
-            }
-
-            .foreground-image {
-                width: 60%;
-            }
-
-            .quote-box {
-                font-size: 1.2rem;
-                padding: 15px 20px;
-            }
-        }
-
+        /* Mobile */
         @media (max-width: 768px) {
             .image-stack {
-                background-size: cover;
-                background-position: center;
-                position: relative;
-                min-height: 70vh;
+                min-height: 75vh;
+                background-position: center 25%;
+
             }
 
+            /* Foreground image positioned at top 0 left 0 */
             .foreground-image {
-                width: 80%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%;
+                max-width: 400px;
+                z-index: 50;
+                /* padding: 30px; */
+                /* transform: translateX(-10px) translateY(-10px);
+            animation: float 8s ease-in-out infinite; */
+            }
+
+            /* Text overlay at bottom center */
+            .text-overlay {
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 20;
+                width: 90%;
+                max-width: 700px;
             }
 
             .quote-box {
-                font-size: 1.1rem;
-            }
-
-        }
-
-        @media (max-width: 576px) {
-
-            .image-stack {
-                background-size: cover;
-                background-position: center;
+                background-color: rgba(255, 255, 255, 0.92);
+                color: #1a365d;
+                padding: 10px 20px;
+                text-align: center;
+                font-size: 1.4rem;
+                font-weight: 700;
+                font-style: italic;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 2px solid #ecc94b;
                 position: relative;
-                min-height: 70vh;
+                overflow: hidden;
             }
 
-            .foreground-image {
-                width: 100%;
+            .quote-box::before,
+            .quote-box::after {
+                content: '"';
+                position: absolute;
+                font-size: 5rem;
+                color: #ecc94b;
+                opacity: 0.2;
+                font-family: Georgia, serif;
             }
 
-            .quote-box {
-                font-size: 1rem;
+            .quote-box::before {
+                top: -20px;
+                left: 20px;
+            }
+
+            .quote-box::after {
+                bottom: -50px;
+                right: 20px;
             }
 
 
-        }
+
+            /* Animation for foreground image */
+            @keyframes float {
+                0% {
+                    transform: translateX(-10px) translateY(-10px);
+                }
+
+                50% {
+                    transform: translateX(10px) translateY(10px);
+                }
+
+                100% {
+                    transform: translateX(-10px) translateY(-10px);
+                }
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 992px) {
+                .image-stack {
+                    background-size: cover;
+                    background-position: center;
+                    position: relative;
+                    min-height: 70vh;
+                }
+
+                .foreground-image {
+                    width: 60%;
+                }
+
+                .quote-box {
+                    font-size: 1.2rem;
+                    padding: 15px 20px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .image-stack {
+                    background-size: cover;
+                    background-position: center;
+                    position: relative;
+                    min-height: 70vh;
+                }
+
+                .foreground-image {
+                    width: 80%;
+                }
+
+                .quote-box {
+                    font-size: 1.1rem;
+                }
+
+            }
+
+            @media (max-width: 576px) {
+
+                .image-stack {
+                    background-size: cover;
+                    background-position: center;
+                    position: relative;
+                    min-height: 70vh;
+                }
+
+                .foreground-image {
+                    width: 100%;
+                }
+
+                .quote-box {
+                    font-size: 1rem;
+                }
+
+
+            }
     </style>
 
     <!-- Scripts -->
