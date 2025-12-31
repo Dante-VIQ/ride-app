@@ -55,11 +55,10 @@
         /* Image Stack Section */
         .image-stack {
             width: 100%;
-            min-height: 70vh;
+            min-height: 100vh;
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-
             display: flex;
             align-items: flex-end;
             justify-content: center;
