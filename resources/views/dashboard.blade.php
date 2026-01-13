@@ -1,22 +1,3 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="px-2 text-gray-900">
-
-                    <main>
-                      <livewire:dashboard />
-                    </main>
-
-                      @include('components.partials.footer')
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+   <div>
+       @include('admin.home.index')
+   </div>

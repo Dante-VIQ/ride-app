@@ -259,11 +259,10 @@
                     Browse our comprehensive range of accessible transportation services
                 </p>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+           
                 <!-- Service Category 1 -->
-<livewire:service-card />
-            </div>
+                <livewire:service-card />
+           
         </div>
     </section>
 
