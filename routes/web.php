@@ -40,6 +40,15 @@ Route::get('service-area', function () {
     return view('service-area');
 })->name('service-area');
 
+Route::get('contact', function () {
+    return view('contact');
+})->name('contact');
+
+// routes/web.php
+Route::get('/booking', function () {
+    return view('booking');
+})->name('booking');
+
 // Route::get('testimonials', Testimonials::class)->name('testimonials');
 Route::view('profile', 'profile')
     ->middleware(['auth'])
