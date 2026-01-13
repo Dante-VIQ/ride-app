@@ -1,491 +1,419 @@
-<div>
-    @if ($bookingSubmitted)
-        <!-- Success Message -->
-        <div class="success-message p-8 text-center">
-            <div class="text-green-600 text-5xl mb-6">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">Booking Confirmed!</h3>
-            <p class="text-gray-600 mb-6">
-                Thank you, {{ $firstName }}! Your booking has been submitted successfully.
-                Your booking reference is: <strong class="text-blue-700">{{ 'RA' . strtoupper(uniqid()) }}</strong>
-            </p>
-            <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 mb-6">
-                <h4 class="font-bold text-gray-800 mb-3">What happens next?</h4>
-                <ul class="text-gray-600 text-sm space-y-2 text-left">
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                        <span>You'll receive a confirmation call within 1 hour</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                        <span>Driver will call 15 minutes before pickup</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                        <span>Have your payment method ready for the driver</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button wire:click="resetForm" class="btn-primary px-6 py-3 rounded-lg font-semibold">
-                    <i class="fas fa-calendar-plus mr-2"></i> Book Another Ride
-                </button>
-                <a href="/" class="btn-secondary px-6 py-3 rounded-lg font-semibold text-center">
-                    <i class="fas fa-home mr-2"></i> Return Home
-                </a>
-            </div>
-        </div>
-    @else
-        <!-- Step 1: Ride Details -->
-        <div id="step1" class="step-content {{ $currentStep !== 1 ? 'hidden' : '' }}">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Ride Details</h3>
-
-            <!-- Service Type -->
-            <div class="mb-8">
-                <label class="block text-gray-700 font-medium mb-4">
-                    Service Type <span class="text-red-500">*</span>
-                </label>
-                <div class="grid sm:grid-cols-2 gap-4">
-                    @foreach ($serviceTypes as $service)
-                        <label class="service-option {{ $serviceType === $service['id'] ? 'selected' : '' }}">
-                            <input type="radio" name="service_type" wire:model="serviceType"
-                                value="{{ $service['id'] }}" class="hidden">
-                            <div class="flex items-start">
-                                <div class="mt-1 mr-3">
-                                    <div class="w-5 h-5 border-2 rounded-full flex items-center justify-center">
-                                        @if ($serviceType === $service['id'])
-                                            <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">{{ $service['name'] }}</h4>
-                                    <p class="text-gray-600 text-sm mt-1">{{ $service['description'] }}</p>
-                                </div>
-                            </div>
-                        </label>
-                    @endforeach
-                </div>
-                @error('serviceType')
-                    <div class="error-message show">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Trip Type -->
-            <div class="mb-8">
-                <label class="block text-gray-700 font-medium mb-4">
-                    Trip Type <span class="text-red-500">*</span>
-                </label>
-                <div class="flex space-x-6">
-                    <label class="flex items-center">
-                        <input type="radio" name="trip_type" wire:model="tripType" value="one-way" class="mr-2">
-                        <span>One-way Trip</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="trip_type" wire:model="tripType" value="round" class="mr-2">
-                        <span>Round Trip</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Addresses -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label for="pickupAddress" class="block text-gray-700 font-medium mb-2">
-                        Pickup Address <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="pickupAddress" wire:model="pickupAddress" placeholder="Street, City, ZIP"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('pickupAddress')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="dropoffAddress" class="block text-gray-700 font-medium mb-2">
-                        Drop-off Address <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="dropoffAddress" wire:model="dropoffAddress"
-                        placeholder="Street, City, ZIP" class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('dropoffAddress')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Date & Time -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label for="pickupDate" class="block text-gray-700 font-medium mb-2">
-                        Pickup Date <span class="text-red-500">*</span>
-                    </label>
-                    <input type="date" id="pickupDate" wire:model="pickupDate" min="{{ date('Y-m-d') }}"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('pickupDate')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="pickupTime" class="block text-gray-700 font-medium mb-2">
-                        Pickup Time <span class="text-red-500">*</span>
-                    </label>
-                    <input type="time" id="pickupTime" wire:model="pickupTime"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('pickupTime')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Return Trip (conditional) -->
-            @if ($tripType === 'round')
-                <div id="returnFields" class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div>
-                        <label for="returnDate" class="block text-gray-700 font-medium mb-2">
-                            Return Date <span class="text-red-500">*</span>
-                        </label>
-                        <input type="date" id="returnDate" wire:model="returnDate" min="{{ $pickupDate }}"
-                            class="form-input w-full px-4 py-3 rounded-lg">
-                        @error('returnDate')
-                            <div class="error-message show">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="returnTime" class="block text-gray-700 font-medium mb-2">
-                            Return Time <span class="text-red-500">*</span>
-                        </label>
-                        <input type="time" id="returnTime" wire:model="returnTime"
-                            class="form-input w-full px-4 py-3 rounded-lg">
-                        @error('returnTime')
-                            <div class="error-message show">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            @endif
-
-            <!-- Passengers & Wheelchair -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="mb-6">
-                    <label for="passengers" class="form-label">Number of Passengers *</label>
-                    <input type="number" id="passengers" wire:model="passengers" min="1" max="10"
-                        class="form-input w-full px-4 py-3 rounded-lg" required>
-                    @error('passengers')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label class="block text-gray-700 font-medium mb-4">
-                        Wheelchair Access Required? <span class="text-red-500">*</span>
-                    </label>
-                    <div class="flex space-x-6">
-                        <label class="flex items-center">
-                            <input type="radio" name="wheelchair" wire:model="wheelchair" value="yes"
-                                class="mr-2">
-                            <span>Yes</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="wheelchair" wire:model="wheelchair" value="no"
-                                class="mr-2">
-                            <span>No</span>
-                        </label>
-                    </div>
-                    @error('wheelchair')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Special Requirements -->
-            <div class="mb-8">
-                <label for="specialRequirements" class="block text-gray-700 font-medium mb-2">
-                    Special Requirements
-                </label>
-                <textarea id="specialRequirements" wire:model="specialRequirements" rows="3"
-                    placeholder="Please list any special requirements (oxygen tanks, service animal, specific vehicle type, etc.)"
-                    class="form-input w-full px-4 py-3 rounded-lg"></textarea>
-            </div>
-
-            <!-- Navigation -->
-            <div class="flex justify-end">
-                <button type="button" wire:click="nextStep" class="btn-primary px-8 py-3 rounded-lg font-semibold">
-                    Continue to Passenger Info
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-            </div>
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Book Your Ride</h1>
+            <p class="text-lg text-gray-600">Fill out the form below to schedule your transportation</p>
         </div>
 
-        <!-- Step 2: Passenger Info -->
-        <div id="step2" class="step-content {{ $currentStep !== 2 ? 'hidden' : '' }}">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Passenger Information</h3>
+        @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                {{ session('error') }}
+            </div>
+        @endif
 
-            <!-- Name -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label for="firstName" class="block text-gray-700 font-medium mb-2">
-                        First Name <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="firstName" wire:model="firstName"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('firstName')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
+        <form id="bookingForm" method="POST" action="{{ route('booking.submit') }}" class="space-y-8">
+            @csrf
+            
+            <!-- Step Indicator -->
+            <div class="flex justify-between mb-8">
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
+                    <p class="mt-2 text-sm font-medium">Ride Details</p>
                 </div>
-
-                <div>
-                    <label for="lastName" class="block text-gray-700 font-medium mb-2">
-                        Last Name <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="lastName" wire:model="lastName"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('lastName')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold">2</div>
+                    <p class="mt-2 text-sm font-medium text-gray-600">Passenger Info</p>
+                </div>
+                <div class="flex-1 text-center">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold">3</div>
+                    <p class="mt-2 text-sm font-medium text-gray-600">Additional Info</p>
                 </div>
             </div>
 
-            <!-- Contact Info -->
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label for="phone" class="block text-gray-700 font-medium mb-2">
-                        Phone Number <span class="text-red-500">*</span>
-                    </label>
-                    <input type="tel" id="phone" wire:model="phone" placeholder="(555) 123-4567"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('phone')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="email" class="block text-gray-700 font-medium mb-2">
-                        Email Address
-                    </label>
-                    <input type="email" id="email" wire:model="email" placeholder="name@example.com"
-                        class="form-input w-full px-4 py-3 rounded-lg">
-                    @error('email')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Preferred Contact -->
-            <div class="mb-8">
-                <label class="block text-gray-700 font-medium mb-4">
-                    Preferred Contact Method <span class="text-red-500">*</span>
-                </label>
-                <div class="grid sm:grid-cols-3 gap-4">
-                    <label class="service-option {{ $preferredContact === 'phone' ? 'selected' : '' }}">
-                        <input type="radio" name="preferredContact" wire:model="preferredContact" value="phone"
-                            class="hidden">
-                        <div class="flex items-center justify-center flex-col p-4">
-                            <i class="fas fa-phone text-2xl mb-2"></i>
-                            <span>Phone Call</span>
-                        </div>
-                    </label>
-
-                    <label class="service-option {{ $preferredContact === 'email' ? 'selected' : '' }}">
-                        <input type="radio" name="preferredContact" wire:model="preferredContact" value="email"
-                            class="hidden">
-                        <div class="flex items-center justify-center flex-col p-4">
-                            <i class="fas fa-envelope text-2xl mb-2"></i>
-                            <span>Email</span>
-                        </div>
-                    </label>
-
-                    <label class="service-option {{ $preferredContact === 'text' ? 'selected' : '' }}">
-                        <input type="radio" name="preferredContact" wire:model="preferredContact" value="text"
-                            class="hidden">
-                        <div class="flex items-center justify-center flex-col p-4">
-                            <i class="fas fa-sms text-2xl mb-2"></i>
-                            <span>Text Message</span>
-                        </div>
-                    </label>
-                </div>
-                @error('preferredContact')
-                    <div class="error-message show">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Insurance Info (optional) -->
-            <div class="mb-8">
-                <h4 class="font-bold text-gray-800 mb-4">Insurance Information (Optional)</h4>
-                <div class="grid md:grid-cols-2 gap-6">
+            <!-- Step 1: Ride Details -->
+            <div id="step1" class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Ride Details</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Service Type -->
                     <div>
-                        <label for="insuranceProvider" class="block text-gray-700 font-medium mb-2">
-                            Insurance Provider
-                        </label>
-                        <input type="text" id="insuranceProvider" wire:model="insuranceProvider"
-                            placeholder="e.g., Medicare, Blue Cross" class="form-input w-full px-4 py-3 rounded-lg">
-                    </div>
-
-                    <div>
-                        <label for="insuranceId" class="block text-gray-700 font-medium mb-2">
-                            Insurance ID Number
-                        </label>
-                        <input type="text" id="insuranceId" wire:model="insuranceId"
-                            placeholder="Your insurance ID" class="form-input w-full px-4 py-3 rounded-lg">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigation -->
-            <div class="flex justify-between">
-                <button type="button" wire:click="previousStep"
-                    class="px-6 py-3 rounded-lg font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50">
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    Back to Ride Details
-                </button>
-
-                <button type="button" wire:click="nextStep" class="btn-primary px-8 py-3 rounded-lg font-semibold">
-                    Continue to Confirmation
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Step 3: Confirmation -->
-        <div id="step3" class="step-content {{ $currentStep !== 3 ? 'hidden' : '' }}">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Confirm Your Booking</h3>
-
-            <!-- Booking Summary -->
-            <div class="bg-gray-50 rounded-lg p-6 mb-8">
-                <h4 class="font-bold text-gray-800 mb-4">Booking Summary</h4>
-                <div class="space-y-3">
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Service:</span>
-                        <span class="font-medium">
-                            @foreach ($serviceTypes as $service)
-                                @if ($service['id'] === $serviceType)
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Type *</label>
+                        <select name="serviceType" required class="form-select w-full rounded-lg border-gray-300">
+                            <option value="">Select a service</option>
+                            @foreach($serviceTypes as $service)
+                                <option value="{{ $service['id'] ?? $service['id'] }}" 
+                                        {{ old('serviceType') == ($service['id'] ?? $service['id']) ? 'selected' : '' }}>
                                     {{ $service['name'] }}
-                                @endif
+                                </option>
                             @endforeach
-                        </span>
+                        </select>
+                        @error('serviceType')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Trip Type:</span>
-                        <span class="font-medium">{{ $tripType === 'one-way' ? 'One-way' : 'Round Trip' }}</span>
+                    <!-- Trip Type -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Trip Type *</label>
+                        <div class="flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="tripType" value="one-way" 
+                                       {{ old('tripType', 'one-way') == 'one-way' ? 'checked' : '' }} class="form-radio">
+                                <span class="ml-2">One Way</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="tripType" value="round" 
+                                       {{ old('tripType') == 'round' ? 'checked' : '' }} class="form-radio">
+                                <span class="ml-2">Round Trip</span>
+                            </label>
+                        </div>
+                        @error('tripType')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Pickup:</span>
-                        <span class="font-medium">{{ $pickupAddress }}</span>
+                    <!-- Pickup Address -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Address *</label>
+                        <input type="text" name="pickupAddress" value="{{ old('pickupAddress') }}" 
+                               required class="form-input w-full rounded-lg" placeholder="Enter full pickup address">
+                        @error('pickupAddress')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Drop-off:</span>
-                        <span class="font-medium">{{ $dropoffAddress }}</span>
+                    <!-- Drop-off Address -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Drop-off Address *</label>
+                        <input type="text" name="dropoffAddress" value="{{ old('dropoffAddress') }}" 
+                               required class="form-input w-full rounded-lg" placeholder="Enter full drop-off address">
+                        @error('dropoffAddress')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Date & Time:</span>
-                        <span class="font-medium">
-                            {{ \Carbon\Carbon::parse($pickupDate)->format('M j, Y') }} at {{ $pickupTime }}
-                            @if ($tripType === 'round')
-                                <br>Return: {{ \Carbon\Carbon::parse($returnDate)->format('M j, Y') }} at
-                                {{ $returnTime }}
-                            @endif
-                        </span>
+                    <!-- Pickup Date & Time -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Date *</label>
+                        <input type="date" name="pickupDate" value="{{ old('pickupDate', date('Y-m-d', strtotime('+1 day'))) }}" 
+                               required min="{{ date('Y-m-d') }}" class="form-input w-full rounded-lg">
+                        @error('pickupDate')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Passengers:</span>
-                        <span class="font-medium">{{ $passengers }}</span>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Time *</label>
+                        <input type="time" name="pickupTime" value="{{ old('pickupTime', '09:00') }}" 
+                               required class="form-input w-full rounded-lg">
+                        @error('pickupTime')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Wheelchair:</span>
-                        <span class="font-medium">{{ $wheelchair === 'yes' ? 'Yes' : 'No' }}</span>
+                    <!-- Return Date & Time (Conditional) -->
+                    <div id="returnDateGroup" class="{{ old('tripType', 'one-way') == 'round' ? '' : 'hidden' }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Return Date *</label>
+                        <input type="date" name="returnDate" value="{{ old('returnDate') }}" 
+                               class="form-input w-full rounded-lg">
+                        @error('returnDate')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Passenger:</span>
-                        <span class="font-medium">{{ $firstName }} {{ $lastName }}</span>
+                    <div id="returnTimeGroup" class="{{ old('tripType', 'one-way') == 'round' ? '' : 'hidden' }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Return Time *</label>
+                        <input type="time" name="returnTime" value="{{ old('returnTime') }}" 
+                               class="form-input w-full rounded-lg">
+                        @error('returnTime')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Contact:</span>
-                        <span class="font-medium">{{ $phone }}</span>
+                    <!-- Passengers -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Passengers *</label>
+                        <input type="number" name="passengers" value="{{ old('passengers', 1) }}" 
+                               min="1" max="10" required class="form-input w-full rounded-lg">
+                        @error('passengers')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <hr class="my-4">
+                    <!-- Wheelchair -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Wheelchair Required *</label>
+                        <select name="wheelchair" required class="form-select w-full rounded-lg">
+                            <option value="no" {{ old('wheelchair', 'no') == 'no' ? 'selected' : '' }}>No</option>
+                            <option value="yes" {{ old('wheelchair') == 'yes' ? 'selected' : '' }}>Yes</option>
+                        </select>
+                        @error('wheelchair')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <div class="flex justify-between text-lg font-bold">
-                        <span>Estimated Cost:</span>
-                        <span class="text-blue-700">${{ number_format($estimatedCost, 2) }}</span>
+                    <!-- Special Requirements -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Special Requirements</label>
+                        <textarea name="specialRequirements" rows="2" class="form-textarea w-full rounded-lg">{{ old('specialRequirements') }}</textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Additional Notes -->
-            <div class="mb-8">
-                <label for="additionalNotes" class="block text-gray-700 font-medium mb-2">
-                    Additional Notes (Optional)
-                </label>
-                <textarea id="additionalNotes" wire:model="additionalNotes" rows="3"
-                    placeholder="Any additional information for the driver..." class="form-input w-full px-4 py-3 rounded-lg"></textarea>
+            <!-- Step 2: Passenger Info -->
+            <div id="step2" class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Passenger Information</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- First Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                        <input type="text" name="firstName" value="{{ old('firstName') }}" 
+                               required class="form-input w-full rounded-lg">
+                        @error('firstName')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Last Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                        <input type="text" name="lastName" value="{{ old('lastName') }}" 
+                               required class="form-input w-full rounded-lg">
+                        @error('lastName')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <input type="tel" name="phone" value="{{ old('phone') }}" 
+                               required class="form-input w-full rounded-lg" placeholder="(123) 456-7890">
+                        @error('phone')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" name="email" value="{{ old('email') }}" 
+                               class="form-input w-full rounded-lg" placeholder="you@example.com">
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Preferred Contact -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Contact Method *</label>
+                        <div class="flex space-x-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="preferredContact" value="phone" 
+                                       {{ old('preferredContact', 'phone') == 'phone' ? 'checked' : '' }} class="form-radio">
+                                <span class="ml-2">Phone</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="preferredContact" value="email" 
+                                       {{ old('preferredContact') == 'email' ? 'checked' : '' }} class="form-radio">
+                                <span class="ml-2">Email</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="preferredContact" value="text" 
+                                       {{ old('preferredContact') == 'text' ? 'checked' : '' }} class="form-radio">
+                                <span class="ml-2">Text</span>
+                            </label>
+                        </div>
+                        @error('preferredContact')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Insurance Info -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Insurance Provider (Optional)</label>
+                        <input type="text" name="insuranceProvider" value="{{ old('insuranceProvider') }}" 
+                               class="form-input w-full rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Insurance ID (Optional)</label>
+                        <input type="text" name="insuranceId" value="{{ old('insuranceId') }}" 
+                               class="form-input w-full rounded-lg">
+                    </div>
+                </div>
             </div>
 
-            <!-- Terms & Privacy -->
-            <div class="mb-8">
+            <!-- Step 3: Additional Info -->
+            <div id="step3" class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Information</h2>
+                
+                <!-- Additional Notes -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
+                    <textarea name="additionalNotes" rows="4" class="form-textarea w-full rounded-lg">{{ old('additionalNotes') }}</textarea>
+                </div>
+
+                <!-- Terms & Privacy -->
                 <div class="space-y-4">
-                    <label class="flex items-start">
-                        <input type="checkbox" wire:model="termsAccepted" class="mt-1 mr-3">
-                        <span class="text-gray-600">
-                            I agree to the <a href="/terms" class="text-blue-600 hover:text-blue-800"
-                                target="_blank">Terms and Conditions</a> of Ride Aide LLC transportation services.
-                        </span>
-                    </label>
-                    @error('termsAccepted')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="termsAccepted" value="1" 
+                                   {{ old('termsAccepted') ? 'checked' : '' }} class="form-checkbox" required>
+                            <span class="ml-2">I agree to the <a href="/terms" class="text-blue-600 hover:underline">Terms and Conditions</a> *</span>
+                        </label>
+                        @error('termsAccepted')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <label class="flex items-start">
-                        <input type="checkbox" wire:model="privacyAccepted" class="mt-1 mr-3">
-                        <span class="text-gray-600">
-                            I agree to the <a href="/privacy" class="text-blue-600 hover:text-blue-800"
-                                target="_blank">Privacy Policy</a> and consent to Ride Aide LLC contacting me regarding
-                            my booking.
-                        </span>
-                    </label>
-                    @error('privacyAccepted')
-                        <div class="error-message show">{{ $message }}</div>
-                    @enderror
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="privacyAccepted" value="1" 
+                                   {{ old('privacyAccepted') ? 'checked' : '' }} class="form-checkbox" required>
+                            <span class="ml-2">I agree to the <a href="/privacy" class="text-blue-600 hover:underline">Privacy Policy</a> *</span>
+                        </label>
+                        @error('privacyAccepted')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Estimated Cost Display -->
+                <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Estimated Cost</h3>
+                            <p class="text-gray-600">Final price may vary based on actual distance and time</p>
+                        </div>
+                        <div class="text-right">
+                            <div id="estimatedCostDisplay" class="text-3xl font-bold text-blue-600">$40.00</div>
+                            <button type="button" onclick="calculateEstimate()" class="text-sm text-blue-600 hover:underline mt-1">
+                                Recalculate Estimate
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Navigation & Submit -->
-            <div class="flex justify-between">
-                <button type="button" wire:click="previousStep"
-                    class="px-6 py-3 rounded-lg font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50">
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    Back to Passenger Info
+            <!-- Submit Button -->
+            <div class="flex justify-between pt-6">
+                <button type="button" onclick="previousStep()" id="prevBtn" class="hidden px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                    Previous
                 </button>
-
-                <button type="button" wire:click="submitBooking" wire:loading.attr="disabled"
-                    class="btn-primary px-8 py-3 rounded-lg font-semibold"
-                    {{ !$termsAccepted || !$privacyAccepted ? 'disabled' : '' }}>
-                    @if ($isSubmitting)
-                        <span class="loading-spinner"></span>
-                        Processing...
-                    @else
-                        <i class="fas fa-calendar-check mr-2"></i>
-                        Confirm Booking
-                    @endif
+                <button type="button" onclick="nextStep()" id="nextBtn" class="ml-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Next
+                </button>
+                <button type="submit" id="submitBtn" class="hidden px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                    Submit Booking
                 </button>
             </div>
-
-            <!-- Flash Messages -->
-            @if (session()->has('error'))
-                <div class="mt-6 p-4 bg-red-50 border border-red-100 rounded-lg text-red-700">
-                    <i class="fas fa-exclamation-circle mr-2"></i>
-                    {{ session('error') }}
-                </div>
-            @endif
-        </div>
-    @endif
+        </form>
+    </div>
 </div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 3;
+
+function showStep(step) {
+    // Hide all steps
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'none';
+    
+    // Show current step
+    document.getElementById(`step${step}`).style.display = 'block';
+    
+    // Update step indicator
+    document.querySelectorAll('.flex-1').forEach((div, index) => {
+        const number = div.querySelector('div');
+        const text = div.querySelector('p');
+        if (index < step) {
+            number.classList.remove('bg-gray-200', 'text-gray-600');
+            number.classList.add('bg-blue-600', 'text-white');
+            text.classList.remove('text-gray-600');
+            text.classList.add('text-blue-600');
+        } else {
+            number.classList.remove('bg-blue-600', 'text-white');
+            number.classList.add('bg-gray-200', 'text-gray-600');
+            text.classList.remove('text-blue-600');
+            text.classList.add('text-gray-600');
+        }
+    });
+    
+    // Update buttons
+    document.getElementById('prevBtn').style.display = step > 1 ? 'block' : 'none';
+    document.getElementById('nextBtn').style.display = step < totalSteps ? 'block' : 'none';
+    document.getElementById('submitBtn').style.display = step === totalSteps ? 'block' : 'none';
+    
+    currentStep = step;
+}
+
+function nextStep() {
+    if (currentStep < totalSteps) {
+        showStep(currentStep + 1);
+    }
+}
+
+function previousStep() {
+    if (currentStep > 1) {
+        showStep(currentStep - 1);
+    }
+}
+
+// Show/hide return date/time based on trip type
+document.querySelectorAll('input[name="tripType"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const isRoundTrip = this.value === 'round';
+        document.getElementById('returnDateGroup').style.display = isRoundTrip ? 'block' : 'none';
+        document.getElementById('returnTimeGroup').style.display = isRoundTrip ? 'block' : 'none';
+        
+        // Make required if round trip
+        document.querySelector('input[name="returnDate"]').required = isRoundTrip;
+        document.querySelector('input[name="returnTime"]').required = isRoundTrip;
+    });
+});
+
+// Calculate estimate function
+function calculateEstimate() {
+    const formData = new FormData();
+    formData.append('serviceType', document.querySelector('select[name="serviceType"]').value);
+    formData.append('tripType', document.querySelector('input[name="tripType"]:checked').value);
+    formData.append('passengers', document.querySelector('input[name="passengers"]').value);
+    formData.append('wheelchair', document.querySelector('select[name="wheelchair"]').value);
+    
+    fetch('/booking/calculate-estimate', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.estimatedCost) {
+            document.getElementById('estimatedCostDisplay').textContent = '$' + data.estimatedCost.toFixed(2);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    showStep(1);
+    
+    // Recalculate estimate when form fields change
+    document.querySelector('select[name="serviceType"]').addEventListener('change', calculateEstimate);
+    document.querySelectorAll('input[name="tripType"]').forEach(radio => {
+        radio.addEventListener('change', calculateEstimate);
+    });
+    document.querySelector('input[name="passengers"]').addEventListener('input', calculateEstimate);
+    document.querySelector('select[name="wheelchair"]').addEventListener('change', calculateEstimate);
+    
+    // Initial calculation
+    calculateEstimate();
+});
+</script>

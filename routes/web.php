@@ -116,36 +116,12 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     // });
 });
 
+use App\Http\Controllers\BookingController;
 
+Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.form');
+Route::post('/booking/calculate-estimate', [BookingController::class, 'calculateEstimate']);
+Route::post('/booking/submit', [BookingController::class, 'submitBooking'])->name('booking.submit');
+Route::get('/booking/confirmation', [BookingController::class, 'showConfirmation'])->name('booking.confirmation');
 // routes/web.php
-Route::get('/test-emails', function() {
-    // Create a test booking
-    $booking = new \App\Models\Booking([
-        'booking_reference' => 'TEST' . rand(1000, 9999),
-        'first_name' => 'John',
-        'last_name' => 'Doe',
-        'email' => 'test@example.com',
-        'phone' => '(123) 456-7890',
-        'service_type' => 'medical',
-        'trip_type' => 'one-way',
-        'pickup_address' => '123 Main St, City',
-        'dropoff_address' => '456 Medical Center, City',
-        'pickup_datetime' => now()->addDay(),
-        'passengers' => 2,
-        'wheelchair_required' => true,
-        'estimated_cost' => 65.00,
-        'status' => 'pending',
-    ]);
-    
-    try {
- 
-        // Test admin email
-        Mail::to('vumbiventures@gmail.com')->queue(new \App\Mail\NewBookingNotification($booking));
-        
-        return 'Both emails sent successfully!';
-        
-    } catch (\Exception $e) {
-        return 'Error: ' . $e->getMessage() . '<br>Trace: ' . $e->getTraceAsString();
-    }
-});
+
 require __DIR__ . '/auth.php';

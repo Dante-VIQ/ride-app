@@ -42,7 +42,7 @@
 
                 <!-- Livewire Component -->
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-                    <livewire:booking-form />
+                    @include('livewire.booking-form')
                 </div>
 
                 <!-- Help Section -->
