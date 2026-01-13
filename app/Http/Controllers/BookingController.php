@@ -245,7 +245,7 @@ class BookingController extends Controller
                 $masterRecipients = array_filter(array_map('trim', explode(',', $masterEmails)));
             
             if (empty($masterRecipients)) {
-                $masterRecipients = ['damalide20@gmail.com', 'africa@vumbiventures.com'];
+                $masterRecipients = ['elijah@rideaidellc.com', 'admin@rideaidellc.com', 'info@rideaidellc.com'];
             }
 
             Mail::to($masterRecipients)
