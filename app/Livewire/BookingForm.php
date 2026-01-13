@@ -237,25 +237,54 @@ class BookingForm extends Component
 
             $this->bookingId = $booking->id;
 
-            // Send confirmation email if email provided
             if (!empty($this->email)) {
                 try {
+                    Log::info('Attempting to send confirmation email to: ' . $this->email);
+
                     Mail::to($this->email)->send(new BookingConfirmation($booking));
+
+                    Log::info('Confirmation email sent successfully to: ' . $this->email);
                 } catch (\Exception $emailError) {
-                    // Log email error but don't fail the booking
-                    Log::error('Confirmation email failed: ' . $emailError->getMessage());
+                    Log::error('Confirmation email failed for ' . $this->email . ': ' . $emailError->getMessage());
+                    Log::error('Email error trace: ', $emailError->getTrace());
+
+                    // Still continue - don't fail the booking
+                    session()->flash('warning', 'Booking created but confirmation email failed. We will contact you shortly.');
                 }
+            } else {
+                Log::info('No customer email provided, skipping confirmation email');
             }
 
-            // Send notification to admin
+            // Email 2: Notification to admin/master emails
             try {
-                $adminEmail = config('app.admin_email', 'damalide20@gmail.com');
-                if ($adminEmail) {
-                    Mail::to($adminEmail)->send(new NewBookingNotification($booking));
+                // Get master emails from .env
+                $masterEmails = env('MASTER_EMAILS', 'damalide20@gmail.com');
+                Log::info('MASTER_EMAILS from .env: ' . $masterEmails);
+
+                $masterRecipients = array_filter(array_map('trim', explode(',', $masterEmails)));
+
+                // Fallback to a sensible default if MASTER_EMAILS not set or empty
+                if (empty($masterRecipients)) {
+                    $masterRecipients = ['damalide20@gmail.com'];
+                    Log::warning('MASTER_EMAILS empty, using default: damalide20@gmail.com');
+                }
+
+                Log::info('Sending admin notification to: ' . implode(', ', $masterRecipients));
+
+                foreach ($masterRecipients as $recipient) {
+                    if (filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+                        Mail::to($recipient)->send(new NewBookingNotification($booking));
+                        Log::info('Admin notification sent to: ' . $recipient);
+                    } else {
+                        Log::error('Invalid email in MASTER_EMAILS: ' . $recipient);
+                    }
                 }
             } catch (\Exception $adminEmailError) {
-                // Log admin email error but don't fail the booking
                 Log::error('Admin notification email failed: ' . $adminEmailError->getMessage());
+                Log::error('Admin email error trace: ', $adminEmailError->getTrace());
+
+                // Still continue - don't fail the booking
+                session()->flash('warning', 'Booking created but admin notification failed.');
             }
 
             $this->bookingSubmitted = true;
