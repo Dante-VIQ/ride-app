@@ -34,10 +34,10 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(rgba(80, 103, 180, 0.9),rgba(117, 163, 238, 0.9)), url('/images/hero.png');
-                        background-size: cover;
+            background: linear-gradient(rgba(80, 103, 180, 0.9), rgba(117, 163, 238, 0.9)), url('/images/hero.png');
+            background-size: cover;
             background-position: center;
-            
+
         }
 
         .service-card {
@@ -239,7 +239,7 @@
 
     <!-- Testimonials Section -->
     <section class="py-16 bg-white">
-            {{-- <livewire:testimonials /> --}}
+        {{-- <livewire:testimonials /> --}}
     </section>
 
     <!-- CTA Section -->
@@ -369,7 +369,8 @@
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
-                            <a href="tel:+12065551234" class="text-gray-400 hover:text-white transition-colors">+1(253) 5451994</a>
+                            <a href="tel:+12065551234"
+                                class="text-gray-400 hover:text-white transition-colors">+1(253) 5451994</a>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
