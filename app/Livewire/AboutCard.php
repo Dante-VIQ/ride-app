@@ -15,9 +15,9 @@ class AboutCard extends Component
         $this->about = About::first();
     }
 
-    #[Layout('layouts.analytic-layout')]
+    // #[Layout('layouts.admin-layout')]
     public function render()
     {
-        return view('all-about');
+        return view('livewire.about-card');
     }
 }

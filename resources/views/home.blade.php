@@ -1,3 +1,3 @@
-<x-admin-layout>
+<div>
     @include('admin.home.index')
-</x-admin-layout>
+</div>

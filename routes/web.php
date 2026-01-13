@@ -2,8 +2,10 @@
 
 use App\Models\Image;
 use App\Models\Employee;
+use PHPUnit\Metadata\Test;
 use App\Livewire\AboutCard;
 use App\Livewire\Dashboard;
+use App\Models\Testimonial;
 use App\Livewire\ServiceCard;
 use App\Livewire\AnalyticsView;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +20,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\UserRoleController;
+use App\Livewire\Testimonials;
 
 Route::view('/', 'welcome');
 // Route::middleware(['role:user'])->group(function () {
@@ -25,11 +28,24 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::get('all-services', function () {
+    return view('all-services');
+})->name('all-services');
+
+Route::get('all-about', function () {
+    return view('all-about');
+})->name('all-about');
+
+Route::get('service-area', function () {
+    return view('service-area');
+})->name('service-area');
+
+// Route::get('testimonials', Testimonials::class)->name('testimonials');
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-Route::get('/all-services', ServiceCard::class);
-Route::get('/all-about', AboutCard::class);
+// Route::get('/all-services', ServiceCard::class);
+// Route::get('/all-about', AboutCard::class);
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 // });
 Route::middleware(['auth', 'role:master|engineer'])->group(function () {
@@ -41,8 +57,7 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     Route::resource('admin/abouts', AboutController::class);
     Route::resource('admin/services', ServiceController::class);
     Route::resource('admin/images', ImageController::class);
-  Route::get('/admin/head', [ImageController::class, 'index']);
-
+    Route::get('/admin/head', [ImageController::class, 'index']);
 
     //     Route::get('admin/head', function () {
     //     return view('admin.head');
