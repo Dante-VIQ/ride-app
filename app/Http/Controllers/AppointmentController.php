@@ -41,7 +41,7 @@ class AppointmentController extends Controller
 
             // Fallback to a sensible default if MASTER_EMAILS not set
             if (empty($masterRecipients)) {
-                $masterRecipients = [config('mail.admin_address_1', 'admin@rideaidellc.com')];
+                $masterRecipients = [config('mail.admin_address_1', 'damalide20@gmail.com')];
             }
 
             Mail::to($masterRecipients)->queue(new AppointmentRequestMail($appointment));

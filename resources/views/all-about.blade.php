@@ -177,21 +177,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Announcement Bar -->
-    <div class="bg-blue-900 text-white py-2">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-sm text-center md:text-left mb-1 md:mb-0">
-                    <i class="fas fa-phone-alt mr-2"></i> Call Now: <a href="tel:+12065551234" class="font-semibold hover:text-blue-200">(206) 555-1234</a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-sm">24/7 Service Available</span>
-                    <a href="/booking" class="text-sm bg-orange-500 hover:bg-orange-600 px-3 py-1 rounded font-semibold transition-colors">
-                        <i class="fas fa-calendar-alt mr-1"></i> Book Online
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-announcement-bar />
 
     <!-- Header -->
  <x-nav-layout />
@@ -399,7 +385,7 @@
     </section>
 
     <!-- Meet Our Team -->
-    <section class="py-16 bg-white">
+    {{-- <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
@@ -496,7 +482,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Certifications & Accreditations -->
     <section class="py-16 bg-gray-50">

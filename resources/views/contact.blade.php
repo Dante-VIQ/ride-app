@@ -175,68 +175,10 @@
 </head>
 <body class="bg-gray-50">
     <!-- Announcement Bar -->
-    <div class="bg-blue-900 text-white py-2">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-sm text-center md:text-left mb-1 md:mb-0">
-                    <i class="fas fa-phone-alt mr-2"></i> Call Now: <a href="tel:+12065551234" class="font-semibold hover:text-blue-200">(206) 555-1234</a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-sm">24/7 Service Available</span>
-                    <a href="/booking" class="text-sm bg-orange-500 hover:bg-orange-600 px-3 py-1 rounded font-semibold transition-colors">
-                        <i class="fas fa-calendar-alt mr-1"></i> Book Online
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<x-announcement-bar />
 
     <!-- Header -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="bg-blue-700 text-white w-12 h-12 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-wheelchair text-xl"></i>
-                    </div>
-                    <div>
-                        <a href="/" class="font-heading text-2xl font-bold text-blue-900 hover:text-blue-700">Ride Aide LLC</a>
-                        <p class="text-sm text-gray-600">Professional ADA Transportation</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="/" class="nav-link font-medium text-gray-700 hover:text-blue-700">Home</a>
-                    <a href="/services" class="nav-link font-medium text-gray-700 hover:text-blue-700">Services</a>
-                    <a href="/about" class="nav-link font-medium text-gray-700 hover:text-blue-700">About Us</a>
-                    <a href="/areas" class="nav-link font-medium text-gray-700 hover:text-blue-700">Service Areas</a>
-                    <a href="/fleet" class="nav-link font-medium text-gray-700 hover:text-blue-700">Our Fleet</a>
-                    <a href="/contact" class="nav-link font-medium text-blue-700 hover:text-blue-700">Contact</a>
-                    <a href="/booking" class="btn-primary px-6 py-2 rounded-lg font-semibold">Book a Ride</a>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="lg:hidden text-gray-700 text-2xl">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobileNav" class="lg:hidden hidden py-4 border-t">
-                <div class="flex flex-col space-y-4">
-                    <a href="/" class="font-medium text-gray-700 hover:text-blue-700 py-2">Home</a>
-                    <a href="/services" class="font-medium text-gray-700 hover:text-blue-700 py-2">Services</a>
-                    <a href="/about" class="font-medium text-gray-700 hover:text-blue-700 py-2">About Us</a>
-                    <a href="/areas" class="font-medium text-gray-700 hover:text-blue-700 py-2">Service Areas</a>
-                    <a href="/fleet" class="font-medium text-gray-700 hover:text-blue-700 py-2">Our Fleet</a>
-                    <a href="/contact" class="font-medium text-blue-700 hover:text-blue-700 py-2">Contact</a>
-                    <a href="/booking" class="btn-primary px-6 py-3 rounded-lg font-semibold text-center">Book a Ride</a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <x-nav-layout />
 
     <!-- Breadcrumb -->
     <div class="bg-gray-100 py-4">
@@ -292,7 +234,7 @@
                         Speak directly with our dispatch team for immediate assistance or to schedule a ride.
                     </p>
                     <a href="tel:+12065551234" class="text-blue-700 text-xl font-bold hover:text-blue-800 transition-colors block mb-2">
-                        (206) 555-1234
+                        +1(253) 5451994
                     </a>
                     <p class="text-gray-500 text-sm">24/7 Emergency Line Available</p>
                 </div>
@@ -340,7 +282,7 @@
                         <h2 class="font-heading text-3xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
                         <div class="section-divider mb-6 ml-0"></div>
                         
-                        <form id="contactForm" class="space-y-6">
+                        <form id="contactForm" action="{{ route('appointments.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="firstName" class="block text-gray-700 font-medium mb-2">
@@ -494,10 +436,10 @@
                                     <div class="flex items-center">
                                         <span class="text-gray-600 w-32">Dispatch:</span>
                                         <a href="tel:+12065551234" class="text-blue-700 font-semibold hover:text-blue-800">
-                                            (206) 555-1234
+                                            +1(253) 5451994
                                         </a>
                                     </div>
-                                    <div class="flex items-center">
+                                    {{-- <div class="flex items-center">
                                         <span class="text-gray-600 w-32">Emergency:</span>
                                         <a href="tel:+12065554321" class="text-blue-700 font-semibold hover:text-blue-800">
                                             (206) 555-4321
@@ -508,7 +450,7 @@
                                         <a href="tel:+12065555678" class="text-blue-700 font-semibold hover:text-blue-800">
                                             (206) 555-5678
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -524,21 +466,21 @@
                                     <div class="flex items-center">
                                         <span class="text-gray-600 w-32">General:</span>
                                         <a href="mailto:info@rideaidellc.com" class="text-blue-700 hover:text-blue-800">
-                                            info@rideaidellc.com
+                                            admin@rideaidellc.com
                                         </a>
                                     </div>
                                     <div class="flex items-center">
                                         <span class="text-gray-600 w-32">Bookings:</span>
                                         <a href="mailto:bookings@rideaidellc.com" class="text-blue-700 hover:text-blue-800">
-                                            bookings@rideaidellc.com
+                                            info@rideaidellc.com
                                         </a>
                                     </div>
-                                    <div class="flex items-center">
+                                    {{-- <div class="flex items-center">
                                         <span class="text-gray-600 w-32">Billing:</span>
                                         <a href="mailto:billing@rideaidellc.com" class="text-blue-700 hover:text-blue-800">
                                             billing@rideaidellc.com
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -592,8 +534,8 @@
                                 <p class="text-gray-600 text-sm mb-3">
                                     For medical emergencies or urgent transportation needs outside regular hours, call our 24/7 emergency dispatch line.
                                 </p>
-                                <a href="tel:+12065554321" class="text-red-700 font-bold hover:text-red-800 text-lg">
-                                    <i class="fas fa-phone-alt mr-2"></i> (206) 555-4321
+                                <a href="tel:+12535451994" class="text-red-700 font-bold hover:text-red-800 text-lg">
+                                    <i class="fas fa-phone-alt mr-2"></i> +1(253) 5451994
                                 </a>
                             </div>
                         </div>
@@ -697,8 +639,8 @@
                                 <i class="fas fa-phone-alt text-blue-700 mt-1 mr-4"></i>
                                 <div>
                                     <h4 class="font-bold text-gray-800 mb-1">Phone</h4>
-                                    <a href="tel:+12065551234" class="text-blue-700 hover:text-blue-800">
-                                        (206) 555-1234
+                                    <a href="tel:+12535451994" class="text-blue-700 hover:text-blue-800">
+                                        +1(253) 5451994
                                     </a>
                                 </div>
                             </div>
@@ -802,7 +744,7 @@
                 Don't wait - contact us today for reliable, accessible transportation when you need it most.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="tel:+12065551234" class="btn-secondary px-8 py-4 rounded-lg font-semibold text-lg">
+                <a href="tel:+12535451994" class="btn-secondary px-8 py-4 rounded-lg font-semibold text-lg">
                     <i class="fas fa-phone-alt mr-2"></i> Call Dispatch Now
                 </a>
                 <a href="/booking" class="bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -850,8 +792,8 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6">Contact Methods</h4>
                     <ul class="space-y-3">
-                        <li><a href="tel:+12065551234" class="text-gray-400 hover:text-white transition-colors">Dispatch: (206) 555-1234</a></li>
-                        <li><a href="tel:+12065554321" class="text-gray-400 hover:text-white transition-colors">Emergency: (206) 555-4321</a></li>
+                        <li><a href="tel:+12535451994" class="text-gray-400 hover:text-white transition-colors">Dispatch: +1(253) 5451994</a></li>
+                        {{-- <li><a href="tel:+12065554321" class="text-gray-400 hover:text-white transition-colors">Emergency: (206) 555-4321</a></li> --}}
                         <li><a href="mailto:info@rideaidellc.com" class="text-gray-400 hover:text-white transition-colors">info@rideaidellc.com</a></li>
                         <li><a href="/contact#form" class="text-gray-400 hover:text-white transition-colors">Contact Form</a></li>
                     </ul>
