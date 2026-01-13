@@ -23,7 +23,7 @@ class NewBookingNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Booking Notification - ' . $this->booking->booking_reference,
+            subject: '🚨 NEW BOOKING: ' . $this->booking->booking_reference . ' - ' . $this->booking->first_name . ' ' . $this->booking->last_name,
         );
     }
 
@@ -31,9 +31,6 @@ class NewBookingNotification extends Mailable
     {
         return new Content(
             markdown: 'emails.booking.notification',
-            with: [
-                'booking' => $this->booking
-            ]
         );
     }
 

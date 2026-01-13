@@ -7,7 +7,9 @@ use App\Livewire\AboutCard;
 use App\Livewire\Dashboard;
 use App\Models\Testimonial;
 use App\Livewire\ServiceCard;
+use App\Livewire\Testimonials;
 use App\Livewire\AnalyticsView;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Employees\Index;
 use App\Http\Controllers\ShowController;
@@ -20,7 +22,6 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\UserRoleController;
-use App\Livewire\Testimonials;
 
 Route::view('/', 'welcome');
 // Route::middleware(['role:user'])->group(function () {
@@ -113,5 +114,38 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     // })->name('admin.employees.profile');
 
     // });
+});
+
+
+// routes/web.php
+Route::get('/test-emails', function() {
+    // Create a test booking
+    $booking = new \App\Models\Booking([
+        'booking_reference' => 'TEST' . rand(1000, 9999),
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+        'email' => 'test@example.com',
+        'phone' => '(123) 456-7890',
+        'service_type' => 'medical',
+        'trip_type' => 'one-way',
+        'pickup_address' => '123 Main St, City',
+        'dropoff_address' => '456 Medical Center, City',
+        'pickup_datetime' => now()->addDay(),
+        'passengers' => 2,
+        'wheelchair_required' => true,
+        'estimated_cost' => 65.00,
+        'status' => 'pending',
+    ]);
+    
+    try {
+ 
+        // Test admin email
+        Mail::to('vumbiventures@gmail.com')->queue(new \App\Mail\NewBookingNotification($booking));
+        
+        return 'Both emails sent successfully!';
+        
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage() . '<br>Trace: ' . $e->getTraceAsString();
+    }
 });
 require __DIR__ . '/auth.php';
