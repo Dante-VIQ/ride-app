@@ -234,27 +234,24 @@ class BookingController extends Controller
     {
         try {
             // Send confirmation to customer
-            // if (!empty($booking->email)) {
-            //     Mail::to($booking->email)
-            //         ->queue(new BookingConfirmation($booking));
-            //     Log::info('Customer confirmation email queued', ['email' => $booking->email]);
-            // }
+            if (!empty($booking->email)) {
+                Mail::to($booking->email)
+                    ->queue(new BookingConfirmation($booking));
+                Log::info('Customer confirmation email queued', ['email' => $booking->email]);
+            }
             
             // Send notification to admin
-            $masterEmails = config('mail.master_emails', 'damalide20@gmail.com');
-            $recipients = array_filter(array_map('trim', explode(',', $masterEmails)));
+            $masterEmails = env('MASTER_EMAILS', '');
+                $masterRecipients = array_filter(array_map('trim', explode(',', $masterEmails)));
             
-            if (empty($recipients)) {
-                $recipients = ['damalide20@gmail.com'];
+            if (empty($masterRecipients)) {
+                $masterRecipients = ['damalide20@gmail.com', 'africa@vumbiventures.com'];
             }
-            
-            foreach ($recipients as $recipient) {
-                if (filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-                    Mail::to($recipient)
-                        ->queue(new NewBookingNotification($booking));
-                    Log::info('Admin notification queued', ['recipient' => $recipient]);
-                }
-            }
+
+            Mail::to($masterRecipients)
+                ->queue(new NewBookingNotification($booking));
+                    
+     
             
         } catch (\Exception $e) {
             Log::error('Email queueing failed', [

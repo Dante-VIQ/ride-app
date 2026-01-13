@@ -28,8 +28,5 @@
     Best regards,
     The Ride Aide LLC Team
 
-    @component('mail::subcopy')
-        This is an automated confirmation. Please do not reply to this email.
-        For immediate assistance, call our dispatch at (206) 555-1234.
-    @endcomponent
+
 @endcomponent

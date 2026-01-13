@@ -39,7 +39,7 @@ Estimated Cost: ${{ number_format($booking->estimated_cost, 2) }}
 Status: {{ ucfirst($booking->status) }}  
 Booking Date: {{ $booking->created_at->format('F j, Y \a\t g:i A') }}
 
-<x-mail::button :url="route('admin.bookings.show', $booking->id)">
+<x-mail::button :url="url('/admin/bookings/'.$booking->id)">
 View Booking in Admin Panel
 </x-mail::button>
 
