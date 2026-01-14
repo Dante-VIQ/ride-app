@@ -78,6 +78,9 @@ Route::prefix('jobs')->name('jobs.')->group(function () {
     Route::get('/application/{application}/document/{index}', [JobApplicationController::class, 'downloadDocument'])->name('application.download-document');
 });
 
+// Add to your web.php
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
+
 Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     Route::get('/analysis', [AdminController::class, 'index'])->name('analysis');
     Route::get('/Admin/user/roles/index', [UserRoleController::class, 'index'])->name('admin.user.roles.index');

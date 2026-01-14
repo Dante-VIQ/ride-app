@@ -1,2 +1,34 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /analysis
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /requests
+Disallow: /admin/abouts
+Disallow: /admin/services
+Disallow: /admin/images
+Disallow: /admin/head
+Disallow: /admin/employees
+Disallow: /admin/employees/index
+Disallow: /admin/employees/create
+Disallow: /admin/employees/*
+Disallow: /admin/about
+Disallow: /admin/service
+Disallow: /admin/view
+Disallow: /admin/user_profile/*
+Disallow: /admin/bookings
+Disallow: /admin/jobs
+Disallow: /admin/job-applications
+Disallow: /admin/roles
+Disallow: /Admin/user/roles/index
+Disallow: /auth/reset-password
+Disallow: /auth/verify-email
+
+# Dynamic parameters that shouldn't be indexed
+Disallow: /*?*
+Disallow: /*/edit
+Disallow: /*/create
+
+# Sitemap location
+Sitemap: https://rideaidellc.com/sitemap.xml
