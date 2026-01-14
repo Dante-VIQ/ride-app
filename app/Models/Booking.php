@@ -6,32 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
-    protected $fillable = [
-        'service_type',
-        'trip_type',
-        'pickup_address',
-        'dropoff_address',
-        'pickup_datetime',
-        'return_datetime',
-        'passengers',
-        'wheelchair_required',
-        'special_requirements',
-        'first_name',
-        'last_name',
-        'phone',
-        'email',
-        'preferred_contact',
-        'insurance_provider',
-        'insurance_id',
-        'additional_notes',
-        'estimated_cost',
-        'status',
-        'booking_reference',
-        'assigned_driver_id',
-        'actual_cost',
-        'payment_status',
-        'notes',
-    ];
+    protected $fillable = ['service_type', 'trip_type', 'pickup_address', 'dropoff_address', 'pickup_datetime', 'return_datetime', 'passengers', 'wheelchair_required', 'special_requirements', 'first_name', 'last_name', 'phone', 'email', 'preferred_contact', 'insurance_provider', 'insurance_id', 'additional_notes', 'estimated_cost', 'status', 'booking_reference', 'assigned_driver_id', 'actual_cost', 'payment_status', 'notes', 'driver_name', 'driver_phone', 'vehicle_number'];
 
     protected $casts = [
         'pickup_datetime' => 'datetime',

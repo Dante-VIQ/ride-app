@@ -19,6 +19,6 @@ class AdminController extends Controller
         $users = User::all();
         $roles = Role::all();
 
-        return view('home', compact('users', 'roles'));
+        return view('analysis', compact('users', 'roles'));
     }
 }

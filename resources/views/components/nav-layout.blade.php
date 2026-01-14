@@ -1,3 +1,20 @@
+    <?php
+    
+    use App\Livewire\Actions\Logout;
+    use Livewire\Volt\Component;
+    
+    new class extends Component {
+        /**
+         * Log the current user out of the application.
+         */
+        public function logout(Logout $logout): void
+        {
+            $logout();
+    
+            $this->redirect('/', navigate: true);
+        }
+    }; ?>
+
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
@@ -21,6 +38,9 @@
                     <a href="/service-area" class="nav-link font-medium text-gray-700 hover:text-blue-700">Areas
                         Served</a>
                     <a href="/contact" class="nav-link font-medium text-gray-700 hover:text-blue-700">Contact</a>
+                    @role('master|engineer')
+                        <a href="/analysis" class="nav-link font-medium text-gray-700 hover:text-blue-700">Analysis</a>
+                    @endrole
                     <a href="/booking" class="btn-primary px-6 py-2 rounded-lg font-semibold">Book a Ride</a>
                 </nav>
 
@@ -62,9 +82,9 @@
                 @endauth
                 @guest
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline px-3 py-2">Login</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 outline-none px-3 py-2">Login</a>
                         <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-gray-700 underline px-3 py-2">Register</a>
+                            class="ml-4 text-sm text-gray-700 outline-none px-3 py-2">Register</a>
                     </div>
                 @endguest
 
@@ -83,6 +103,31 @@
                     <a href="/contact" class="font-medium text-gray-700 hover:text-blue-700 py-2">Contact</a>
                     <a href="/booking" class="btn-primary px-6 py-3 rounded-lg font-semibold text-center">Book a
                         Ride</a>
+                </div>
+
+                <div class="pt-4 pb-1 border-t border-gray-200">
+                    @auth
+                        <div class="px-4">
+                            <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                                x-on:profile-updated.window="name = $event.detail.name"></div>
+                            <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
+                        </div>
+
+                        <div class="mt-3 space-y-1">
+                            <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                                {{ __('Profile') }}
+                            </x-responsive-nav-link>
+
+                            <!-- Authentication -->
+                            <button wire:click="logout" class="w-full text-start">
+                                <x-responsive-nav-link>
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </button>
+                        </div>
+                    @endauth
+
+
                 </div>
             </div>
         </div>

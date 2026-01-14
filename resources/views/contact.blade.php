@@ -6,6 +6,42 @@
     <title>Contact Us | Ride Aide LLC | Get in Touch for ADA Transportation</title>
     <meta name="description" content="Contact Ride Aide LLC for ADA transportation services. Call, email, or visit our contact page to schedule rides, ask questions, or get transportation assistance in Seattle.">
     
+     <meta name="title" content="Ride_Aide LLC – Safe & Compassionate Non-Emergency Medical Transportation">
+    <meta name="description"
+        content="Ride_Aide LLC provides reliable, compassionate non-emergency medical transportation throughout Washington. Serving seniors, disabled individuals, and those with limited mobility.">
+    <meta name="keywords"
+        content="Non-Emergency Medical Transportation, NEMT Washington, wheelchair transport, senior transport, Ride_Aide LLC, medical appointments, dialysis transport, therapy ride, Seattle medical ride, Tacoma transport service">
+    <meta name="author" content="Daniel Mwangi, Web Designer - Kenya">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="coverage" content="Worldwide">
+    <meta name="copyright" content="Ride_Aide LLC">
+    <meta name="reply-to" content="damalide20@gmail.com">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.rideaidellc.com">
+    <meta property="og:title" content="Ride_Aide LLC – Safe & Compassionate Medical Transportation">
+    <meta property="og:description"
+        content="Non-emergency medical transportation services across Washington. Reliable, accessible, and senior-friendly.">
+    <meta property="og:image" content="http://127.0.0.1:8000/images/ride-logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ride_Aide LLC – Medical Transport You Can Trust">
+    <meta name="twitter:description"
+        content="Transportation services for medical appointments, dialysis, therapy, and more across Washington.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/images/ride-logo.png">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ride-logo.PNG') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ride-logo.PNG') }}">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->

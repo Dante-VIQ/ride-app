@@ -1,209 +1,194 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ride-logo.PNG') }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ride-logo.PNG') }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ride-logo.PNG') }}">
-
+    
+    <title>Admin - @yield('title', 'Dashboard')</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Admin CSS -->
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
-        .font-family-karla {
-            font-family: karla;
+        body {
+            background-color: #f8f9fa;
         }
-
-        .bg-sidebar {
-            background: #3d68ff;
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: #343a40;
+            color: white;
         }
-
-        .cta-btn {
-            color: #3d68ff;
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
-
-        .upgrade-btn {
-            background: #1947ee;
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, .75);
+            padding: 0.75rem 1rem;
         }
-
-        .upgrade-btn:hover {
-            background: #0038fd;
+        .sidebar .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, .1);
         }
-
-        .active-nav-link {
-            background: #1947ee;
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: #007bff;
         }
-
-        .nav-item:hover {
-            background: #1947ee;
+        .sidebar-heading {
+            font-size: .75rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            padding: 0.5rem 1rem;
         }
-
-        .account-link:hover {
-            background: #3d68ff;
+        .main-content {
+            padding-left: 240px;
+            padding-top: 60px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                padding-left: 0;
+            }
+        }
+        .navbar-brand {
+            padding: 0.5rem 1rem;
         }
     </style>
-    <!-- Scripts -->
-    @livewireStyles
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{{ route('analysis') }}">
+                <i class="fas fa-car me-2"></i> RideAlly Admin
+            </a>
+            <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-user-circle me-1"></i> Admin
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/"><i class="fas fa-home me-2"></i> Back to Site</a></li>
+                    {{-- <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a></li> --}}
+                    {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form> --}}
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<body class="font-family-karla antialiased">
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('analysis') ? 'active' : '' }}" href="{{ route('analysis') }}">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}" href="{{ route('admin.bookings.index') }}">
+                                <i class="fas fa-calendar-alt me-2"></i>
+                                Bookings
+                                <span class="badge bg-primary float-end">{{ App\Models\Booking::where('status', 'pending')->count() }}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/service">
+                                <i class="fas fa-users me-2"></i>
+                                Services
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="/admin/head">
+                                <i class="fas fa-car me-2"></i>
+                                Headers
+                            </a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.view') }}">
+                                <i class="fas fa-chart-line me-2"></i>
+                                Employees
+                            </a>
+                        </li>
+                    </ul>
 
-    <div class="bg-gray-100">
-        {{-- @include('layouts.navigation') --}}
-
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+                    {{-- <h6 class="sidebar-heading mt-4">Settings</h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog me-2"></i>
+                                General Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-envelope me-2"></i>
+                                Email Templates
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-user-shield me-2"></i>
+                                Admin Users
+                            </a>
+                        </li>
+                    </ul> --}}
                 </div>
-            </header>
-        @endisset
+            </nav>
 
-        <!-- Page Content -->
-        <main class="flex">
-            <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
-                <div class="p-6">
-                    <a href="/"
-                        class="text-white text-3xl font-semibold uppercase hover:text-gray-300">RideAide</a>
-                    <button
-                        class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                        <i class="fas fa-plus mr-3"></i> New Report
-                    </button>
-                </div>
-                <nav class="text-white text-base font-semibold pt-3">
-                    <a href="/home" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
-                        <i class="fas fa-tachometer-alt mr-3"></i>
-                        Dashboard
-                    </a>
-
-                    <a href="/admin/service"
-                        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                        <i class="fas fa-table mr-3"></i>
-                        Services
-                    </a>
-                    <a href="/admin/head"
-                        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                        <i class="fas fa-table mr-3"></i>
-                        Headers
-                    </a>
-                    <a href="/admin/abouts"
-                        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                        <i class="fas fa-table mr-3"></i>
-                        Abouts
-                    </a>
-
-                    <a href="{{ route('admin.view') }}"
-                        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                        <i class="fas fa-align-left mr-3"></i>
-                        Employees
-                    </a>
-
-                </nav>
-            </aside>
-
-            {{ $slot }}
-        </main>
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                {{ $slot }}
+            </main>
+        </div>
     </div>
 
-    @livewireScripts
-    <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-    <!-- ChartJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
     <script>
-        var chartOne = document.getElementById('chartOne');
-        var myChart = new Chart(chartOne, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-
-        var chartTwo = document.getElementById('chartTwo');
-        var myLineChart = new Chart(chartTwo, {
-            type: 'line',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
+        // Auto-hide alerts after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    var bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                });
+            }, 5000);
         });
     </script>
-
 </body>
-
 </html>

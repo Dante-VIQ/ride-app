@@ -18,9 +18,11 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImageController;
 use App\Livewire\Admin\Employees\Profile;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\Admin\UserRoleController;
 
 Route::view('/', 'welcome');
@@ -58,8 +60,14 @@ Route::view('profile', 'profile')
 // Route::get('/all-about', AboutCard::class);
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 // });
+
+Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.form');
+Route::post('/booking/calculate-estimate', [BookingController::class, 'calculateEstimate']);
+Route::post('/booking/submit', [BookingController::class, 'submitBooking'])->name('booking.submit');
+Route::get('/booking/confirmation', [BookingController::class, 'showConfirmation'])->name('booking.confirmation');
+
 Route::middleware(['auth', 'role:master|engineer'])->group(function () {
-    Route::get('/home', [AdminController::class, 'index'])->name('home');
+    Route::get('/analysis', [AdminController::class, 'index'])->name('analysis');
     Route::get('/Admin/user/roles/index', [UserRoleController::class, 'index'])->name('admin.user.roles.index');
     Route::post('/Admin/roles/{user}', [UserRoleController::class, 'update'])->name('admin.roles.update');
     // Admin routes
@@ -114,14 +122,21 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     // })->name('admin.employees.profile');
 
     // });
+
+    // routes/web.php (admin routes)
+
+    // Dashboard
+    Route::get('/analysis', [AdminBookingController::class, 'dashboard'])->name('analysis');
+
+    // Bookings management
+    Route::get('admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::get('admin/bookings/{booking}', [AdminBookingController::class, 'show'])->name('admin.bookings.show');
+    Route::get('admin/bookings/{booking}/edit', [AdminBookingController::class, 'edit'])->name('admin.bookings.edit');
+    Route::put('admin/bookings/{booking}', [AdminBookingController::class, 'update'])->name('admin.bookings.update');
+    Route::delete('admin/bookings/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.bookings.destroy');
+    Route::get('admin/bookings/export', [AdminBookingController::class, 'export'])->name('admin.bookings.export');
 });
 
-use App\Http\Controllers\BookingController;
-
-Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.form');
-Route::post('/booking/calculate-estimate', [BookingController::class, 'calculateEstimate']);
-Route::post('/booking/submit', [BookingController::class, 'submitBooking'])->name('booking.submit');
-Route::get('/booking/confirmation', [BookingController::class, 'showConfirmation'])->name('booking.confirmation');
 // routes/web.php
 
 require __DIR__ . '/auth.php';
