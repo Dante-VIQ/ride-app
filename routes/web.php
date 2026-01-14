@@ -21,9 +21,11 @@ use App\Livewire\Admin\Employees\Profile;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AdminJobController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\Admin\UserRoleController;
+use App\Http\Controllers\JobApplicationController;
 
 Route::view('/', 'welcome');
 // Route::middleware(['role:user'])->group(function () {
@@ -65,6 +67,16 @@ Route::get('/booking', [BookingController::class, 'showForm'])->name('booking.fo
 Route::post('/booking/calculate-estimate', [BookingController::class, 'calculateEstimate']);
 Route::post('/booking/submit', [BookingController::class, 'submitBooking'])->name('booking.submit');
 Route::get('/booking/confirmation', [BookingController::class, 'showConfirmation'])->name('booking.confirmation');
+
+Route::prefix('jobs')->name('jobs.')->group(function () {
+    Route::get('/', [JobApplicationController::class, 'index'])->name('index');
+    Route::get('/{career:slug}', [JobApplicationController::class, 'show'])->name('show');
+    Route::get('/{career:slug}/apply', [JobApplicationController::class, 'apply'])->name('apply');
+    Route::post('/{career:slug}/apply', [JobApplicationController::class, 'store'])->name('apply.store');
+    Route::get('/application/{application}/thankyou', [JobApplicationController::class, 'thankyou'])->name('application.thankyou');
+    Route::get('/application/{application}/resume', [JobApplicationController::class, 'downloadResume'])->name('application.download-resume');
+    Route::get('/application/{application}/document/{index}', [JobApplicationController::class, 'downloadDocument'])->name('application.download-document');
+});
 
 Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     Route::get('/analysis', [AdminController::class, 'index'])->name('analysis');
@@ -135,6 +147,19 @@ Route::middleware(['auth', 'role:master|engineer'])->group(function () {
     Route::put('admin/bookings/{booking}', [AdminBookingController::class, 'update'])->name('admin.bookings.update');
     Route::delete('admin/bookings/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.bookings.destroy');
     Route::get('admin/bookings/export', [AdminBookingController::class, 'export'])->name('admin.bookings.export');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('jobs', AdminJobController::class);
+    
+    // Job applications
+    Route::get('/job-applications', [AdminJobController::class, 'applications'])->name('jobs.applications');
+    Route::get('/job-applications/{application}', [AdminJobController::class, 'showApplication'])->name('jobs.applications.show');
+    Route::put('/job-applications/{application}', [AdminJobController::class, 'updateApplication'])->name('jobs.applications.update');
+    Route::delete('/job-applications/{application}', [AdminJobController::class, 'destroy'])->name('jobs.applications.destroy');
+    Route::get('/job-applications/{application}/resume', [AdminJobController::class, 'downloadApplicationResume'])->name('jobs.applications.download-resume');
+    Route::get('/job-applications/export', [AdminJobController::class, 'exportApplications'])->name('jobs.applications.export');
+
+    });
 });
 
 // routes/web.php

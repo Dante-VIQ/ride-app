@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <title>Admin - @yield('title', 'Dashboard')</title>
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom Admin CSS -->
     <style>
         body {
             background-color: #f8f9fa;
         }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -29,6 +31,7 @@
             background-color: #343a40;
             color: white;
         }
+
         .sidebar-sticky {
             position: relative;
             top: 0;
@@ -37,48 +40,58 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
+
         .sidebar .nav-link {
             color: rgba(255, 255, 255, .75);
             padding: 0.75rem 1rem;
         }
+
         .sidebar .nav-link:hover {
             color: white;
             background-color: rgba(255, 255, 255, .1);
         }
+
         .sidebar .nav-link.active {
             color: white;
             background-color: #007bff;
         }
+
         .sidebar-heading {
             font-size: .75rem;
             text-transform: uppercase;
             color: rgba(255, 255, 255, .5);
             padding: 0.5rem 1rem;
         }
+
         .main-content {
             padding-left: 240px;
             padding-top: 60px;
         }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
                 height: auto;
                 position: relative;
             }
+
             .main-content {
                 padding-left: 0;
             }
         }
+
         .navbar-brand {
             padding: 0.5rem 1rem;
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="{{ route('analysis') }}">
@@ -91,7 +104,9 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="/"><i class="fas fa-home me-2"></i> Back to Site</a></li>
                     {{-- <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt me-2"></i> Logout
@@ -111,16 +126,19 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('analysis') ? 'active' : '' }}" href="{{ route('analysis') }}">
+                            <a class="nav-link {{ request()->routeIs('analysis') ? 'active' : '' }}"
+                                href="{{ route('analysis') }}">
                                 <i class="fas fa-tachometer-alt me-2"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}" href="{{ route('admin.bookings.index') }}">
+                            <a class="nav-link {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}"
+                                href="{{ route('admin.bookings.index') }}">
                                 <i class="fas fa-calendar-alt me-2"></i>
                                 Bookings
-                                <span class="badge bg-primary float-end">{{ App\Models\Booking::where('status', 'pending')->count() }}</span>
+                                <span
+                                    class="badge bg-primary float-end">{{ App\Models\Booking::where('status', 'pending')->count() }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -139,6 +157,23 @@
                             <a class="nav-link" href="{{ route('admin.view') }}">
                                 <i class="fas fa-chart-line me-2"></i>
                                 Employees
+                            </a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.jobs.*') ? 'active' : '' }}"
+                                href="{{ route('admin.jobs.index') }}">
+                                <i class="fas fa-briefcase me-2"></i>
+                                Job Postings
+                            </a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.jobs.applications.*') ? 'active' : '' }}"
+                                href="{{ route('admin.jobs.applications') }}">
+                                <i class="fas fa-file-alt me-2"></i>
+                                Job Applications
+                                <span
+                                    class="badge bg-primary float-end">{{ App\Models\CareerApplication::where('status', 'pending')->count() }}</span>
                             </a>
                         </li>
                     </ul>
@@ -176,7 +211,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom Scripts -->
     <script>
         // Auto-hide alerts after 5 seconds
@@ -191,4 +226,5 @@
         });
     </script>
 </body>
+
 </html>

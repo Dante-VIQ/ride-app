@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <h1 class="mt-4">Edit Booking</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('analysis') }}">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.bookings.index') }}">Bookings</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.bookings.show', $booking) }}">{{ $booking->booking_reference }}</a></li>
         <li class="breadcrumb-item active">Edit</li>

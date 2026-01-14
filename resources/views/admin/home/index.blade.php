@@ -273,10 +273,12 @@
         </div>
     </section>
 
+
     <!-- Testimonials Section -->
     <section class="py-16 bg-white">
         {{-- <livewire:testimonials /> --}}
     </section>
+
 
     <!-- CTA Section -->
     <section class="py-16 bg-blue-700 text-white">
@@ -332,6 +334,182 @@
         </div>
     </section>
 
+    {{-- Add this section to your home.blade.php --}}
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Join Our Team</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    We're always looking for passionate individuals to help us provide exceptional transportation
+                    services.
+                </p>
+            </div>
+
+            <!-- Quick Apply Section -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <!-- Left Content -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Quick Career Inquiry</h3>
+                        <p class="text-gray-600 mb-6">
+                            Not sure which position fits you? Send us your resume and we'll notify you when a matching
+                            position opens up.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-paper-plane text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Quick Application</h4>
+                                    <p class="text-gray-600 text-sm">Submit your resume in under 2 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-bell text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Get Notified</h4>
+                                    <p class="text-gray-600 text-sm">We'll contact you for relevant openings</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Save Time</h4>
+                                    <p class="text-gray-600 text-sm">No need to fill lengthy applications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Form -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Submit Your Interest</h4>
+                        <form id="quickApplicationForm" enctype="multipart/form-data">
+                            @csrf
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <input type="text" name="first_name" placeholder="First Name" required
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <input type="text" name="last_name" placeholder="Last Name" required
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="email" name="email" placeholder="Email Address" required
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <input type="tel" name="phone" placeholder="Phone Number" required
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Resume/CV *</label>
+                                    <input type="file" name="resume" accept=".pdf,.doc,.docx" required
+                                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    <p class="text-xs text-gray-500 mt-1">PDF, DOC, or DOCX files only (max 5MB)</p>
+                                </div>
+                                <div>
+                                    <textarea name="note" rows="2" placeholder="Optional: What position are you interested in?"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-paper-plane mr-2"></i>Submit Interest
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Open Positions Preview -->
+            <div class="text-center mb-10">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Current Open Positions</h3>
+                <p class="text-gray-600">Browse our available positions and apply directly</p>
+            </div>
+
+            <!-- Positions Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                @php
+                    $positions = \App\Models\Career::where('is_active', true)
+                        ->where(function ($query) {
+                            $query->whereNull('application_deadline')->orWhere('application_deadline', '>=', now());
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->take(3)
+                        ->get();
+                @endphp
+
+                @forelse($positions as $position)
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                {{ ucfirst(str_replace('-', ' ', $position->type)) }}
+                            </span>
+                            <span class="text-sm text-gray-500">{{ $position->department }}</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">{{ $position->title }}</h4>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-map-marker-alt mr-2 text-sm"></i>
+                                <span class="text-sm">{{ ucfirst($position->location) }}</span>
+                            </div>
+                            @if ($position->salary_formatted)
+                                <div class="flex items-center text-gray-600">
+                                    <i class="fas fa-money-bill-wave mr-2 text-sm"></i>
+                                    <span class="text-sm">{{ $position->salary_formatted }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-2">
+                            {{ Str::limit(strip_tags($position->description), 100) }}
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="{{ route('jobs.show', $position) }}"
+                                class="flex-1 text-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm">
+                                View Details
+                            </a>
+                            <a href="{{ route('jobs.apply', $position) }}"
+                                class="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                Apply Now
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 text-center py-8">
+                        <div class="text-gray-400 mb-4">
+                            <i class="fas fa-briefcase text-4xl"></i>
+                        </div>
+                        <p class="text-gray-600">No open positions at the moment.</p>
+                        <p class="text-gray-500 text-sm">Check back soon or submit your interest above.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- CTA Button -->
+            <div class="text-center">
+                <a href="{{ route('jobs.index') }}"
+                    class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl">
+                    <i class="fas fa-briefcase mr-3"></i>
+                    View All Career Opportunities
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
