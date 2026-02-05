@@ -70,7 +70,7 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(rgba(80, 103, 180, 0.9), rgba(117, 163, 238, 0.9)), url('/images/hero.png');
+            background: linear-gradient(rgba(80, 103, 180, 0.5), rgba(117, 163, 238, 0.6)), url('/images/hero.png');
             background-size: cover;
             background-position: center;
 
@@ -144,6 +144,11 @@
             background-color: var(--accent-orange);
             margin: 0 auto;
         }
+        .bg-img{
+        background: linear-gradient(rgba(80, 103, 180, 0.6), rgba(117, 163, 238, 0.7)), url('/images/wheelvan6.jpg');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
 
@@ -213,33 +218,33 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-16 bg-blue-50">
+    <section class="bg-img py-16 ">
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Ride Aide LLC</h2>
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-300 mb-6">About Ride Aide LLC</h2>
                     <div class="section-divider mb-6 ml-0"></div>
-                    <p class="text-gray-600 mb-6">
+                    <p class="text-gray-300 mb-6">
                         Founded with a commitment to accessibility and reliability, Ride Aide LLC has been serving the
                         Seattle community with professional ADA transportation services. Our mission is to provide safe,
                         comfortable, and dignified transportation for all.
                     </p>
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-700 mt-1 mr-3"></i>
-                            <span>Fully licensed and insured ADA-compliant vehicles</span>
+                            <i class="fas fa-check-circle bg-orange-500 mt-1 mr-3"></i>
+                            <span class="text-gray-200">Fully licensed and insured ADA-compliant vehicles</span>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-700 mt-1 mr-3"></i>
-                            <span>Professional drivers trained in passenger assistance</span>
+                            <i class="fas fa-check-circle bg-orange-500 mt-1 mr-3"></i>
+                            <span class="text-gray-200">Professional drivers trained in passenger assistance</span>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-700 mt-1 mr-3"></i>
-                            <span>24/7 dispatch and emergency services</span>
+                            <i class="fas fa-check-circle bg-orange-500 mt-1 mr-3"></i>
+                            <span class="text-gray-200">24/7 dispatch and emergency services</span>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-700 mt-1 mr-3"></i>
-                            <span>Accept insurance and various payment methods</span>
+                            <i class="fas fa-check-circle bg-orange-500 mt-1 mr-3"></i>
+                            <span class="text-gray-200">Accept insurance and various payment methods</span>
                         </div>
                     </div>
                     <a href="/about" class="btn-primary px-6 py-3 rounded-lg font-semibold inline-block">

@@ -281,7 +281,7 @@
                 </div>
 
                 <!-- Estimated Cost Display -->
-                <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                {{-- <div class="mt-8 p-4 bg-blue-50 rounded-lg">
                     <div class="flex justify-between items-center">
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900">Estimated Cost</h3>
@@ -294,7 +294,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Submit Button -->
