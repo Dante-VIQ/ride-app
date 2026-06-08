@@ -35,15 +35,12 @@ Insurance ID: {{ $booking->insurance_id }}
 Additional Notes: {{ $booking->additional_notes }}  
 @endif
 
-Estimated Cost: ${{ number_format($booking->estimated_cost, 2) }}  
 Status: {{ ucfirst($booking->status) }}  
 Booking Date: {{ $booking->created_at->format('F j, Y \a\t g:i A') }}
 
 <x-mail::button :url="url('/admin/bookings/'.$booking->id)">
 View Booking in Admin Panel
 </x-mail::button>
-
-If you don't have an admin panel link, you can access the booking directly.
 
 Thanks,<br>
 {{ config('app.name') }}

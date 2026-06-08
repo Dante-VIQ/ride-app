@@ -21,7 +21,7 @@
     3. The driver will call 15 minutes before your scheduled pickup time
 
     Need to make changes?
-    To modify or cancel your booking, please call our dispatch at (206) 555-1234 and provide your booking reference.
+    To modify or cancel your booking, please call our dispatch at +1 (253) 5451994 and provide your booking reference.
 
     Thank you for choosing Ride Aide LLC for your transportation needs.
 
