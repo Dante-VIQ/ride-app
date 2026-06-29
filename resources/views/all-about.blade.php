@@ -347,7 +347,7 @@
     </section>
 
     <!-- Company Story -->
-    <section class="py-16 bg-gray-50">
+    {{-- <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Journey</h2>
@@ -418,7 +418,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Meet Our Team -->
     {{-- <section class="py-16 bg-white">
